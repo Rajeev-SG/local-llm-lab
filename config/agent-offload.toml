@@ -1,0 +1,81 @@
+title = "Shared agent offload broker"
+
+[openrouter]
+api_base = "https://openrouter.ai/api/v1/chat/completions"
+env_file = "/Users/rajeev/.config/claude-openrouter/env.sh"
+app_name = "local-llm-lab-agent-offload"
+site_url = "https://local-llm-lab.local"
+
+[budgets]
+per_call_soft_limit_usd = 0.12
+daily_soft_limit_usd = 5.0
+
+[thresholds]
+long_context_min_chars = 45000
+hard_task_min_chars = 12000
+code_specialist_min_chars = 6000
+large_input_warn_chars = 120000
+max_input_chars = 350000
+
+[routing]
+default_role = "default_worker"
+long_context_role = "long_context_escalator"
+hard_task_role = "harder_mid_cost_worker"
+coding_role = "coding_specialist"
+
+[roles.default_worker]
+label = "Default worker"
+model = "x-ai/grok-4.1-fast"
+temperature = 0.1
+max_output_tokens = 900
+price_prompt_per_million = 0.20
+price_completion_per_million = 0.50
+reasoning = "off"
+description = "Cheap default worker for summarization, extraction, clustering, and most tool-using subtasks."
+
+[roles.default_worker.provider]
+require_parameters = true
+data_collection = "deny"
+
+[roles.long_context_escalator]
+label = "Long-context escalator"
+model = "google/gemini-3-flash-preview"
+temperature = 0.1
+max_output_tokens = 1200
+price_prompt_per_million = 0.50
+price_completion_per_million = 3.00
+reasoning = "minimal"
+description = "Use only when selected context is genuinely large or many documents need synthesis."
+
+[roles.long_context_escalator.provider]
+require_parameters = true
+data_collection = "deny"
+
+[roles.harder_mid_cost_worker]
+label = "Harder mid-cost worker"
+model = "minimax/minimax-m2.5"
+temperature = 0.1
+max_output_tokens = 1000
+price_prompt_per_million = 0.20
+price_completion_per_million = 1.17
+reasoning = "minimal"
+description = "Use for harder agentic synthesis when the default worker is not enough."
+
+[roles.harder_mid_cost_worker.provider]
+require_parameters = true
+data_collection = "deny"
+
+[roles.coding_specialist]
+label = "Coding specialist"
+model = "z-ai/glm-5"
+temperature = 0.1
+max_output_tokens = 1100
+price_prompt_per_million = 0.80
+price_completion_per_million = 2.56
+reasoning = "minimal"
+description = "Use for API surface extraction, diff distillation, contract checks, and code-focused compression."
+
+[roles.coding_specialist.provider]
+require_parameters = true
+data_collection = "deny"
+

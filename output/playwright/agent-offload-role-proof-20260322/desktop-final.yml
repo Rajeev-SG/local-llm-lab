@@ -1,0 +1,80 @@
+- generic [ref=e8]:
+  - generic [ref=e9]:
+    - button "Open Sidebar New Chat Search Notes Workspace" [ref=e10]:
+      - button "Open Sidebar" [ref=e13]
+      - generic [ref=e15]:
+        - link "New Chat" [ref=e18] [cursor=pointer]:
+          - /url: /
+          - img [ref=e20]
+        - button "Search" [ref=e24] [cursor=pointer]:
+          - img [ref=e26]
+        - link "Notes" [ref=e30] [cursor=pointer]:
+          - /url: /notes
+          - img [ref=e32]
+        - link "Workspace" [ref=e36] [cursor=pointer]:
+          - /url: /workspace
+          - img [ref=e38]
+    - button "Open User Profile Menu" [ref=e43] [cursor=pointer]:
+      - img "Open User Profile Menu" [ref=e46]
+  - generic [ref=e53]:
+    - navigation [ref=e54]:
+      - generic [ref=e57]:
+        - generic [ref=e60]:
+          - 'button "Selected model: OWUI Local Helper Fast" [ref=e710] [cursor=pointer]':
+            - generic [ref=e64]:
+              - text: OWUI Local Helper Fast
+              - img [ref=e65]
+          - button "Add Model" [ref=e69] [cursor=pointer]:
+            - img [ref=e70]
+        - generic [ref=e74]:
+          - button [ref=e753] [cursor=pointer]:
+            - button [ref=e754]:
+              - img [ref=e756]
+          - button "Controls" [ref=e81] [cursor=pointer]:
+            - img [ref=e83]
+          - button "User menu" [ref=e85] [cursor=pointer]:
+            - generic [ref=e88]: User menu
+    - generic [ref=e89]:
+      - region "Chat Conversation" [ref=e762]:
+        - heading "Chat Conversation" [level=2] [ref=e763]
+        - log [ref=e764]:
+          - listitem [ref=e765]:
+            - paragraph [ref=e773]: What is 17 + 26? Reply with digits only.
+          - listitem [ref=e777]:
+            - generic [ref=e778]:
+              - img [ref=e780]
+              - generic [ref=e781]:
+                - generic [ref=e784]: OWUI Local Helper Fast
+                - generic [ref=e785]:
+                  - paragraph [ref=e828]: "43"
+                  - generic [ref=e829]:
+                    - button "Edit" [ref=e831] [cursor=pointer]:
+                      - img [ref=e832]
+                    - button "Copy" [ref=e835] [cursor=pointer]:
+                      - img [ref=e836]
+                    - button "Read Aloud" [ref=e839] [cursor=pointer]:
+                      - img [ref=e840]
+                    - button [ref=e843] [cursor=pointer]:
+                      - img [ref=e844]
+                    - button "Good Response" [ref=e847] [cursor=pointer]:
+                      - img [ref=e848]
+                    - button "Bad Response" [ref=e851] [cursor=pointer]:
+                      - img [ref=e852]
+                    - button "Continue Response" [ref=e855] [cursor=pointer]:
+                      - img [ref=e856]
+                    - button "Regenerate" [ref=e859] [cursor=pointer]:
+                      - generic "Regenerate" [ref=e861]:
+                        - img [ref=e862]
+      - generic [ref=e799]:
+        - paragraph [ref=e804]: Send a Message
+        - generic [ref=e805]:
+          - generic [ref=e806]:
+            - button [ref=e807] [cursor=pointer]:
+              - img [ref=e810]
+            - button [ref=e813] [cursor=pointer]:
+              - img [ref=e816]
+          - generic [ref=e821]:
+            - button "Voice Input" [ref=e865] [cursor=pointer]:
+              - img [ref=e866]
+            - button "Voice mode" [ref=e871] [cursor=pointer]:
+              - img [ref=e872]

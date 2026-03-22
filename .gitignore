@@ -1,0 +1,15 @@
+.DS_Store
+.openwebui-port
+.playwright-cli/
+.python-version
+__pycache__/
+*.pyc
+
+node_modules/
+site/dist/
+site/.vercel/
+site/test-results/
+site/tmp-*.png
+
+tmp/
+output/playwright/openwebui-cookies.txt

@@ -1,0 +1,4 @@
+FROM llama3.2:3b
+
+# Work around the local Metal backend crash by forcing CPU inference.
+PARAMETER num_gpu 0

@@ -1,0 +1,6 @@
+### Page
+- Page URL: http://localhost:3001/
+- Page Title: Open WebUI
+- Console: 0 errors, 1 warnings
+### Snapshot
+- [Snapshot](.playwright-cli/page-2026-03-22T02-05-33-441Z.yml)

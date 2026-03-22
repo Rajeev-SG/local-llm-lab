@@ -1,0 +1,4 @@
+Total messages: 2 (Errors: 0, Warnings: 2)
+
+[WARNING] [tiptap warn]: Duplicate extension names found: ['codeBlock', 'bulletList', 'listItem', 'listKeymap', 'orderedList']. This can lead to issues. @ http://localhost:3001/_app/immutable/chunks/CSrg1QrI.js:145
+[WARNING] [tiptap warn]: Duplicate extension names found: ['codeBlock', 'bulletList', 'listItem', 'listKeymap', 'orderedList']. This can lead to issues. @ http://localhost:3001/_app/immutable/chunks/CSrg1QrI.js:145
