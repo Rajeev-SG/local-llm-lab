@@ -87,6 +87,14 @@ OPENWEBUI_PASSWORD='<your-openwebui-password>' ./scripts/setup-openwebui-role-mo
 ./scripts/status.sh
 ```
 
+### 5. Enable private remote access on your own devices
+
+```bash
+./scripts/enable-tailscale-openwebui.sh
+```
+
+This does not publish Open WebUI to the open internet. It exposes the UI over Tailscale Serve so only devices signed into the same tailnet can reach it. Use this when you want your phone, tablet, or another laptop to reach the lab safely.
+
 ## Day-to-day commands
 
 ### Core services
@@ -96,6 +104,8 @@ OPENWEBUI_PASSWORD='<your-openwebui-password>' ./scripts/setup-openwebui-role-mo
 ./scripts/stop-ollama.sh
 ./scripts/start-openwebui.sh
 ./scripts/stop-openwebui.sh
+./scripts/enable-tailscale-openwebui.sh
+./scripts/disable-tailscale-openwebui.sh
 ```
 
 ### Model setup and testing
@@ -153,6 +163,16 @@ Use this lab for:
 - role-based helper design for coding agents
 - Apple Silicon model selection without guesswork
 - Open WebUI setups that need actual browser proof
+
+## Safe remote access
+
+If you want access away from the Mac without broadly exposing your laptop to the public internet, the recommended path is Tailscale Serve.
+
+- enable it with `./scripts/enable-tailscale-openwebui.sh`
+- inspect the current private URL with `./scripts/status.sh`
+- disable it with `./scripts/disable-tailscale-openwebui.sh`
+
+This gives you HTTPS access on devices signed into the same Tailscale tailnet. That is a much safer default than putting Open WebUI directly on the public internet and relying only on the app login screen.
 
 Do not use this repo as if it were a claim that all large models fit comfortably on this hardware. The value here is that the repo distinguishes clean wins from constrained experiments.
 

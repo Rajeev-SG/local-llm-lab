@@ -55,6 +55,33 @@ fi
 
 echo ""
 
+# Tailscale remote access
+echo "━━━ Tailscale Remote Access ━━━"
+if command -v tailscale >/dev/null 2>&1; then
+    TS_STATE="$(tailscale status --json 2>/dev/null | jq -r '.BackendState // empty')"
+    if [[ "${TS_STATE}" == "Running" ]]; then
+        TS_URL="$(
+            tailscale serve status --json 2>/dev/null \
+                | jq -r '.Web | keys[0] // empty | sub(":443$"; "") | "https://" + . + "/"'
+        )"
+        if [[ -n "${TS_URL}" ]]; then
+            echo "Status: ✓ Private remote access enabled"
+            echo "URL: ${TS_URL}"
+            echo "Scope: Only devices signed into the same Tailscale tailnet"
+        else
+            echo "Status: ⏸ Tailscale connected, no Open WebUI serve rule"
+            echo "Enable with: ${LAB_ROOT}/scripts/enable-tailscale-openwebui.sh"
+        fi
+    else
+        echo "Status: ✗ Tailscale not connected"
+        echo "Enable with: tailscale up"
+    fi
+else
+    echo "Status: ✗ Tailscale CLI not installed"
+fi
+
+echo ""
+
 # Memory usage
 echo "━━━ System Memory ━━━"
 if command -v sysctl &> /dev/null; then
@@ -72,6 +99,7 @@ echo ""
 echo "━━━ Quick Commands ━━━"
 echo "Chat with model:    ollama run mistral-small:22b"
 echo "Open WebUI:         open ${URL}"
+echo "Private anywhere:   ${LAB_ROOT}/scripts/enable-tailscale-openwebui.sh"
 echo "Test all models:    ${LAB_ROOT}/scripts/test-models.sh"
 echo "Benchmark:          ${LAB_ROOT}/scripts/benchmark-model.sh mistral-small:22b"
 echo "Broker test sweep:  ${LAB_ROOT}/scripts/test-agent-offload.sh"

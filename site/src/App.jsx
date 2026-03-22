@@ -304,6 +304,13 @@ OPENWEBUI_PASSWORD='<your-password>' ./scripts/setup-openwebui-role-models.sh`}<
                   containers are up, then fall back to the local port reported by
                   <code> ./scripts/status.sh</code>.
                 </p>
+                <p className="local-ui-note tailscale-note">
+                  For safer access on your own devices from anywhere, this lab can
+                  expose Open WebUI through private Tailscale HTTPS with
+                  <code> ./scripts/enable-tailscale-openwebui.sh</code>. That keeps
+                  the app inside your tailnet instead of publishing it openly to
+                  the internet.
+                </p>
               </div>
             </div>
           </div>
