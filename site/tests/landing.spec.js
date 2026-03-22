@@ -35,6 +35,9 @@ test("landing page presents the core lab story and start path", async ({ page },
     "http://localhost:3001",
   );
   await expect(page.getByText("This only works on the Mac that is actually running the lab.")).toBeVisible();
+  await expect(
+    page.getByText("For safer access on your own devices from anywhere, this lab can expose Open WebUI through private Tailscale HTTPS"),
+  ).toBeVisible();
   expect(consoleErrors).toEqual([]);
 
   await page.waitForTimeout(500);
