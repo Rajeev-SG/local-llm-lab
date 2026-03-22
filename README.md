@@ -2,7 +2,7 @@
 
 A proof-backed local AI workstation for Apple Silicon: Ollama, Open WebUI, tuned helper roles, and browser-validated evidence of what actually works.
 
-Live site: [site-iota-brown-59.vercel.app](https://site-iota-brown-59.vercel.app)
+Live site: [local-llm-lab.vercel.app](https://local-llm-lab.vercel.app)
 
 GitHub repo: [Rajeev-SG/local-llm-lab](https://github.com/Rajeev-SG/local-llm-lab)
 

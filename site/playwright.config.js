@@ -1,6 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const baseURL = process.env.PLAYWRIGHT_BASE_URL || "http://127.0.0.1:4173";
+const localPreviewUrl = "http://127.0.0.1:4273";
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || localPreviewUrl;
 const useLocalPreview = !process.env.PLAYWRIGHT_BASE_URL;
 
 export default defineConfig({
@@ -12,9 +13,9 @@ export default defineConfig({
   },
   webServer: useLocalPreview
     ? {
-        command: "pnpm preview --host 127.0.0.1 --port 4173",
-        url: "http://127.0.0.1:4173",
-        reuseExistingServer: true,
+        command: "pnpm preview --host 127.0.0.1 --port 4273",
+        url: localPreviewUrl,
+        reuseExistingServer: false,
         timeout: 30_000,
       }
     : undefined,

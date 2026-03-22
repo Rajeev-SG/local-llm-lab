@@ -277,6 +277,34 @@ OPENWEBUI_PASSWORD='<your-password>' ./scripts/setup-openwebui-role-models.sh`}<
                 <li>Proof notes documenting what passed and what failed</li>
                 <li>A clean landing page for sharing the project publicly</li>
               </ul>
+              <div className="local-ui-card">
+                <p className="callout-label">Open WebUI on this machine</p>
+                <div className="local-ui-actions">
+                  <a
+                    className="button button-primary"
+                    href="http://open-webui-lab.orb.local"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Open via OrbStack
+                  </a>
+                  <a
+                    className="button button-secondary"
+                    href="http://localhost:3001"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Use localhost fallback
+                  </a>
+                </div>
+                <p className="local-ui-note">
+                  This only works on the Mac that is actually running the lab. If
+                  the OrbStack hostname does not resolve, open OrbStack and make
+                  sure the <strong>ollama-lab</strong> and <strong>open-webui-lab</strong>
+                  containers are up, then fall back to the local port reported by
+                  <code> ./scripts/status.sh</code>.
+                </p>
+              </div>
             </div>
           </div>
         </section>
