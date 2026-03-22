@@ -296,6 +296,14 @@ OPENWEBUI_PASSWORD='<your-password>' ./scripts/setup-openwebui-role-models.sh`}<
                   >
                     Use localhost fallback
                   </a>
+                  <a
+                    className="button button-secondary"
+                    href="https://rajeevs-macbook-pro-2.tail33d641.ts.net/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Open via Tailscale
+                  </a>
                 </div>
                 <p className="local-ui-note">
                   This only works on the Mac that is actually running the lab. If
@@ -311,6 +319,11 @@ OPENWEBUI_PASSWORD='<your-password>' ./scripts/setup-openwebui-role-models.sh`}<
                   the app inside your tailnet instead of publishing it openly to
                   the internet.
                 </p>
+                <ol className="tailscale-steps">
+                  <li>Install Tailscale on the device you want to use remotely.</li>
+                  <li>Sign into the same Tailscale tailnet as this Mac.</li>
+                  <li>Open the Tailscale link above, then sign into Open WebUI normally.</li>
+                </ol>
               </div>
             </div>
           </div>
