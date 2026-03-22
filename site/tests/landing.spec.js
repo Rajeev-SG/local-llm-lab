@@ -34,10 +34,17 @@ test("landing page presents the core lab story and start path", async ({ page },
     "href",
     "http://localhost:3001",
   );
+  await expect(page.getByRole("link", { name: "Open via Tailscale" })).toHaveAttribute(
+    "href",
+    "https://rajeevs-macbook-pro-2.tail33d641.ts.net/",
+  );
   await expect(page.getByText("This only works on the Mac that is actually running the lab.")).toBeVisible();
   await expect(
     page.getByText("For safer access on your own devices from anywhere, this lab can expose Open WebUI through private Tailscale HTTPS"),
   ).toBeVisible();
+  await expect(page.getByText("Install Tailscale on the device you want to use remotely.")).toBeVisible();
+  await expect(page.getByText("Sign into the same Tailscale tailnet as this Mac.")).toBeVisible();
+  await expect(page.getByText("Open the Tailscale link above, then sign into Open WebUI normally.")).toBeVisible();
   expect(consoleErrors).toEqual([]);
 
   await page.waitForTimeout(500);
