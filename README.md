@@ -35,9 +35,40 @@ Local LLM Lab answers that with:
 
 The strongest current proof artifacts are:
 
-- [model-sweep-20260322.md](/Users/rajeev/Code/tools/local-llm-lab/output/acceptance/model-sweep-20260322.md)
-- [agent-offload-role-proof-20260322.md](/Users/rajeev/Code/tools/local-llm-lab/output/acceptance/agent-offload-role-proof-20260322.md)
-- [desktop-final.png](/Users/rajeev/Code/tools/local-llm-lab/output/playwright/agent-offload-role-proof-20260322/desktop-final.png)
+- [benchmark-results.md](./benchmark-results.md)
+- [model-sweep-20260322.md](./output/acceptance/model-sweep-20260322.md)
+- [agent-offload-role-proof-20260322.md](./output/acceptance/agent-offload-role-proof-20260322.md)
+- [desktop-final.png](./output/playwright/agent-offload-role-proof-20260322/desktop-final.png)
+
+Latest benchmark takeaway:
+
+- `apfel` is the fastest option in the lab for tiny offline tasks, but it underperforms the stronger Ollama models on shell generation and structured JSON work.
+- `gemma4:e4b` is now tracked in the benchmark visuals, but the model is still runtime-blocked on this machine through Ollama, so it is listed as `n/a` rather than scored.
+- The current Apfel benchmark and workflow recommendation are captured in [apfel-benchmark-20260409.md](./output/acceptance/apfel-benchmark-20260409.md).
+
+## Benchmark Graphs
+
+The current chart set is generated from the scored benchmark JSON plus the Gemma 4 blocked-run artifact:
+
+- [chart index](./output/charts/benchmark-20260409/README.md)
+
+### Overview dashboard
+
+![Benchmark dashboard](./output/charts/benchmark-20260409/overview-dashboard.svg)
+
+### Master comparison charts
+
+![Capability heatmap](./output/charts/benchmark-20260409/master-capability-heatmap.svg)
+
+![Average score ranking](./output/charts/benchmark-20260409/master-average-score-ranking.svg)
+
+![Quality vs speed](./output/charts/benchmark-20260409/master-quality-vs-speed.svg)
+
+![Latency by task](./output/charts/benchmark-20260409/master-latency-by-task.svg)
+
+![Guardrail diagnostics](./output/charts/benchmark-20260409/master-guardrails.svg)
+
+![Gemma runtime status](./output/charts/benchmark-20260409/master-gemma-runtime-status.svg)
 
 ## Practical hardware takeaway
 
@@ -114,6 +145,7 @@ This does not publish Open WebUI to the open internet. It exposes the UI over Ta
 ./scripts/setup-agent-offload-models.sh
 ./scripts/test-models.sh
 ./scripts/benchmark-model.sh mistral-small:22b
+./scripts/generate-benchmark-charts.py
 ```
 
 ### Agent offload workflow
@@ -141,7 +173,7 @@ This repo recommends a two-tier system rather than a full local-agent swap:
 3. Keep final judgment, edits, and planning in the stronger main coding agent.
 4. Validate outcomes with real acceptance proof.
 
-That architecture is documented in [agent-offload-setup-recommendation.md](/Users/rajeev/Code/tools/local-llm-lab/agent-offload-setup-recommendation.md).
+That architecture is documented in [agent-offload-setup-recommendation.md](./agent-offload-setup-recommendation.md).
 
 ## Repo layout
 
@@ -151,6 +183,7 @@ That architecture is documented in [agent-offload-setup-recommendation.md](/User
 | `modelfiles/` | Deterministic helper model wrappers |
 | `config/agent-offload.toml` | Shared broker configuration |
 | `broker/agent_offload.py` | Role-aware offload broker |
+| `output/charts/` | Generated benchmark comparison charts |
 | `output/acceptance/` | Human-readable proof notes |
 | `output/playwright/` | Browser-level acceptance artifacts |
 | `site/` | Public landing page for the lab |

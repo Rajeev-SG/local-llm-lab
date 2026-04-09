@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+<title>Guardrail diagnostics</title>
+<desc>Guardrail diagnostics</desc>
+<style>
+.bg { fill: #FAFAFB; }
+.card { fill: #FFFFFF; stroke: #E5E7EB; stroke-width: 1; }
+.axis { stroke: #D1D5DB; stroke-width: 1; }
+.grid { stroke: #E5E7EB; stroke-width: 1; stroke-dasharray: 4 4; }
+.title { font: 700 28px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.subtitle { font: 500 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #4B5563; }
+.label { font: 600 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.small { font: 500 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #4B5563; }
+.tiny { font: 500 11px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #6B7280; }
+.value { font: 700 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.value-light { font: 700 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #FFFFFF; }
+.mono { font: 600 12px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #111827; }
+</style>
+<rect class="bg" x="0" y="0" width="900" height="420" rx="24" />
+<text class="title" x="56" y="56">Guardrail Diagnostics</text>
+<text class="subtitle" x="56" y="84">Generated from 2026-04-09T17:30:11+00:00 benchmark data with Gemma 4 runtime findings appended</text>
+<text class="label" x="350.0" y="108" text-anchor="middle">Unknown refusal</text>
+<text class="label" x="570.0" y="108" text-anchor="middle">Exact harmless</text>
+<text class="label" x="56" y="160">apfel</text>
+<rect x="240" y="130" width="206" height="38" rx="12" fill="#16A34A" />
+<text class="value-light" x="343.0" y="159" text-anchor="middle">1.00</text>
+<rect x="460" y="130" width="206" height="38" rx="12" fill="#DC2626" />
+<text class="value" x="563.0" y="159" text-anchor="middle">0.00</text>
+<text class="label" x="56" y="208">qwen3.5:9b</text>
+<rect x="240" y="178" width="206" height="38" rx="12" fill="#16A34A" />
+<text class="value-light" x="343.0" y="207" text-anchor="middle">1.00</text>
+<rect x="460" y="178" width="206" height="38" rx="12" fill="#16A34A" />
+<text class="value-light" x="563.0" y="207" text-anchor="middle">1.00</text>
+<text class="label" x="56" y="256">phi4</text>
+<rect x="240" y="226" width="206" height="38" rx="12" fill="#16A34A" />
+<text class="value-light" x="343.0" y="255" text-anchor="middle">1.00</text>
+<rect x="460" y="226" width="206" height="38" rx="12" fill="#16A34A" />
+<text class="value-light" x="563.0" y="255" text-anchor="middle">1.00</text>
+<text class="label" x="56" y="304">qwen2.5:14b</text>
+<rect x="240" y="274" width="206" height="38" rx="12" fill="#16A34A" />
+<text class="value-light" x="343.0" y="303" text-anchor="middle">1.00</text>
+<rect x="460" y="274" width="206" height="38" rx="12" fill="#16A34A" />
+<text class="value-light" x="563.0" y="303" text-anchor="middle">1.00</text>
+<text class="label" x="56" y="352">qwen2.5-coder:14b</text>
+<rect x="240" y="322" width="206" height="38" rx="12" fill="#16A34A" />
+<text class="value-light" x="343.0" y="351" text-anchor="middle">1.00</text>
+<rect x="460" y="322" width="206" height="38" rx="12" fill="#16A34A" />
+<text class="value-light" x="563.0" y="351" text-anchor="middle">1.00</text>
+<text class="label" x="56" y="400">mistral-small:22b</text>
+<rect x="240" y="370" width="206" height="38" rx="12" fill="#16A34A" />
+<text class="value-light" x="343.0" y="399" text-anchor="middle">1.00</text>
+<rect x="460" y="370" width="206" height="38" rx="12" fill="#16A34A" />
+<text class="value-light" x="563.0" y="399" text-anchor="middle">1.00</text>
+<text class="label" x="56" y="448">gemma4:e4b</text>
+<rect x="240" y="418" width="206" height="38" rx="12" fill="#E5E7EB" />
+<text class="value" x="343.0" y="447" text-anchor="middle">n/a</text>
+<rect x="460" y="418" width="206" height="38" rx="12" fill="#E5E7EB" />
+<text class="value" x="563.0" y="447" text-anchor="middle">n/a</text>
+</svg>

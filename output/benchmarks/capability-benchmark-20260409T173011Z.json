@@ -1,0 +1,1685 @@
+{
+  "generated_at": "2026-04-09T17:30:11+00:00",
+  "environment": {
+    "machine": "arm64",
+    "platform": "macOS-26.3.1-arm64-arm-64bit-Mach-O",
+    "macos_version": "26.3.1",
+    "ollama_host": "http://localhost:11434",
+    "python": "3.14.3",
+    "seed": 42
+  },
+  "models": [
+    {
+      "slug": "apfel",
+      "label": "apfel",
+      "kind": "apfel",
+      "model_name": "apple-foundationmodel",
+      "note": "Apple Foundation Model via apfel CLI"
+    },
+    {
+      "slug": "qwen35_9b",
+      "label": "qwen3.5:9b",
+      "kind": "ollama",
+      "model_name": "qwen3.5:9b",
+      "note": "Fast helper baseline with think=false"
+    },
+    {
+      "slug": "phi4",
+      "label": "phi4",
+      "kind": "ollama",
+      "model_name": "phi4:latest",
+      "note": "Conservative helper baseline"
+    },
+    {
+      "slug": "qwen25_14b",
+      "label": "qwen2.5:14b",
+      "kind": "ollama",
+      "model_name": "qwen2.5:14b",
+      "note": "General synthesis baseline"
+    },
+    {
+      "slug": "qwen25_coder_14b",
+      "label": "qwen2.5-coder:14b",
+      "kind": "ollama",
+      "model_name": "qwen2.5-coder:14b",
+      "note": "Coding baseline"
+    },
+    {
+      "slug": "mistral_small_22b",
+      "label": "mistral-small:22b",
+      "kind": "ollama",
+      "model_name": "mistral-small:22b",
+      "note": "Strong clean general baseline"
+    }
+  ],
+  "tasks": [
+    {
+      "slug": "shell_scripting",
+      "label": "Shell scripting",
+      "category": "claimed"
+    },
+    {
+      "slug": "text_transformation",
+      "label": "Text transformation",
+      "category": "claimed"
+    },
+    {
+      "slug": "classification",
+      "label": "Classification",
+      "category": "claimed"
+    },
+    {
+      "slug": "short_summary",
+      "label": "Short summaries",
+      "category": "claimed"
+    },
+    {
+      "slug": "json_restructuring",
+      "label": "JSON restructuring",
+      "category": "claimed"
+    },
+    {
+      "slug": "translation",
+      "label": "Translation",
+      "category": "claimed"
+    },
+    {
+      "slug": "unknown_refusal",
+      "label": "Unknown refusal",
+      "category": "diagnostic"
+    },
+    {
+      "slug": "harmless_exactness",
+      "label": "Harmless exactness",
+      "category": "diagnostic"
+    }
+  ],
+  "results": {
+    "apfel": {
+      "shell_scripting": {
+        "content": "awk '{print $3, $2}' | sort -nr | uniq -c | sort -nr | tail -n 3",
+        "elapsed_ms": 2172.8,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "stdout": "awk '{print $3, $2}' | sort -nr | uniq -c | sort -nr | tail -n 3\n",
+          "stderr": "",
+          "returncode": 0
+        },
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Matched 0/3 expected lines",
+          "details": {
+            "command": "awk '{print $3, $2}' | sort -nr | uniq -c | sort -nr | tail -n 3",
+            "actual": [
+              "10 - -"
+            ],
+            "expected": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "stderr": ""
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "- Fixes login loop for SSO users in version 2.4.1.\n- Repairs broken CSV exports from finance dashboard.\n- Reports load 35% faster in internal tests.",
+        "elapsed_ms": 813.0,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "stdout": "- Fixes login loop for SSO users in version 2.4.1.\n- Repairs broken CSV exports from finance dashboard.\n- Reports load 35% faster in internal tests.\n",
+          "stderr": "",
+          "returncode": 0
+        },
+        "evaluation": {
+          "score": 0.833,
+          "summary": "5/6 rubric checks passed",
+          "details": {
+            "three_bullets": true,
+            "version": true,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": false
+          }
+        }
+      },
+      "classification": {
+        "content": "```json\n{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"account\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"feature\"\n}\n```",
+        "elapsed_ms": 1109.8,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "stdout": "```json\n{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"account\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"feature\"\n}\n```\n",
+          "stderr": "",
+          "returncode": 0
+        },
+        "evaluation": {
+          "score": 0.75,
+          "summary": "6/8 tickets classified correctly",
+          "details": {
+            "T5": {
+              "expected": "feature",
+              "actual": "account"
+            },
+            "T8": {
+              "expected": "account",
+              "actual": "feature"
+            }
+          }
+        }
+      },
+      "short_summary": {
+        "content": "A 47-minute outage due to an expired Redis TLS certificate resulted in 18% checkout failures, mitigated by rolling back the certificate, flushing stale connections, and restarting affected payment workers.",
+        "elapsed_ms": 794.4,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "stdout": "A 47-minute outage due to an expired Redis TLS certificate resulted in 18% checkout failures, mitigated by rolling back the certificate, flushing stale connections, and restarting affected payment workers.\n",
+          "stderr": "",
+          "returncode": 0
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "5/5 summary checks passed",
+          "details": {
+            "word_range": true,
+            "duration": true,
+            "cause": true,
+            "impact": true,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "```json\n{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\"o-103\"],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-102\", \"o-100\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\"o-101\"],\n      \"total_amount\": 75\n    }\n  ],\n  \"grand_total\": 265\n}\n```",
+        "elapsed_ms": 2404.1,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "stdout": "```json\n{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\"o-103\"],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-102\", \"o-100\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\"o-101\"],\n      \"total_amount\": 75\n    }\n  ],\n  \"grand_total\": 265\n}\n```\n",
+          "stderr": "",
+          "returncode": 0
+        },
+        "evaluation": {
+          "score": 0.5,
+          "summary": "2/4 JSON checks passed",
+          "details": {
+            "checks": {
+              "grand_total": false,
+              "region_count": true,
+              "eu_total": true,
+              "us_high_priority": false
+            },
+            "parsed": {
+              "regions": [
+                {
+                  "region": "apac",
+                  "customer_count": 1,
+                  "high_priority_ids": [
+                    "o-103"
+                  ],
+                  "total_amount": 40
+                },
+                {
+                  "region": "eu",
+                  "customer_count": 2,
+                  "high_priority_ids": [
+                    "o-100",
+                    "o-102"
+                  ],
+                  "total_amount": 150
+                },
+                {
+                  "region": "us",
+                  "customer_count": 1,
+                  "high_priority_ids": [
+                    "o-101"
+                  ],
+                  "total_amount": 75
+                }
+              ],
+              "grand_total": 265
+            }
+          }
+        }
+      },
+      "translation": {
+        "content": "```json\n{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei ist weg.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}\n```",
+        "elapsed_ms": 1210.0,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "stdout": "```json\n{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei ist weg.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}\n```\n",
+          "stderr": "",
+          "returncode": 0
+        },
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 translations accepted",
+          "details": {
+            "t2": {
+              "expected_any_of": [
+                "datei fehlt",
+                "die datei fehlt"
+              ],
+              "actual": "Die Datei ist weg."
+            }
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "I'm sorry, but I can't provide specific details about changes in package versions without access to external resources.",
+        "elapsed_ms": 656.2,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "stdout": "I'm sorry, but I can't provide specific details about changes in package versions without access to external resources.\n",
+          "stderr": "",
+          "returncode": 0
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Refused cleanly without inventing details",
+          "details": {
+            "uncertain": true,
+            "fabricated_markers_present": false
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "OK.",
+        "elapsed_ms": 254.9,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "stdout": "OK.\n",
+          "stderr": "",
+          "returncode": 0
+        },
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Did not follow exact harmless output request",
+          "details": {
+            "actual": "OK."
+          }
+        }
+      }
+    },
+    "qwen35_9b": {
+      "shell_scripting": {
+        "content": "awk '{print $1}' | sort | uniq -c | sort -rn | head -3 | awk '{print $1, $2}'",
+        "elapsed_ms": 23078.0,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen3.5:9b",
+          "created_at": "2026-04-09T17:30:44.489724284Z",
+          "message": {
+            "role": "assistant",
+            "content": "awk '{print $1}' | sort | uniq -c | sort -rn | head -3 | awk '{print $1, $2}'"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 23033116553,
+          "load_duration": 3262649335,
+          "prompt_eval_count": 614,
+          "prompt_eval_duration": 15501148382,
+          "eval_count": 31,
+          "eval_duration": 4172495917
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact match on top-3 IP count pipeline",
+          "details": {
+            "command": "awk '{print $1}' | sort | uniq -c | sort -rn | head -3 | awk '{print $1, $2}'",
+            "actual": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "expected": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "stderr": ""
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "- Version 2.4.1 fixes the annoying login loop for SSO users.\n- Version 2.4.1 repairs broken CSV exports from the finance dashboard.\n- Version 2.4.1 makes the reports page load about 35 percent faster.",
+        "elapsed_ms": 11154.4,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen3.5:9b",
+          "created_at": "2026-04-09T17:30:55.682591289Z",
+          "message": {
+            "role": "assistant",
+            "content": "- Version 2.4.1 fixes the annoying login loop for SSO users.\n- Version 2.4.1 repairs broken CSV exports from the finance dashboard.\n- Version 2.4.1 makes the reports page load about 35 percent faster."
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 11150446255,
+          "load_duration": 124223167,
+          "prompt_eval_count": 136,
+          "prompt_eval_duration": 3876306919,
+          "eval_count": 58,
+          "eval_duration": 7107821792
+        },
+        "evaluation": {
+          "score": 0.833,
+          "summary": "5/6 rubric checks passed",
+          "details": {
+            "three_bullets": true,
+            "version": true,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": false
+          }
+        }
+      },
+      "classification": {
+        "content": "{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"account\"\n}",
+        "elapsed_ms": 13939.6,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen3.5:9b",
+          "created_at": "2026-04-09T17:31:09.620067421Z",
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"account\"\n}"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 13904420298,
+          "load_duration": 203369292,
+          "prompt_eval_count": 164,
+          "prompt_eval_duration": 4165700794,
+          "eval_count": 76,
+          "eval_duration": 9485022255
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "8/8 tickets classified correctly",
+          "details": {}
+        }
+      },
+      "short_summary": {
+        "content": "A 47-minute checkout outage affecting 18% of returning customers stemmed from an expired Redis TLS certificate, resolved by rolling back the bundle and restarting payment workers.",
+        "elapsed_ms": 9032.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen3.5:9b",
+          "created_at": "2026-04-09T17:31:18.6448928Z",
+          "message": {
+            "role": "assistant",
+            "content": "A 47-minute checkout outage affecting 18% of returning customers stemmed from an expired Redis TLS certificate, resolved by rolling back the bundle and restarting payment workers."
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 9003429838,
+          "load_duration": 194142333,
+          "prompt_eval_count": 177,
+          "prompt_eval_duration": 4674703794,
+          "eval_count": 35,
+          "eval_duration": 4107133333
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "5/5 summary checks passed",
+          "details": {
+            "word_range": true,
+            "duration": true,
+            "cause": true,
+            "impact": true,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\n        \"o-100\",\n        \"o-102\"\n      ],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\n        \"o-103\"\n      ],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}",
+        "elapsed_ms": 32133.1,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen3.5:9b",
+          "created_at": "2026-04-09T17:31:50.780636566Z",
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\n        \"o-100\",\n        \"o-102\"\n      ],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\n        \"o-103\"\n      ],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 32113961307,
+          "load_duration": 210401500,
+          "prompt_eval_count": 284,
+          "prompt_eval_duration": 7217298795,
+          "eval_count": 179,
+          "eval_duration": 24561677185
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact semantic JSON restructure match",
+          "details": {}
+        }
+      },
+      "translation": {
+        "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}",
+        "elapsed_ms": 10792.4,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen3.5:9b",
+          "created_at": "2026-04-09T17:32:01.580386237Z",
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 10778709672,
+          "load_duration": 213959000,
+          "prompt_eval_count": 93,
+          "prompt_eval_duration": 2559562585,
+          "eval_count": 59,
+          "eval_duration": 7955045011
+        },
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 translations accepted",
+          "details": {
+            "t2": {
+              "expected_any_of": [
+                "datei fehlt",
+                "die datei fehlt"
+              ],
+              "actual": "Die Datei fehlt."
+            }
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "I cannot know the specific changes in version 7.4.1 of the package \"quartzpickle\" because there is no widely recognized software package by that name in public records, and I do not have access to external databases or the internet to verify its existence or release notes.",
+        "elapsed_ms": 9188.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen3.5:9b",
+          "created_at": "2026-04-09T17:32:10.769002908Z",
+          "message": {
+            "role": "assistant",
+            "content": "I cannot know the specific changes in version 7.4.1 of the package \"quartzpickle\" because there is no widely recognized software package by that name in public records, and I do not have access to external databases or the internet to verify its existence or release notes."
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 9167390587,
+          "load_duration": 230968375,
+          "prompt_eval_count": 54,
+          "prompt_eval_duration": 1595452251,
+          "eval_count": 58,
+          "eval_duration": 7298405585
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Refused cleanly without inventing details",
+          "details": {
+            "uncertain": true,
+            "fabricated_markers_present": false
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "OK",
+        "elapsed_ms": 1065.6,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen3.5:9b",
+          "created_at": "2026-04-09T17:32:11.834706992Z",
+          "message": {
+            "role": "assistant",
+            "content": "OK"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 1044937626,
+          "load_duration": 245809917,
+          "prompt_eval_count": 20,
+          "prompt_eval_duration": 708875625,
+          "eval_count": 2,
+          "eval_duration": 86764083
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Matched exact harmless output request",
+          "details": {
+            "actual": "OK"
+          }
+        }
+      }
+    },
+    "phi4": {
+      "shell_scripting": {
+        "content": "```shell\nawk '{print $1}' | sort | uniq -c | sort -nr | head -n 3 | awk '{$1=$1; print}'\n```",
+        "elapsed_ms": 32299.7,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "phi4:latest",
+          "created_at": "2026-04-09T17:32:44.123970734Z",
+          "message": {
+            "role": "assistant",
+            "content": "```shell\nawk '{print $1}' | sort | uniq -c | sort -nr | head -n 3 | awk '{$1=$1; print}'\n```"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 32287349451,
+          "load_duration": 5311097336,
+          "prompt_eval_count": 482,
+          "prompt_eval_duration": 23217621000,
+          "eval_count": 36,
+          "eval_duration": 3742579252
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact match on top-3 IP count pipeline",
+          "details": {
+            "command": "awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3 | awk '{$1=$1; print}'",
+            "actual": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "expected": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "stderr": ""
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "- Version 2.4.1 fixes annoying login loop for SSO users.\n- Repairs broken CSV exports from finance dashboard.\n- Reports page loads approximately 35% faster now.",
+        "elapsed_ms": 10246.1,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "phi4:latest",
+          "created_at": "2026-04-09T17:32:54.381761548Z",
+          "message": {
+            "role": "assistant",
+            "content": "- Version 2.4.1 fixes annoying login loop for SSO users.\n- Repairs broken CSV exports from finance dashboard.\n- Reports page loads approximately 35% faster now."
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 10237104172,
+          "load_duration": 56987911,
+          "prompt_eval_count": 123,
+          "prompt_eval_duration": 6046294742,
+          "eval_count": 39,
+          "eval_duration": 4117244431
+        },
+        "evaluation": {
+          "score": 0.833,
+          "summary": "5/6 rubric checks passed",
+          "details": {
+            "three_bullets": true,
+            "version": true,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": false
+          }
+        }
+      },
+      "classification": {
+        "content": "```json\n{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"feature\"\n}\n```",
+        "elapsed_ms": 14613.1,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "phi4:latest",
+          "created_at": "2026-04-09T17:33:08.995270716Z",
+          "message": {
+            "role": "assistant",
+            "content": "```json\n{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"feature\"\n}\n```"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 14609734282,
+          "load_duration": 50186600,
+          "prompt_eval_count": 152,
+          "prompt_eval_duration": 7470651295,
+          "eval_count": 71,
+          "eval_duration": 7065573071
+        },
+        "evaluation": {
+          "score": 0.875,
+          "summary": "7/8 tickets classified correctly",
+          "details": {
+            "T8": {
+              "expected": "account",
+              "actual": "feature"
+            }
+          }
+        }
+      },
+      "short_summary": {
+        "content": "A 47-minute outage on Tuesday morning caused by an expired Redis TLS certificate led to a 18% checkout failure rate, primarily affecting returning customers, and was mitigated by rolling back the certificate, flushing connections, and restarting payment workers.",
+        "elapsed_ms": 12261.9,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "phi4:latest",
+          "created_at": "2026-04-09T17:33:21.250507781Z",
+          "message": {
+            "role": "assistant",
+            "content": "A 47-minute outage on Tuesday morning caused by an expired Redis TLS certificate led to a 18% checkout failure rate, primarily affecting returning customers, and was mitigated by rolling back the certificate, flushing connections, and restarting payment workers.\n\n"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 12252962476,
+          "load_duration": 49090472,
+          "prompt_eval_count": 164,
+          "prompt_eval_duration": 7830690102,
+          "eval_count": 49,
+          "eval_duration": 4352676176
+        },
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 summary checks passed",
+          "details": {
+            "word_range": false,
+            "duration": true,
+            "cause": true,
+            "impact": true,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "```json\n{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\"o-100\", \"o-102\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-103\"],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}\n```",
+        "elapsed_ms": 24818.3,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "phi4:latest",
+          "created_at": "2026-04-09T17:33:46.075982425Z",
+          "message": {
+            "role": "assistant",
+            "content": "```json\n{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\"o-100\", \"o-102\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-103\"],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}\n```"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 24816281451,
+          "load_duration": 50112725,
+          "prompt_eval_count": 242,
+          "prompt_eval_duration": 11572273059,
+          "eval_count": 138,
+          "eval_duration": 13154142187
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact semantic JSON restructure match",
+          "details": {}
+        }
+      },
+      "translation": {
+        "content": "```json\n{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Rote Apfel\"\n}\n```",
+        "elapsed_ms": 10357.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "phi4:latest",
+          "created_at": "2026-04-09T17:33:56.43346002Z",
+          "message": {
+            "role": "assistant",
+            "content": "```json\n{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Rote Apfel\"\n}\n```"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 10355517756,
+          "load_duration": 48104260,
+          "prompt_eval_count": 84,
+          "prompt_eval_duration": 4146051680,
+          "eval_count": 63,
+          "eval_duration": 6141060589
+        },
+        "evaluation": {
+          "score": 0.6,
+          "summary": "3/5 translations accepted",
+          "details": {
+            "t2": {
+              "expected_any_of": [
+                "datei fehlt",
+                "die datei fehlt"
+              ],
+              "actual": "Die Datei fehlt."
+            },
+            "t5": {
+              "expected_any_of": [
+                "ein roter apfel",
+                "roter apfel"
+              ],
+              "actual": "Rote Apfel"
+            }
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "As an AI model without real-time access to external databases or the ability to browse the internet, I am unable to provide specific information about changes made in version 7.4.1 of the package \"quartzpickle.\" For accurate details, you would need to consult official release notes or documentation from a reliable source such as the project's repository or website.",
+        "elapsed_ms": 9793.7,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "phi4:latest",
+          "created_at": "2026-04-09T17:34:06.225300354Z",
+          "message": {
+            "role": "assistant",
+            "content": "As an AI model without real-time access to external databases or the ability to browse the internet, I am unable to provide specific information about changes made in version 7.4.1 of the package \"quartzpickle.\" For accurate details, you would need to consult official release notes or documentation from a reliable source such as the project's repository or website."
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 9789541078,
+          "load_duration": 52472190,
+          "prompt_eval_count": 52,
+          "prompt_eval_duration": 2676802333,
+          "eval_count": 73,
+          "eval_duration": 7035812985
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Refused cleanly without inventing details",
+          "details": {
+            "uncertain": true,
+            "fabricated_markers_present": false
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "OK",
+        "elapsed_ms": 968.0,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "phi4:latest",
+          "created_at": "2026-04-09T17:34:07.195349837Z",
+          "message": {
+            "role": "assistant",
+            "content": "OK"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 963264881,
+          "load_duration": 47786968,
+          "prompt_eval_count": 18,
+          "prompt_eval_duration": 829009461,
+          "eval_count": 2,
+          "eval_duration": 85101156
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Matched exact harmless output request",
+          "details": {
+            "actual": "OK"
+          }
+        }
+      }
+    },
+    "qwen25_14b": {
+      "shell_scripting": {
+        "content": "awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3 | awk '{printf(\"%d %s\\n\", $1, $2)}'",
+        "elapsed_ms": 40296.8,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5:14b",
+          "created_at": "2026-04-09T17:34:47.491445145Z",
+          "message": {
+            "role": "assistant",
+            "content": "awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3 | awk '{printf(\"%d %s\\n\", $1, $2)}'"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 40294182345,
+          "load_duration": 5189538703,
+          "prompt_eval_count": 628,
+          "prompt_eval_duration": 30415783884,
+          "eval_count": 40,
+          "eval_duration": 4668797494
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact match on top-3 IP count pipeline",
+          "details": {
+            "command": "awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3 | awk '{printf(\"%d %s\\n\", $1, $2)}'",
+            "actual": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "expected": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "stderr": ""
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "- Version 2.4.1 fixes SSO login loop issue.\n- Repairs CSV export from finance dashboard.\n- Reports page loads 35% faster internally.",
+        "elapsed_ms": 9318.6,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5:14b",
+          "created_at": "2026-04-09T17:34:56.805300208Z",
+          "message": {
+            "role": "assistant",
+            "content": "- Version 2.4.1 fixes SSO login loop issue.\n- Repairs CSV export from finance dashboard.\n- Reports page loads 35% faster internally."
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 9310078219,
+          "load_duration": 77875111,
+          "prompt_eval_count": 143,
+          "prompt_eval_duration": 6036915625,
+          "eval_count": 36,
+          "eval_duration": 3171029881
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "6/6 rubric checks passed",
+          "details": {
+            "three_bullets": true,
+            "version": true,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": true
+          }
+        }
+      },
+      "classification": {
+        "content": "{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"account\"\n}",
+        "elapsed_ms": 13620.7,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5:14b",
+          "created_at": "2026-04-09T17:35:10.432007587Z",
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"account\"\n}"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 13617909357,
+          "load_duration": 73992601,
+          "prompt_eval_count": 171,
+          "prompt_eval_duration": 7129932231,
+          "eval_count": 67,
+          "eval_duration": 6381026109
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "8/8 tickets classified correctly",
+          "details": {}
+        }
+      },
+      "short_summary": {
+        "content": "A 47-minute outage on Tuesday caused by an expired Redis TLS certificate led to 18% of checkout attempts failing; mitigation involved rolling back certificates and restarting affected workers.",
+        "elapsed_ms": 11872.6,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5:14b",
+          "created_at": "2026-04-09T17:35:22.30473621Z",
+          "message": {
+            "role": "assistant",
+            "content": "A 47-minute outage on Tuesday caused by an expired Redis TLS certificate led to 18% of checkout attempts failing; mitigation involved rolling back certificates and restarting affected workers."
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 11870724784,
+          "load_duration": 74141727,
+          "prompt_eval_count": 191,
+          "prompt_eval_duration": 8099443444,
+          "eval_count": 37,
+          "eval_duration": 3674734097
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "5/5 summary checks passed",
+          "details": {
+            "word_range": true,
+            "duration": true,
+            "cause": true,
+            "impact": true,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-100\", \"o-102\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-103\"],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 270\n}",
+        "elapsed_ms": 27574.9,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5:14b",
+          "created_at": "2026-04-09T17:35:49.879692814Z",
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-100\", \"o-102\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-103\"],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 270\n}"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 27573216183,
+          "load_duration": 73129141,
+          "prompt_eval_count": 277,
+          "prompt_eval_duration": 12050459191,
+          "eval_count": 147,
+          "eval_duration": 15385162198
+        },
+        "evaluation": {
+          "score": 0.75,
+          "summary": "3/4 JSON checks passed",
+          "details": {
+            "checks": {
+              "grand_total": false,
+              "region_count": true,
+              "eu_total": true,
+              "us_high_priority": true
+            },
+            "parsed": {
+              "regions": [
+                {
+                  "region": "apac",
+                  "customer_count": 1,
+                  "high_priority_ids": [],
+                  "total_amount": 40
+                },
+                {
+                  "region": "eu",
+                  "customer_count": 2,
+                  "high_priority_ids": [
+                    "o-100",
+                    "o-102"
+                  ],
+                  "total_amount": 150
+                },
+                {
+                  "region": "us",
+                  "customer_count": 2,
+                  "high_priority_ids": [
+                    "o-103"
+                  ],
+                  "total_amount": 130
+                }
+              ],
+              "grand_total": 270
+            }
+          }
+        }
+      },
+      "translation": {
+        "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}",
+        "elapsed_ms": 11834.0,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5:14b",
+          "created_at": "2026-04-09T17:36:01.713581172Z",
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 11826341215,
+          "load_duration": 75908440,
+          "prompt_eval_count": 103,
+          "prompt_eval_duration": 4154769380,
+          "eval_count": 59,
+          "eval_duration": 7566536864
+        },
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 translations accepted",
+          "details": {
+            "t2": {
+              "expected_any_of": [
+                "datei fehlt",
+                "die datei fehlt"
+              ],
+              "actual": "Die Datei fehlt."
+            }
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "I don't have specific information about the changes in version 7.4.1 of the package \"quartzpickle\".",
+        "elapsed_ms": 5883.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5:14b",
+          "created_at": "2026-04-09T17:36:07.595066492Z",
+          "message": {
+            "role": "assistant",
+            "content": "I don't have specific information about the changes in version 7.4.1 of the package \"quartzpickle\"."
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 5878858605,
+          "load_duration": 75105521,
+          "prompt_eval_count": 71,
+          "prompt_eval_duration": 2486721546,
+          "eval_count": 26,
+          "eval_duration": 3301447332
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Refused cleanly without inventing details",
+          "details": {
+            "uncertain": true,
+            "fabricated_markers_present": false
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "OK",
+        "elapsed_ms": 989.0,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5:14b",
+          "created_at": "2026-04-09T17:36:08.586550303Z",
+          "message": {
+            "role": "assistant",
+            "content": "OK"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 986747632,
+          "load_duration": 68833130,
+          "prompt_eval_count": 37,
+          "prompt_eval_duration": 797479076,
+          "eval_count": 2,
+          "eval_duration": 115479705
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Matched exact harmless output request",
+          "details": {
+            "actual": "OK"
+          }
+        }
+      }
+    },
+    "qwen25_coder_14b": {
+      "shell_scripting": {
+        "content": "awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3 | awk '{print $1, $2}'",
+        "elapsed_ms": 40744.1,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5-coder:14b",
+          "created_at": "2026-04-09T17:36:49.328718455Z",
+          "message": {
+            "role": "assistant",
+            "content": "awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3 | awk '{print $1, $2}'"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 40740407523,
+          "load_duration": 5156335633,
+          "prompt_eval_count": 628,
+          "prompt_eval_duration": 31682287958,
+          "eval_count": 33,
+          "eval_duration": 3876223284
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact match on top-3 IP count pipeline",
+          "details": {
+            "command": "awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3 | awk '{print $1, $2}'",
+            "actual": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "expected": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "stderr": ""
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "- Version 2.4.1 resolves SSO login loop issue.\n- Fixes broken CSV exports from finance dashboard.\n- Reports page loads 35% faster internally.",
+        "elapsed_ms": 10153.7,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5-coder:14b",
+          "created_at": "2026-04-09T17:36:59.512041031Z",
+          "message": {
+            "role": "assistant",
+            "content": "- Version 2.4.1 resolves SSO login loop issue.\n- Fixes broken CSV exports from finance dashboard.\n- Reports page loads 35% faster internally."
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 10150166949,
+          "load_duration": 80745373,
+          "prompt_eval_count": 143,
+          "prompt_eval_duration": 5888568430,
+          "eval_count": 36,
+          "eval_duration": 4157408501
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "6/6 rubric checks passed",
+          "details": {
+            "three_bullets": true,
+            "version": true,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": true
+          }
+        }
+      },
+      "classification": {
+        "content": "```json\n{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"account\"\n}\n```",
+        "elapsed_ms": 16040.9,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5-coder:14b",
+          "created_at": "2026-04-09T17:37:15.553176332Z",
+          "message": {
+            "role": "assistant",
+            "content": "```json\n{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"account\"\n}\n```"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 16038204211,
+          "load_duration": 70521514,
+          "prompt_eval_count": 171,
+          "prompt_eval_duration": 7338196385,
+          "eval_count": 71,
+          "eval_duration": 8596657108
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "8/8 tickets classified correctly",
+          "details": {}
+        }
+      },
+      "short_summary": {
+        "content": "A 47-minute customer-visible outage occurred due to an expired Redis TLS certificate on the payments cache cluster, causing checkout failures for about 18% of attempts, which was mitigated by rolling back the certificate bundle, flushing stale connections, and restarting affected payment workers.",
+        "elapsed_ms": 15065.9,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5-coder:14b",
+          "created_at": "2026-04-09T17:37:30.619149391Z",
+          "message": {
+            "role": "assistant",
+            "content": "A 47-minute customer-visible outage occurred due to an expired Redis TLS certificate on the payments cache cluster, causing checkout failures for about 18% of attempts, which was mitigated by rolling back the certificate bundle, flushing stale connections, and restarting affected payment workers."
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 15057389036,
+          "load_duration": 71320349,
+          "prompt_eval_count": 191,
+          "prompt_eval_duration": 8231626753,
+          "eval_count": 56,
+          "eval_duration": 6723910980
+        },
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 summary checks passed",
+          "details": {
+            "word_range": false,
+            "duration": true,
+            "cause": true,
+            "impact": true,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "```json\n{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-100\", \"o-102\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 3,\n      \"high_priority_ids\": [\"o-103\"],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}\n```",
+        "elapsed_ms": 29490.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5-coder:14b",
+          "created_at": "2026-04-09T17:38:00.106288276Z",
+          "message": {
+            "role": "assistant",
+            "content": "```json\n{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-100\", \"o-102\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 3,\n      \"high_priority_ids\": [\"o-103\"],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}\n```"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 29484502420,
+          "load_duration": 77949866,
+          "prompt_eval_count": 277,
+          "prompt_eval_duration": 12010097496,
+          "eval_count": 151,
+          "eval_duration": 17333839940
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "4/4 JSON checks passed",
+          "details": {
+            "checks": {
+              "grand_total": true,
+              "region_count": true,
+              "eu_total": true,
+              "us_high_priority": true
+            },
+            "parsed": {
+              "regions": [
+                {
+                  "region": "apac",
+                  "customer_count": 1,
+                  "high_priority_ids": [],
+                  "total_amount": 40
+                },
+                {
+                  "region": "eu",
+                  "customer_count": 2,
+                  "high_priority_ids": [
+                    "o-100",
+                    "o-102"
+                  ],
+                  "total_amount": 150
+                },
+                {
+                  "region": "us",
+                  "customer_count": 3,
+                  "high_priority_ids": [
+                    "o-103"
+                  ],
+                  "total_amount": 130
+                }
+              ],
+              "grand_total": 320
+            }
+          }
+        }
+      },
+      "translation": {
+        "content": "```json\n{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}\n```",
+        "elapsed_ms": 10815.3,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5-coder:14b",
+          "created_at": "2026-04-09T17:38:10.925459519Z",
+          "message": {
+            "role": "assistant",
+            "content": "```json\n{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}\n```"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 10809119676,
+          "load_duration": 73902356,
+          "prompt_eval_count": 103,
+          "prompt_eval_duration": 3911405833,
+          "eval_count": 63,
+          "eval_duration": 6794251500
+        },
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 translations accepted",
+          "details": {
+            "t2": {
+              "expected_any_of": [
+                "datei fehlt",
+                "die datei fehlt"
+              ],
+              "actual": "Die Datei fehlt."
+            }
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "I apologize, but I don't have specific information about changes in version 7.4.1 of the package \"quartzpickle\" without accessing the internet or a reliable database of package versions and their updates.",
+        "elapsed_ms": 7057.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5-coder:14b",
+          "created_at": "2026-04-09T17:38:17.983232521Z",
+          "message": {
+            "role": "assistant",
+            "content": "I apologize, but I don't have specific information about changes in version 7.4.1 of the package \"quartzpickle\" without accessing the internet or a reliable database of package versions and their updates."
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 7055349538,
+          "load_duration": 69505553,
+          "prompt_eval_count": 71,
+          "prompt_eval_duration": 2484872894,
+          "eval_count": 44,
+          "eval_duration": 4477693491
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Refused cleanly without inventing details",
+          "details": {
+            "uncertain": true,
+            "fabricated_markers_present": false
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "OK",
+        "elapsed_ms": 1000.7,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "qwen2.5-coder:14b",
+          "created_at": "2026-04-09T17:38:18.984104663Z",
+          "message": {
+            "role": "assistant",
+            "content": "OK"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 998741928,
+          "load_duration": 69625636,
+          "prompt_eval_count": 37,
+          "prompt_eval_duration": 807063022,
+          "eval_count": 2,
+          "eval_duration": 117151924
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Matched exact harmless output request",
+          "details": {
+            "actual": "OK"
+          }
+        }
+      }
+    },
+    "mistral_small_22b": {
+      "shell_scripting": {
+        "content": "awk '{print $1}' | sort | uniq -c | sort -nr | head -n3",
+        "elapsed_ms": 64291.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "mistral-small:22b",
+          "created_at": "2026-04-09T17:39:23.265396697Z",
+          "message": {
+            "role": "assistant",
+            "content": " awk '{print $1}' | sort | uniq -c | sort -nr | head -n3"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 64279247071,
+          "load_duration": 6214174221,
+          "prompt_eval_count": 620,
+          "prompt_eval_duration": 54085197210,
+          "eval_count": 23,
+          "eval_duration": 3969394240
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact match on top-3 IP count pipeline",
+          "details": {
+            "command": "awk '{print $1}' | sort | uniq -c | sort -nr | head -n3",
+            "actual": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "expected": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "stderr": ""
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "- Fixes SSO login loop issue\n- Repairs broken CSV exports\n- Reports load 35% faster",
+        "elapsed_ms": 16159.8,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "mistral-small:22b",
+          "created_at": "2026-04-09T17:39:39.454189056Z",
+          "message": {
+            "role": "assistant",
+            "content": " - Fixes SSO login loop issue\n- Repairs broken CSV exports\n- Reports load 35% faster"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 16156176565,
+          "load_duration": 19440718,
+          "prompt_eval_count": 142,
+          "prompt_eval_duration": 12111005376,
+          "eval_count": 27,
+          "eval_duration": 4019590663
+        },
+        "evaluation": {
+          "score": 0.667,
+          "summary": "4/6 rubric checks passed",
+          "details": {
+            "three_bullets": true,
+            "version": false,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": false
+          }
+        }
+      },
+      "classification": {
+        "content": "```json\n{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"feature\"\n}\n```",
+        "elapsed_ms": 28747.3,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "mistral-small:22b",
+          "created_at": "2026-04-09T17:40:08.201581974Z",
+          "message": {
+            "role": "assistant",
+            "content": " ```json\n{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"feature\"\n}\n```"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 28744980995,
+          "load_duration": 14871331,
+          "prompt_eval_count": 173,
+          "prompt_eval_duration": 15074175538,
+          "eval_count": 84,
+          "eval_duration": 13643253173
+        },
+        "evaluation": {
+          "score": 0.875,
+          "summary": "7/8 tickets classified correctly",
+          "details": {
+            "T8": {
+              "expected": "account",
+              "actual": "feature"
+            }
+          }
+        }
+      },
+      "short_summary": {
+        "content": "On Tuesday morning, a 47-minute outage caused by an expired Redis TLS certificate led to 18% of checkout failures, primarily affecting returning customers; mitigation involved rolling back the certificate bundle and flushing stale connections.",
+        "elapsed_ms": 28953.6,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "mistral-small:22b",
+          "created_at": "2026-04-09T17:40:37.155175478Z",
+          "message": {
+            "role": "assistant",
+            "content": " On Tuesday morning, a 47-minute outage caused by an expired Redis TLS certificate led to 18% of checkout failures, primarily affecting returning customers; mitigation involved rolling back the certificate bundle and flushing stale connections."
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 28947895947,
+          "load_duration": 22446184,
+          "prompt_eval_count": 189,
+          "prompt_eval_duration": 17851490835,
+          "eval_count": 54,
+          "eval_duration": 11064220943
+        },
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 summary checks passed",
+          "details": {
+            "word_range": false,
+            "duration": true,
+            "cause": true,
+            "impact": true,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "```json\n{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\"o-100\", \"o-102\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-103\"],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}\n```",
+        "elapsed_ms": 64212.0,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "mistral-small:22b",
+          "created_at": "2026-04-09T17:41:41.365779982Z",
+          "message": {
+            "role": "assistant",
+            "content": " ```json\n{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\"o-100\", \"o-102\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-103\"],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}\n```"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 64207560662,
+          "load_duration": 21256389,
+          "prompt_eval_count": 293,
+          "prompt_eval_duration": 26630785611,
+          "eval_count": 185,
+          "eval_duration": 37530277253
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact semantic JSON restructure match",
+          "details": {}
+        }
+      },
+      "translation": {
+        "content": "```json\n{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}\n```",
+        "elapsed_ms": 21508.7,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "mistral-small:22b",
+          "created_at": "2026-04-09T17:42:02.876975771Z",
+          "message": {
+            "role": "assistant",
+            "content": " ```json\n{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}\n```"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 21503760769,
+          "load_duration": 22131351,
+          "prompt_eval_count": 91,
+          "prompt_eval_duration": 7985066837,
+          "eval_count": 76,
+          "eval_duration": 13485741675
+        },
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 translations accepted",
+          "details": {
+            "t2": {
+              "expected_any_of": [
+                "datei fehlt",
+                "die datei fehlt"
+              ],
+              "actual": "Die Datei fehlt."
+            }
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "I don't know what changed in version 7.4.1 of the package \"quartzpickle\".",
+        "elapsed_ms": 8835.6,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "mistral-small:22b",
+          "created_at": "2026-04-09T17:42:11.712557015Z",
+          "message": {
+            "role": "assistant",
+            "content": " I don't know what changed in version 7.4.1 of the package \"quartzpickle\"."
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 8833491113,
+          "load_duration": 15227374,
+          "prompt_eval_count": 51,
+          "prompt_eval_duration": 4282562572,
+          "eval_count": 26,
+          "eval_duration": 4530784326
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Refused cleanly without inventing details",
+          "details": {
+            "uncertain": true,
+            "fabricated_markers_present": false
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "OK",
+        "elapsed_ms": 1532.6,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "model": "mistral-small:22b",
+          "created_at": "2026-04-09T17:42:13.24541546Z",
+          "message": {
+            "role": "assistant",
+            "content": " OK"
+          },
+          "done": true,
+          "done_reason": "stop",
+          "total_duration": 1530723481,
+          "load_duration": 18715383,
+          "prompt_eval_count": 14,
+          "prompt_eval_duration": 1302667244,
+          "eval_count": 2,
+          "eval_duration": 208310934
+        },
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Matched exact harmless output request",
+          "details": {
+            "actual": "OK"
+          }
+        }
+      }
+    }
+  },
+  "json_path": "/Users/rajeev/Code/tools/local-llm-lab/output/benchmarks/capability-benchmark-20260409T173011Z.json"
+}

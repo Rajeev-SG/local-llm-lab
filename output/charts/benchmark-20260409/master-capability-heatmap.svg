@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1360" height="560" viewBox="0 0 1360 560" role="img" aria-labelledby="title desc">
+<title>Capability heatmap</title>
+<desc>Capability heatmap</desc>
+<style>
+.bg { fill: #FAFAFB; }
+.card { fill: #FFFFFF; stroke: #E5E7EB; stroke-width: 1; }
+.axis { stroke: #D1D5DB; stroke-width: 1; }
+.grid { stroke: #E5E7EB; stroke-width: 1; stroke-dasharray: 4 4; }
+.title { font: 700 28px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.subtitle { font: 500 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #4B5563; }
+.label { font: 600 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.small { font: 500 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #4B5563; }
+.tiny { font: 500 11px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #6B7280; }
+.value { font: 700 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.value-light { font: 700 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #FFFFFF; }
+.mono { font: 600 12px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #111827; }
+</style>
+<rect class="bg" x="0" y="0" width="1360" height="560" rx="24" />
+<text class="title" x="56" y="56">Capability Score Heatmap</text>
+<text class="subtitle" x="56" y="84">Generated from 2026-04-09T17:30:11+00:00 benchmark data with Gemma 4 runtime findings appended</text>
+<text class="label" x="285.0" y="120" text-anchor="middle">Shell</text>
+<text class="label" x="415.0" y="120" text-anchor="middle">Transform</text>
+<text class="label" x="545.0" y="120" text-anchor="middle">Classify</text>
+<text class="label" x="675.0" y="120" text-anchor="middle">Summary</text>
+<text class="label" x="805.0" y="120" text-anchor="middle">JSON</text>
+<text class="label" x="935.0" y="120" text-anchor="middle">Translate</text>
+<text class="label" x="1065.0" y="120" text-anchor="middle">Average</text>
+<text class="label" x="56" y="173">apfel</text>
+<rect x="220" y="140" width="122" height="46" rx="12" fill="#DC2626" stroke="#FFFFFF" />
+<text class="value" x="281.0" y="170" text-anchor="middle">0.00</text>
+<rect x="350" y="140" width="122" height="46" rx="12" fill="#378E43" stroke="#FFFFFF" />
+<text class="value-light" x="411.0" y="170" text-anchor="middle">0.83</text>
+<rect x="480" y="140" width="122" height="46" rx="12" fill="#478341" stroke="#FFFFFF" />
+<text class="value-light" x="541.0" y="170" text-anchor="middle">0.75</text>
+<rect x="610" y="140" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="671.0" y="170" text-anchor="middle">1.00</text>
+<rect x="740" y="140" width="122" height="46" rx="12" fill="#796438" stroke="#FFFFFF" />
+<text class="value" x="801.0" y="170" text-anchor="middle">0.50</text>
+<rect x="870" y="140" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="931.0" y="170" text-anchor="middle">0.80</text>
+<rect x="1000" y="140" width="122" height="46" rx="12" fill="#5B763D" stroke="#FFFFFF" />
+<text class="value-light" x="1061.0" y="170" text-anchor="middle">0.65</text>
+<text class="label" x="56" y="227">qwen3.5:9b</text>
+<rect x="220" y="194" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="281.0" y="224" text-anchor="middle">1.00</text>
+<rect x="350" y="194" width="122" height="46" rx="12" fill="#378E43" stroke="#FFFFFF" />
+<text class="value-light" x="411.0" y="224" text-anchor="middle">0.83</text>
+<rect x="480" y="194" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="541.0" y="224" text-anchor="middle">1.00</text>
+<rect x="610" y="194" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="671.0" y="224" text-anchor="middle">1.00</text>
+<rect x="740" y="194" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="801.0" y="224" text-anchor="middle">1.00</text>
+<rect x="870" y="194" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="931.0" y="224" text-anchor="middle">0.80</text>
+<rect x="1000" y="194" width="122" height="46" rx="12" fill="#229B47" stroke="#FFFFFF" />
+<text class="value-light" x="1061.0" y="224" text-anchor="middle">0.94</text>
+<text class="label" x="56" y="281">phi4</text>
+<rect x="220" y="248" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="281.0" y="278" text-anchor="middle">1.00</text>
+<rect x="350" y="248" width="122" height="46" rx="12" fill="#378E43" stroke="#FFFFFF" />
+<text class="value-light" x="411.0" y="278" text-anchor="middle">0.83</text>
+<rect x="480" y="248" width="122" height="46" rx="12" fill="#2E9345" stroke="#FFFFFF" />
+<text class="value-light" x="541.0" y="278" text-anchor="middle">0.88</text>
+<rect x="610" y="248" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="671.0" y="278" text-anchor="middle">0.80</text>
+<rect x="740" y="248" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="801.0" y="278" text-anchor="middle">1.00</text>
+<rect x="870" y="248" width="122" height="46" rx="12" fill="#65713B" stroke="#FFFFFF" />
+<text class="value" x="931.0" y="278" text-anchor="middle">0.60</text>
+<rect x="1000" y="248" width="122" height="46" rx="12" fill="#339044" stroke="#FFFFFF" />
+<text class="value-light" x="1061.0" y="278" text-anchor="middle">0.85</text>
+<text class="label" x="56" y="335">qwen2.5:14b</text>
+<rect x="220" y="302" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="281.0" y="332" text-anchor="middle">1.00</text>
+<rect x="350" y="302" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="411.0" y="332" text-anchor="middle">1.00</text>
+<rect x="480" y="302" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="541.0" y="332" text-anchor="middle">1.00</text>
+<rect x="610" y="302" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="671.0" y="332" text-anchor="middle">1.00</text>
+<rect x="740" y="302" width="122" height="46" rx="12" fill="#478341" stroke="#FFFFFF" />
+<text class="value-light" x="801.0" y="332" text-anchor="middle">0.75</text>
+<rect x="870" y="302" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="931.0" y="332" text-anchor="middle">0.80</text>
+<rect x="1000" y="302" width="122" height="46" rx="12" fill="#249947" stroke="#FFFFFF" />
+<text class="value-light" x="1061.0" y="332" text-anchor="middle">0.93</text>
+<text class="label" x="56" y="389">qwen2.5-coder:14b</text>
+<rect x="220" y="356" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="281.0" y="386" text-anchor="middle">1.00</text>
+<rect x="350" y="356" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="411.0" y="386" text-anchor="middle">1.00</text>
+<rect x="480" y="356" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="541.0" y="386" text-anchor="middle">1.00</text>
+<rect x="610" y="356" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="671.0" y="386" text-anchor="middle">0.80</text>
+<rect x="740" y="356" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="801.0" y="386" text-anchor="middle">1.00</text>
+<rect x="870" y="356" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="931.0" y="386" text-anchor="middle">0.80</text>
+<rect x="1000" y="356" width="122" height="46" rx="12" fill="#239A47" stroke="#FFFFFF" />
+<text class="value-light" x="1061.0" y="386" text-anchor="middle">0.93</text>
+<text class="label" x="56" y="443">mistral-small:22b</text>
+<rect x="220" y="410" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="281.0" y="440" text-anchor="middle">1.00</text>
+<rect x="350" y="410" width="122" height="46" rx="12" fill="#57793E" stroke="#FFFFFF" />
+<text class="value-light" x="411.0" y="440" text-anchor="middle">0.67</text>
+<rect x="480" y="410" width="122" height="46" rx="12" fill="#2E9345" stroke="#FFFFFF" />
+<text class="value-light" x="541.0" y="440" text-anchor="middle">0.88</text>
+<rect x="610" y="410" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="671.0" y="440" text-anchor="middle">0.80</text>
+<rect x="740" y="410" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="801.0" y="440" text-anchor="middle">1.00</text>
+<rect x="870" y="410" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="931.0" y="440" text-anchor="middle">0.80</text>
+<rect x="1000" y="410" width="122" height="46" rx="12" fill="#329144" stroke="#FFFFFF" />
+<text class="value-light" x="1061.0" y="440" text-anchor="middle">0.86</text>
+<text class="label" x="56" y="497">gemma4:e4b</text>
+<text class="tiny" x="56" y="512">runtime blocked</text>
+<rect x="220" y="464" width="122" height="46" rx="12" fill="#E5E7EB" stroke="#CBD5E1" />
+<text class="value" x="281.0" y="494" text-anchor="middle">n/a</text>
+<rect x="350" y="464" width="122" height="46" rx="12" fill="#E5E7EB" stroke="#CBD5E1" />
+<text class="value" x="411.0" y="494" text-anchor="middle">n/a</text>
+<rect x="480" y="464" width="122" height="46" rx="12" fill="#E5E7EB" stroke="#CBD5E1" />
+<text class="value" x="541.0" y="494" text-anchor="middle">n/a</text>
+<rect x="610" y="464" width="122" height="46" rx="12" fill="#E5E7EB" stroke="#CBD5E1" />
+<text class="value" x="671.0" y="494" text-anchor="middle">n/a</text>
+<rect x="740" y="464" width="122" height="46" rx="12" fill="#E5E7EB" stroke="#CBD5E1" />
+<text class="value" x="801.0" y="494" text-anchor="middle">n/a</text>
+<rect x="870" y="464" width="122" height="46" rx="12" fill="#E5E7EB" stroke="#CBD5E1" />
+<text class="value" x="931.0" y="494" text-anchor="middle">n/a</text>
+<rect x="1000" y="464" width="122" height="46" rx="12" fill="#E5E7EB" stroke="#CBD5E1" />
+<text class="value" x="1061.0" y="494" text-anchor="middle">n/a</text>
+<text class="tiny" x="56" y="520">Green is stronger. Gray indicates a model that was part of the comparison set but could not be fairly scored.</text>
+</svg>

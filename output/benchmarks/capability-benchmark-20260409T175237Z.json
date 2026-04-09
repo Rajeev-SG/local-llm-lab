@@ -1,0 +1,179 @@
+{
+  "generated_at": "2026-04-09T17:52:37+00:00",
+  "environment": {
+    "machine": "arm64",
+    "platform": "macOS-26.3.1-arm64-arm-64bit-Mach-O",
+    "macos_version": "26.3.1",
+    "ollama_host": "http://127.0.0.1:11435",
+    "python": "3.14.3",
+    "seed": 42
+  },
+  "models": [
+    {
+      "slug": "gemma4_e4b",
+      "label": "gemma4:e4b",
+      "kind": "ollama",
+      "model_name": "gemma4:e4b",
+      "note": "Gemma 4 edge-sized baseline"
+    }
+  ],
+  "tasks": [
+    {
+      "slug": "shell_scripting",
+      "label": "Shell scripting",
+      "category": "claimed"
+    },
+    {
+      "slug": "text_transformation",
+      "label": "Text transformation",
+      "category": "claimed"
+    },
+    {
+      "slug": "classification",
+      "label": "Classification",
+      "category": "claimed"
+    },
+    {
+      "slug": "short_summary",
+      "label": "Short summaries",
+      "category": "claimed"
+    },
+    {
+      "slug": "json_restructuring",
+      "label": "JSON restructuring",
+      "category": "claimed"
+    },
+    {
+      "slug": "translation",
+      "label": "Translation",
+      "category": "claimed"
+    },
+    {
+      "slug": "unknown_refusal",
+      "label": "Unknown refusal",
+      "category": "diagnostic"
+    },
+    {
+      "slug": "harmless_exactness",
+      "label": "Harmless exactness",
+      "category": "diagnostic"
+    }
+  ],
+  "results": {
+    "gemma4_e4b": {
+      "shell_scripting": {
+        "content": "",
+        "elapsed_ms": 2261.2,
+        "ok": false,
+        "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "raw": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Invocation failed",
+          "details": {
+            "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}"
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "",
+        "elapsed_ms": 2233.5,
+        "ok": false,
+        "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "raw": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Invocation failed",
+          "details": {
+            "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}"
+          }
+        }
+      },
+      "classification": {
+        "content": "",
+        "elapsed_ms": 2235.3,
+        "ok": false,
+        "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "raw": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Invocation failed",
+          "details": {
+            "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}"
+          }
+        }
+      },
+      "short_summary": {
+        "content": "",
+        "elapsed_ms": 2227.5,
+        "ok": false,
+        "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "raw": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Invocation failed",
+          "details": {
+            "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}"
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "",
+        "elapsed_ms": 2240.1,
+        "ok": false,
+        "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "raw": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Invocation failed",
+          "details": {
+            "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}"
+          }
+        }
+      },
+      "translation": {
+        "content": "",
+        "elapsed_ms": 2236.4,
+        "ok": false,
+        "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "raw": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Invocation failed",
+          "details": {
+            "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}"
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "",
+        "elapsed_ms": 2217.4,
+        "ok": false,
+        "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "raw": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Invocation failed",
+          "details": {
+            "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}"
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "",
+        "elapsed_ms": 2230.5,
+        "ok": false,
+        "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "raw": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}",
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Invocation failed",
+          "details": {
+            "error": "{\"error\":\"model failed to load, this may be due to resource limitations or an internal error, check ollama server logs for details\"}"
+          }
+        }
+      }
+    }
+  },
+  "json_path": "/Users/rajeev/Code/tools/local-llm-lab/output/benchmarks/capability-benchmark-20260409T175237Z.json"
+}

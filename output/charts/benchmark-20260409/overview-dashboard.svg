@@ -1,0 +1,253 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1480" height="900" viewBox="0 0 1480 900" role="img" aria-labelledby="title desc">
+<title>Benchmark dashboard</title>
+<desc>Benchmark dashboard</desc>
+<style>
+.bg { fill: #FAFAFB; }
+.card { fill: #FFFFFF; stroke: #E5E7EB; stroke-width: 1; }
+.axis { stroke: #D1D5DB; stroke-width: 1; }
+.grid { stroke: #E5E7EB; stroke-width: 1; stroke-dasharray: 4 4; }
+.title { font: 700 28px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.subtitle { font: 500 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #4B5563; }
+.label { font: 600 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.small { font: 500 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #4B5563; }
+.tiny { font: 500 11px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #6B7280; }
+.value { font: 700 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.value-light { font: 700 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #FFFFFF; }
+.mono { font: 600 12px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #111827; }
+</style>
+<rect class="bg" x="0" y="0" width="1480" height="900" rx="24" />
+<text class="title" x="56" y="56">Benchmark Dashboard</text>
+<text class="subtitle" x="56" y="84">Generated from 2026-04-09T17:30:11+00:00 benchmark data with Gemma 4 runtime findings appended</text>
+<rect class="card" x="56" y="116" width="320" height="112" rx="24" />
+<text class="small" x="78" y="148">Top score</text>
+<text class="label" x="78" y="182">qwen3.5:9b</text>
+<text class="value" x="78" y="214">0.94 avg</text>
+<rect class="card" x="400" y="116" width="320" height="112" rx="24" />
+<text class="small" x="422" y="148">Fastest median</text>
+<text class="label" x="422" y="182">apfel</text>
+<text class="value" x="422" y="214">1.16s</text>
+<rect class="card" x="744" y="116" width="320" height="112" rx="24" />
+<text class="small" x="766" y="148">Best guardrails</text>
+<text class="label" x="766" y="182">qwen3.5:9b</text>
+<text class="value" x="766" y="214">2/2 diagnostics</text>
+<rect class="card" x="1088" y="116" width="320" height="112" rx="24" />
+<text class="small" x="1110" y="148">Apfel profile</text>
+<text class="label" x="1110" y="182">Speed-first sidecar</text>
+<text class="value" x="1110" y="214">0.65 avg, 1.16s</text>
+<g transform="translate(40, 250) scale(0.64)">
+<title>Capability heatmap</title>
+<desc>Capability heatmap</desc>
+<style>
+.bg { fill: #FAFAFB; }
+.card { fill: #FFFFFF; stroke: #E5E7EB; stroke-width: 1; }
+.axis { stroke: #D1D5DB; stroke-width: 1; }
+.grid { stroke: #E5E7EB; stroke-width: 1; stroke-dasharray: 4 4; }
+.title { font: 700 28px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.subtitle { font: 500 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #4B5563; }
+.label { font: 600 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.small { font: 500 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #4B5563; }
+.tiny { font: 500 11px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #6B7280; }
+.value { font: 700 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.value-light { font: 700 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #FFFFFF; }
+.mono { font: 600 12px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #111827; }
+</style>
+<rect class="bg" x="0" y="0" width="1360" height="560" rx="24" />
+<text class="title" x="56" y="56">Capability Score Heatmap</text>
+<text class="subtitle" x="56" y="84">Generated from 2026-04-09T17:30:11+00:00 benchmark data with Gemma 4 runtime findings appended</text>
+<text class="label" x="285.0" y="120" text-anchor="middle">Shell</text>
+<text class="label" x="415.0" y="120" text-anchor="middle">Transform</text>
+<text class="label" x="545.0" y="120" text-anchor="middle">Classify</text>
+<text class="label" x="675.0" y="120" text-anchor="middle">Summary</text>
+<text class="label" x="805.0" y="120" text-anchor="middle">JSON</text>
+<text class="label" x="935.0" y="120" text-anchor="middle">Translate</text>
+<text class="label" x="1065.0" y="120" text-anchor="middle">Average</text>
+<text class="label" x="56" y="173">apfel</text>
+<rect x="220" y="140" width="122" height="46" rx="12" fill="#DC2626" stroke="#FFFFFF" />
+<text class="value" x="281.0" y="170" text-anchor="middle">0.00</text>
+<rect x="350" y="140" width="122" height="46" rx="12" fill="#378E43" stroke="#FFFFFF" />
+<text class="value-light" x="411.0" y="170" text-anchor="middle">0.83</text>
+<rect x="480" y="140" width="122" height="46" rx="12" fill="#478341" stroke="#FFFFFF" />
+<text class="value-light" x="541.0" y="170" text-anchor="middle">0.75</text>
+<rect x="610" y="140" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="671.0" y="170" text-anchor="middle">1.00</text>
+<rect x="740" y="140" width="122" height="46" rx="12" fill="#796438" stroke="#FFFFFF" />
+<text class="value" x="801.0" y="170" text-anchor="middle">0.50</text>
+<rect x="870" y="140" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="931.0" y="170" text-anchor="middle">0.80</text>
+<rect x="1000" y="140" width="122" height="46" rx="12" fill="#5B763D" stroke="#FFFFFF" />
+<text class="value-light" x="1061.0" y="170" text-anchor="middle">0.65</text>
+<text class="label" x="56" y="227">qwen3.5:9b</text>
+<rect x="220" y="194" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="281.0" y="224" text-anchor="middle">1.00</text>
+<rect x="350" y="194" width="122" height="46" rx="12" fill="#378E43" stroke="#FFFFFF" />
+<text class="value-light" x="411.0" y="224" text-anchor="middle">0.83</text>
+<rect x="480" y="194" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="541.0" y="224" text-anchor="middle">1.00</text>
+<rect x="610" y="194" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="671.0" y="224" text-anchor="middle">1.00</text>
+<rect x="740" y="194" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="801.0" y="224" text-anchor="middle">1.00</text>
+<rect x="870" y="194" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="931.0" y="224" text-anchor="middle">0.80</text>
+<rect x="1000" y="194" width="122" height="46" rx="12" fill="#229B47" stroke="#FFFFFF" />
+<text class="value-light" x="1061.0" y="224" text-anchor="middle">0.94</text>
+<text class="label" x="56" y="281">phi4</text>
+<rect x="220" y="248" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="281.0" y="278" text-anchor="middle">1.00</text>
+<rect x="350" y="248" width="122" height="46" rx="12" fill="#378E43" stroke="#FFFFFF" />
+<text class="value-light" x="411.0" y="278" text-anchor="middle">0.83</text>
+<rect x="480" y="248" width="122" height="46" rx="12" fill="#2E9345" stroke="#FFFFFF" />
+<text class="value-light" x="541.0" y="278" text-anchor="middle">0.88</text>
+<rect x="610" y="248" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="671.0" y="278" text-anchor="middle">0.80</text>
+<rect x="740" y="248" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="801.0" y="278" text-anchor="middle">1.00</text>
+<rect x="870" y="248" width="122" height="46" rx="12" fill="#65713B" stroke="#FFFFFF" />
+<text class="value" x="931.0" y="278" text-anchor="middle">0.60</text>
+<rect x="1000" y="248" width="122" height="46" rx="12" fill="#339044" stroke="#FFFFFF" />
+<text class="value-light" x="1061.0" y="278" text-anchor="middle">0.85</text>
+<text class="label" x="56" y="335">qwen2.5:14b</text>
+<rect x="220" y="302" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="281.0" y="332" text-anchor="middle">1.00</text>
+<rect x="350" y="302" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="411.0" y="332" text-anchor="middle">1.00</text>
+<rect x="480" y="302" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="541.0" y="332" text-anchor="middle">1.00</text>
+<rect x="610" y="302" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="671.0" y="332" text-anchor="middle">1.00</text>
+<rect x="740" y="302" width="122" height="46" rx="12" fill="#478341" stroke="#FFFFFF" />
+<text class="value-light" x="801.0" y="332" text-anchor="middle">0.75</text>
+<rect x="870" y="302" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="931.0" y="332" text-anchor="middle">0.80</text>
+<rect x="1000" y="302" width="122" height="46" rx="12" fill="#249947" stroke="#FFFFFF" />
+<text class="value-light" x="1061.0" y="332" text-anchor="middle">0.93</text>
+<text class="label" x="56" y="389">qwen2.5-coder:14b</text>
+<rect x="220" y="356" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="281.0" y="386" text-anchor="middle">1.00</text>
+<rect x="350" y="356" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="411.0" y="386" text-anchor="middle">1.00</text>
+<rect x="480" y="356" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="541.0" y="386" text-anchor="middle">1.00</text>
+<rect x="610" y="356" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="671.0" y="386" text-anchor="middle">0.80</text>
+<rect x="740" y="356" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="801.0" y="386" text-anchor="middle">1.00</text>
+<rect x="870" y="356" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="931.0" y="386" text-anchor="middle">0.80</text>
+<rect x="1000" y="356" width="122" height="46" rx="12" fill="#239A47" stroke="#FFFFFF" />
+<text class="value-light" x="1061.0" y="386" text-anchor="middle">0.93</text>
+<text class="label" x="56" y="443">mistral-small:22b</text>
+<rect x="220" y="410" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="281.0" y="440" text-anchor="middle">1.00</text>
+<rect x="350" y="410" width="122" height="46" rx="12" fill="#57793E" stroke="#FFFFFF" />
+<text class="value-light" x="411.0" y="440" text-anchor="middle">0.67</text>
+<rect x="480" y="410" width="122" height="46" rx="12" fill="#2E9345" stroke="#FFFFFF" />
+<text class="value-light" x="541.0" y="440" text-anchor="middle">0.88</text>
+<rect x="610" y="410" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="671.0" y="440" text-anchor="middle">0.80</text>
+<rect x="740" y="410" width="122" height="46" rx="12" fill="#16A34A" stroke="#FFFFFF" />
+<text class="value-light" x="801.0" y="440" text-anchor="middle">1.00</text>
+<rect x="870" y="410" width="122" height="46" rx="12" fill="#3D8A42" stroke="#FFFFFF" />
+<text class="value-light" x="931.0" y="440" text-anchor="middle">0.80</text>
+<rect x="1000" y="410" width="122" height="46" rx="12" fill="#329144" stroke="#FFFFFF" />
+<text class="value-light" x="1061.0" y="440" text-anchor="middle">0.86</text>
+<text class="label" x="56" y="497">gemma4:e4b</text>
+<text class="tiny" x="56" y="512">runtime blocked</text>
+<rect x="220" y="464" width="122" height="46" rx="12" fill="#E5E7EB" stroke="#CBD5E1" />
+<text class="value" x="281.0" y="494" text-anchor="middle">n/a</text>
+<rect x="350" y="464" width="122" height="46" rx="12" fill="#E5E7EB" stroke="#CBD5E1" />
+<text class="value" x="411.0" y="494" text-anchor="middle">n/a</text>
+<rect x="480" y="464" width="122" height="46" rx="12" fill="#E5E7EB" stroke="#CBD5E1" />
+<text class="value" x="541.0" y="494" text-anchor="middle">n/a</text>
+<rect x="610" y="464" width="122" height="46" rx="12" fill="#E5E7EB" stroke="#CBD5E1" />
+<text class="value" x="671.0" y="494" text-anchor="middle">n/a</text>
+<rect x="740" y="464" width="122" height="46" rx="12" fill="#E5E7EB" stroke="#CBD5E1" />
+<text class="value" x="801.0" y="494" text-anchor="middle">n/a</text>
+<rect x="870" y="464" width="122" height="46" rx="12" fill="#E5E7EB" stroke="#CBD5E1" />
+<text class="value" x="931.0" y="494" text-anchor="middle">n/a</text>
+<rect x="1000" y="464" width="122" height="46" rx="12" fill="#E5E7EB" stroke="#CBD5E1" />
+<text class="value" x="1061.0" y="494" text-anchor="middle">n/a</text>
+<text class="tiny" x="56" y="520">Green is stronger. Gray indicates a model that was part of the comparison set but could not be fairly scored.</text>
+</g>
+<g transform="translate(660, 250) scale(0.58)">
+<title>Quality versus speed</title>
+<desc>Quality versus speed</desc>
+<style>
+.bg { fill: #FAFAFB; }
+.card { fill: #FFFFFF; stroke: #E5E7EB; stroke-width: 1; }
+.axis { stroke: #D1D5DB; stroke-width: 1; }
+.grid { stroke: #E5E7EB; stroke-width: 1; stroke-dasharray: 4 4; }
+.title { font: 700 28px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.subtitle { font: 500 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #4B5563; }
+.label { font: 600 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.small { font: 500 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #4B5563; }
+.tiny { font: 500 11px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #6B7280; }
+.value { font: 700 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #111827; }
+.value-light { font: 700 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #FFFFFF; }
+.mono { font: 600 12px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #111827; }
+</style>
+<rect class="bg" x="0" y="0" width="1360" height="620" rx="24" />
+<text class="title" x="56" y="56">Quality vs Speed</text>
+<text class="subtitle" x="56" y="84">Generated from 2026-04-09T17:30:11+00:00 benchmark data with Gemma 4 runtime findings appended</text>
+<rect class="card" x="100" y="100" width="1020" height="440" rx="20" />
+<line class="grid" x1="120.0" y1="120" x2="120.0" y2="520" />
+<text class="tiny" x="120.0" y="546" text-anchor="middle">1s</text>
+<line class="grid" x1="275.0" y1="120" x2="275.0" y2="520" />
+<text class="tiny" x="275.0" y="546" text-anchor="middle">2s</text>
+<line class="grid" x1="479.9" y1="120" x2="479.9" y2="520" />
+<text class="tiny" x="479.9" y="546" text-anchor="middle">5s</text>
+<line class="grid" x1="635.0" y1="120" x2="635.0" y2="520" />
+<text class="tiny" x="635.0" y="546" text-anchor="middle">10s</text>
+<line class="grid" x1="790.0" y1="120" x2="790.0" y2="520" />
+<text class="tiny" x="790.0" y="546" text-anchor="middle">20s</text>
+<line class="grid" x1="945.0" y1="120" x2="945.0" y2="520" />
+<text class="tiny" x="945.0" y="546" text-anchor="middle">40s</text>
+<line class="grid" x1="1100.0" y1="120" x2="1100.0" y2="520" />
+<text class="tiny" x="1100.0" y="546" text-anchor="middle">80s</text>
+<line class="grid" x1="120" y1="520.0" x2="1100" y2="520.0" />
+<text class="tiny" x="102" y="524.0" text-anchor="end">0.5</text>
+<line class="grid" x1="120" y1="440.0" x2="1100" y2="440.0" />
+<text class="tiny" x="102" y="444.0" text-anchor="end">0.6</text>
+<line class="grid" x1="120" y1="360.0" x2="1100" y2="360.0" />
+<text class="tiny" x="102" y="364.0" text-anchor="end">0.7</text>
+<line class="grid" x1="120" y1="280.0" x2="1100" y2="280.0" />
+<text class="tiny" x="102" y="284.0" text-anchor="end">0.8</text>
+<line class="grid" x1="120" y1="200.0" x2="1100" y2="200.0" />
+<text class="tiny" x="102" y="204.0" text-anchor="end">0.9</text>
+<line class="grid" x1="120" y1="120.0" x2="1100" y2="120.0" />
+<text class="tiny" x="102" y="124.0" text-anchor="end">1.0</text>
+<line class="axis" x1="120" y1="520" x2="1100" y2="520" />
+<line class="axis" x1="120" y1="120" x2="120" y2="520" />
+<text class="small" x="610.0" y="574" text-anchor="middle">Median latency per model (log scale)</text>
+<text class="small" x="40" y="320.0" text-anchor="middle" transform="rotate(-90 40,320.0)">Average claimed-task score</text>
+<circle cx="153.2" cy="402.4" r="12" fill="#D97706" stroke="#111827" stroke-width="2" />
+<text class="label" x="169.2" y="390.4" text-anchor="start">apfel</text>
+<text class="tiny" x="169.2" y="408.4" text-anchor="start">0.65 avg, 1.16s</text>
+<circle cx="685.7" cy="168.8" r="10" fill="#2563EB" stroke="#111827" stroke-width="2" />
+<text class="label" x="701.7" y="156.8" text-anchor="start">qwen3.5:9b</text>
+<text class="tiny" x="701.7" y="174.8" text-anchor="start">0.94 avg, 12.55s</text>
+<circle cx="701.0" cy="239.2" r="10" fill="#16A34A" stroke="#111827" stroke-width="2" />
+<text class="label" x="717.0" y="227.2" text-anchor="start">phi4</text>
+<text class="tiny" x="717.0" y="245.2" text-anchor="start">0.85 avg, 13.44s</text>
+<circle cx="689.2" cy="180.0" r="10" fill="#7C3AED" stroke="#111827" stroke-width="2" />
+<text class="label" x="705.2" y="168.0" text-anchor="start">qwen2.5:14b</text>
+<text class="tiny" x="705.2" y="186.0" text-anchor="start">0.93 avg, 12.75s</text>
+<circle cx="733.7" cy="173.6" r="10" fill="#DB2777" stroke="#111827" stroke-width="2" />
+<text class="label" x="749.7" y="161.6" text-anchor="start">qwen2.5-coder:14b</text>
+<text class="tiny" x="749.7" y="179.6" text-anchor="start">0.93 avg, 15.55s</text>
+<circle cx="871.9" cy="234.4" r="10" fill="#DC2626" stroke="#111827" stroke-width="2" />
+<text class="label" x="855.9" y="222.4" text-anchor="end">mistral-small:22b</text>
+<text class="tiny" x="855.9" y="240.4" text-anchor="end">0.86 avg, 28.85s</text>
+<rect class="card" x="1130" y="140" width="180" height="114" rx="18" />
+<text class="label" x="1150" y="170">Read this chart</text>
+<text class="small" x="1150" y="196">Upper-left is better.</text>
+<text class="small" x="1150" y="220">Apfel wins speed.</text>
+<text class="small" x="1150" y="244">Qwen variants win quality.</text>
+<rect class="card" x="1130" y="280" width="180" height="126" rx="18" />
+<text class="label" x="1150" y="310">Blocked model</text>
+<text class="small" x="1150" y="336">Gemma 4 is omitted from the</text>
+<text class="small" x="1150" y="356">scatter because it could not</text>
+<text class="small" x="1150" y="376">complete a single valid run on</text>
+<text class="small" x="1150" y="396">this Mac.</text>
+</g>
+</svg>
