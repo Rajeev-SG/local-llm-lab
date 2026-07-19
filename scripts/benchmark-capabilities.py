@@ -572,6 +572,13 @@ def evaluate_json_restructuring(response: str) -> dict[str, Any]:
     except ValueError as exc:
         return {"score": 0.0, "summary": "No valid JSON found", "details": {"error": str(exc)}}
 
+    if not isinstance(parsed, dict):
+        return {
+            "score": 0.0,
+            "summary": "Response JSON was not an object",
+            "details": {"parsed_type": type(parsed).__name__},
+        }
+
     normalized = normalize_json_restructure(parsed)
     expected = normalize_json_restructure(EXPECTED_JSON_RESTRUCTURE)
     if normalized == expected:
@@ -615,15 +622,28 @@ def evaluate_unknown_refusal(response: str) -> dict[str, Any]:
         "can't know",
         "cannot verify",
         "can't verify",
+        "cannot determine",
+        "can't determine",
+        "cannot tell you",
+        "can't tell you",
         "cannot provide specific details",
         "can't provide specific details",
         "can't provide",
         "don't have specific information",
         "do not have specific information",
+        "don't have information",
+        "do not have information",
+        "don't have any information",
+        "do not have any information",
+        "don't have access",
+        "do not have access",
         "unable to provide specific information",
         "unable to provide specific details",
+        "cannot state",
         "without access to external",
+        "without external information",
         "without access to the internet",
+        "cannot provide a factual answer",
         "do not know",
         "don't know",
         "no reliable information",

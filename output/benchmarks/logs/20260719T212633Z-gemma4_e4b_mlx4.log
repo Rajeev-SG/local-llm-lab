@@ -1,0 +1,39 @@
+INFO:     Started server process [61161]
+INFO:     Waiting for application startup.
+2026-07-19 22:26:35,782 - INFO - Pre-loading language model: /Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-E4B-it-MLX-4bit/snapshots/fa6f15978ba53de9ff3a95ce2821deb0ca4a15f0
+/Users/rajeev/.local/share/uv/tools/mlx-vlm/lib/python3.14/site-packages/transformers/audio_utils.py:723: UserWarning: At least one mel filter has all zero values. The value for `num_mel_filters` (128) may be set too high. Or, the value for `num_frequency_bins` (257) may be set too low.
+  warnings.warn(
+2026-07-19 22:26:37,028 - INFO - Language model ready, continuous batching enabled.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8091 (Press CTRL+C to quit)
+Loading model from: /Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-E4B-it-MLX-4bit/snapshots/fa6f15978ba53de9ff3a95ce2821deb0ca4a15f0
+Model and processor loaded successfully.
+INFO:     127.0.0.1:62294 - "GET /v1/models HTTP/1.1" 200 OK
+2026-07-19 22:26:38,244 - INFO - HTTP Request: GET https://huggingface.co/api/models/lmstudio-community/gemma-4-E4B-it-MLX-4bit/revision/main "HTTP/1.1 200 OK"
+New text_generation model request, clearing existing cache...
+Unloading text_generation model: /Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-E4B-it-MLX-4bit/snapshots/fa6f15978ba53de9ff3a95ce2821deb0ca4a15f0, Adapter: None
+Stopping ResponseGenerator...
+Loading model from: lmstudio-community/gemma-4-E4B-it-MLX-4bit
+Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 23876.49it/s]
+Model and processor loaded successfully.
+INFO:     127.0.0.1:62296 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: lmstudio-community/gemma-4-E4B-it-MLX-4bit, Adapter: None
+INFO:     127.0.0.1:62310 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: lmstudio-community/gemma-4-E4B-it-MLX-4bit, Adapter: None
+INFO:     127.0.0.1:62311 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: lmstudio-community/gemma-4-E4B-it-MLX-4bit, Adapter: None
+INFO:     127.0.0.1:62312 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: lmstudio-community/gemma-4-E4B-it-MLX-4bit, Adapter: None
+INFO:     127.0.0.1:62313 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: lmstudio-community/gemma-4-E4B-it-MLX-4bit, Adapter: None
+INFO:     127.0.0.1:62314 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: lmstudio-community/gemma-4-E4B-it-MLX-4bit, Adapter: None
+INFO:     127.0.0.1:62315 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: lmstudio-community/gemma-4-E4B-it-MLX-4bit, Adapter: None
+INFO:     127.0.0.1:62316 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: lmstudio-community/gemma-4-E4B-it-MLX-4bit, Adapter: None
+INFO:     127.0.0.1:62317 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [61161]

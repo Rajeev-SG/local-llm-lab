@@ -1,6 +1,6 @@
 # Local LLM Lab
 
-A proof-backed local AI workstation for Apple Silicon: Ollama, Open WebUI, tuned helper roles, and browser-validated evidence of what actually works.
+A proof-backed local AI workstation for Apple Silicon: MLX, Ollama, Open WebUI, tuned helper roles, and measured evidence of what actually works.
 
 Live site: [local-llm-lab.vercel.app](https://local-llm-lab.vercel.app)
 
@@ -26,25 +26,30 @@ Local LLM Lab answers that with:
 
 | Area | Current answer |
 |------|----------------|
-| Best clean general local model | `mistral-small:22b` |
-| Best clean coding-focused local model | `qwen2.5-coder:14b` |
-| Best fast helper | `qwen3.5:9b` with `think=false` |
+| Best coding and terminal model | `Qwen3 Coder 30B A3B`, MLX 4-bit |
+| Best broad local model | `Qwen3.6 35B A3B`, MLX 4-bit |
+| Best smaller broad helper | `Gemma 4 E4B`, MLX 4-bit |
+| Fastest measured model | `LFM2 24B A2B`, MLX 4-bit, but its task quality is too low for the default role |
 | Best conservative helper | `phi4` |
-| Largest model proven through Open WebUI | `mistral-small:22b` |
+| Exact model builds recorded | 26 |
+| Fully comparable benchmark rows | 17 |
 | Browser validation | Real Open WebUI prompt-response path verified with Playwright |
 
 The strongest current proof artifacts are:
 
 - [benchmark-results.md](./benchmark-results.md)
+- [overall-leaderboard.md](./overall-leaderboard.md)
+- [huggingface-candidate-search.md](./huggingface-candidate-search.md)
 - [model-sweep-20260322.md](./output/acceptance/model-sweep-20260322.md)
 - [agent-offload-role-proof-20260322.md](./output/acceptance/agent-offload-role-proof-20260322.md)
 - [desktop-final.png](./output/playwright/agent-offload-role-proof-20260322/desktop-final.png)
 
 Latest benchmark takeaway:
 
-- `apfel` is the fastest option in the lab for tiny offline tasks, but it underperforms the stronger Ollama models on shell generation and structured JSON work.
-- `gemma4:e4b` is now tracked in the benchmark visuals, but the model is still runtime-blocked on this machine through Ollama, so it is listed as `n/a` rather than scored.
-- The current Apfel benchmark and workflow recommendation are captured in [apfel-benchmark-20260409.md](./output/acceptance/apfel-benchmark-20260409.md).
+- `Qwen3 Coder 30B A3B` ranks first for the coding-heavy workload at 98.3 work-fit, 98.8 task quality, 98.8 generated tokens per second, and 17.8 GB peak memory.
+- `Qwen3.6 35B A3B` is nearly tied at 98.2 work-fit and remains the better broad default when image input matters.
+- `Gemma 4 E4B` ranks third despite a 6.86 GB download, making it the best smaller broad helper found in the Hugging Face search.
+- `LFM2 24B A2B` is fastest at 139.2 generated tokens per second, but it ranks 17th because it failed important shell, classification, structured-data, and factual-reliability checks.
 
 ## Benchmark Graphs
 
@@ -72,15 +77,26 @@ The current chart set is generated from the scored benchmark JSON plus the Gemma
 
 ## Practical hardware takeaway
 
-This lab was tuned on a `48 GB` Apple Silicon machine, but the currently reliable Docker Ollama runtime only exposes about `15.7 GiB` to the model runner. That changes the real model envelope:
+This lab was tuned on a `48 GB` Apple Silicon machine. The Docker Ollama runtime exposes about `15.7 GiB` to its model runner, while direct MLX runs can use the host's unified memory. That creates two practical limits:
 
-- `9B` to `14B` models are the sweet spot
-- `mistral-small:22b` is the heaviest model proven cleanly working end-to-end
-- `30B+` models are still documented as constrained or failing under the current runtime ceiling
+- `9B` to `14B` models remain the safest range inside the current Docker Ollama setup.
+- Direct 4-bit MLX builds around `30B` total parameters run cleanly with measured peaks around `18` to `20 GB`.
+- A model near `45 GB` before context memory is still unsuitable because the operating system and working applications need the same unified memory.
 
 That honesty matters. A useful local AI lab should explain the limits as clearly as the wins.
 
 ## Model roles
+
+### Direct MLX recommendations
+
+| Role | Exact build | Best use |
+|------|-------------|----------|
+| Coding default | `lmstudio-community/Qwen3-Coder-30B-A3B-Instruct-MLX-4bit` | Repository work, shell tasks, structured extraction, and classification |
+| Broad default | `mlx-community/Qwen3.6-35B-A3B-4bit` | General technical work and image-aware tasks |
+| Smaller broad helper | `lmstudio-community/gemma-4-E4B-it-MLX-4bit` | Fast summaries, extraction, and routine technical work |
+| Careful dense comparison | `mlx-community/Qwen3.6-27B-4bit` | Difficult review when slower output is acceptable |
+
+### Ollama roles
 
 | Role | Alias | Base model | Best use |
 |------|-------|------------|----------|
@@ -145,6 +161,8 @@ This does not publish Open WebUI to the open internet. It exposes the UI over Ta
 ./scripts/setup-agent-offload-models.sh
 ./scripts/test-models.sh
 ./scripts/benchmark-model.sh mistral-small:22b
+python3 ./scripts/benchmark-recommended-models.py --models qwen3_coder_30b_a3b_mlx4
+python3 ./scripts/generate-overall-leaderboard.py
 ./scripts/generate-benchmark-charts.py
 ```
 
@@ -184,6 +202,8 @@ That architecture is documented in [agent-offload-setup-recommendation.md](./age
 | `config/agent-offload.toml` | Shared broker configuration |
 | `broker/agent_offload.py` | Role-aware offload broker |
 | `output/charts/` | Generated benchmark comparison charts |
+| `output/benchmarks/` | Raw, revision-pinned benchmark results and runtime logs |
+| `output/leaderboard/` | Generated JSON and CSV leaderboard data |
 | `output/acceptance/` | Human-readable proof notes |
 | `output/playwright/` | Browser-level acceptance artifacts |
 | `site/` | Public landing page for the lab |

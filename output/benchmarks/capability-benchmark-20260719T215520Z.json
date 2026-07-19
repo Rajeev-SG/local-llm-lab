@@ -1,0 +1,532 @@
+{
+  "schema_version": 2,
+  "benchmark_protocol": {
+    "name": "mlx-capability-v1",
+    "seed": 42,
+    "max_tokens": 256,
+    "performance_prompt_tokens": 512,
+    "performance_generation_tokens": 128,
+    "performance_trials": 3
+  },
+  "generated_at": "2026-07-19T21:55:20+00:00",
+  "environment": {
+    "machine": "arm64",
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "macos_version": "26.5.1",
+    "python": "3.14.3",
+    "mlx_lm_version": "0.31.3",
+    "seed": 42,
+    "hardware": "Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores"
+  },
+  "models": [
+    {
+      "slug": "nemotron3_nano_30b_a3b_mlx4",
+      "label": "Nemotron 3 Nano 30B A3B (MLX 4-bit)",
+      "kind": "mlx",
+      "model_name": "lmstudio-community/NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit",
+      "revision": "543873e66e36362182738b0d2863a766728045aa",
+      "download_size_gb": 17.79,
+      "base_model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+      "note": "Efficient coding, reasoning, and tool-use comparison"
+    }
+  ],
+  "tasks": [
+    {
+      "slug": "shell_scripting",
+      "label": "Shell scripting",
+      "category": "claimed"
+    },
+    {
+      "slug": "text_transformation",
+      "label": "Text transformation",
+      "category": "claimed"
+    },
+    {
+      "slug": "classification",
+      "label": "Classification",
+      "category": "claimed"
+    },
+    {
+      "slug": "short_summary",
+      "label": "Short summaries",
+      "category": "claimed"
+    },
+    {
+      "slug": "json_restructuring",
+      "label": "JSON restructuring",
+      "category": "claimed"
+    },
+    {
+      "slug": "translation",
+      "label": "Translation",
+      "category": "claimed"
+    },
+    {
+      "slug": "unknown_refusal",
+      "label": "Unknown refusal",
+      "category": "diagnostic"
+    },
+    {
+      "slug": "harmless_exactness",
+      "label": "Harmless exactness",
+      "category": "diagnostic"
+    }
+  ],
+  "results": {
+    "nemotron3_nano_30b_a3b_mlx4": {
+      "shell_scripting": {
+        "content": "awk '{print $1}' | sort | uniq -c | sort -nr | head -3 | awk '{print $1 \" \" $2}'",
+        "elapsed_ms": 1584.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-4ada4213-7074-4733-ba8b-9a0ccc21315d",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit/snapshots/543873e66e36362182738b0d2863a766728045aa",
+          "created": 1784498129,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "awk '{print $1}' | sort | uniq -c | sort -nr | head -3 | awk '{print $1 \" \" $2}'"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 620,
+            "completion_tokens": 33,
+            "total_tokens": 653,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 620,
+          "completion_tokens": 33,
+          "total_tokens": 653,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 20.827,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact match on top-3 IP count pipeline",
+          "details": {
+            "command": "awk '{print $1}' | sort | uniq -c | sort -nr | head -3 | awk '{print $1 \" \" $2}'",
+            "actual": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "expected": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "stderr": ""
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "- Version 2.4.1 fixes login loop for SSO users  \n- Repairs CSV export from finance dashboard  \n- Reports load faster, about 35 percent improvement",
+        "elapsed_ms": 662.8,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-7113106c-0959-487a-87b1-653914346ef3",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit/snapshots/543873e66e36362182738b0d2863a766728045aa",
+          "created": 1784498157,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "- Version 2.4.1 fixes login loop for SSO users  \n- Repairs CSV export from finance dashboard  \n- Reports load faster, about 35 percent improvement"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 134,
+            "completion_tokens": 39,
+            "total_tokens": 173,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 134,
+          "completion_tokens": 39,
+          "total_tokens": 173,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 58.841,
+        "evaluation": {
+          "score": 0.833,
+          "summary": "5/6 rubric checks passed",
+          "details": {
+            "three_bullets": true,
+            "version": true,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": false
+          }
+        }
+      },
+      "classification": {
+        "content": "{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"account\",\n  \"T8\": \"feature\"\n}",
+        "elapsed_ms": 945.2,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-223c1e71-4654-451f-9377-eac4cc139864",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit/snapshots/543873e66e36362182738b0d2863a766728045aa",
+          "created": 1784498157,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"account\",\n  \"T8\": \"feature\"\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 160,
+            "completion_tokens": 68,
+            "total_tokens": 228,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 160,
+          "completion_tokens": 68,
+          "total_tokens": 228,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 71.942,
+        "evaluation": {
+          "score": 0.75,
+          "summary": "6/8 tickets classified correctly",
+          "details": {
+            "T7": {
+              "expected": "billing",
+              "actual": "account"
+            },
+            "T8": {
+              "expected": "account",
+              "actual": "feature"
+            }
+          }
+        }
+      },
+      "short_summary": {
+        "content": "From 09:13 to 10:00 UTC (47 minutes), an expired TLS certificate on the payments cache cluster caused stale connections to accumulate, leading to request latency spikes and a 18% failure rate in checkout attempts, primarily affecting returning customers with saved carts; the issue was resolved by rolling back the certificate bundle, flushing stale connections, and restarting the affected payment workers.",
+        "elapsed_ms": 1128.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-894857a7-75a5-487b-9a3c-24cde1ddede7",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit/snapshots/543873e66e36362182738b0d2863a766728045aa",
+          "created": 1784498158,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "From 09:13 to 10:00 UTC (47 minutes), an expired TLS certificate on the payments cache cluster caused stale connections to accumulate, leading to request latency spikes and a 18% failure rate in checkout attempts, primarily affecting returning customers with saved carts; the issue was resolved by rolling back the certificate bundle, flushing stale connections, and restarting the affected payment workers."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 184,
+            "completion_tokens": 86,
+            "total_tokens": 270,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 184,
+          "completion_tokens": 86,
+          "total_tokens": 270,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 76.207,
+        "evaluation": {
+          "score": 0.6,
+          "summary": "3/5 summary checks passed",
+          "details": {
+            "word_range": false,
+            "duration": true,
+            "cause": false,
+            "impact": true,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\n        \"o-100\",\n        \"o-102\"\n      ],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\n        \"o-103\"\n      ],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}",
+        "elapsed_ms": 1903.0,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-b6360fcd-2094-4ce9-981e-555237607453",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit/snapshots/543873e66e36362182738b0d2863a766728045aa",
+          "created": 1784498159,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\n        \"o-100\",\n        \"o-102\"\n      ],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\n        \"o-103\"\n      ],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 268,
+            "completion_tokens": 160,
+            "total_tokens": 428,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 268,
+          "completion_tokens": 160,
+          "total_tokens": 428,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 84.078,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact semantic JSON restructure match",
+          "details": {}
+        }
+      },
+      "translation": {
+        "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}",
+        "elapsed_ms": 813.6,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-33f49fa1-922a-426c-b90f-16f328fcd82d",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit/snapshots/543873e66e36362182738b0d2863a766728045aa",
+          "created": 1784498161,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 91,
+            "completion_tokens": 58,
+            "total_tokens": 149,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 91,
+          "completion_tokens": 58,
+          "total_tokens": 149,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 71.288,
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 translations accepted",
+          "details": {
+            "t2": {
+              "expected_any_of": [
+                "datei fehlt",
+                "die datei fehlt"
+              ],
+              "actual": "Die Datei fehlt."
+            }
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "I cannot determine what changed in version\u202f7.4.1 of the \u201cquartzpickle\u201d package without external information, so I cannot provide a factual answer.",
+        "elapsed_ms": 563.3,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-76fcf02e-d292-4693-9b1a-d45889d51ccc",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit/snapshots/543873e66e36362182738b0d2863a766728045aa",
+          "created": 1784498162,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "I cannot determine what changed in version\u202f7.4.1 of the \u201cquartzpickle\u201d package without external information, so I cannot provide a factual answer."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 61,
+            "completion_tokens": 35,
+            "total_tokens": 96,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 61,
+          "completion_tokens": 35,
+          "total_tokens": 96,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 62.134,
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Did not clearly refuse or appeared to fabricate details",
+          "details": {
+            "uncertain": false,
+            "fabricated_markers_present": false
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "OK",
+        "elapsed_ms": 151.2,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-7cff1935-ec03-492d-ac95-2b1d299acc01",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit/snapshots/543873e66e36362182738b0d2863a766728045aa",
+          "created": 1784498163,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "OK"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 25,
+            "completion_tokens": 2,
+            "total_tokens": 27,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 25,
+          "completion_tokens": 2,
+          "total_tokens": 27,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 13.228,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Matched exact harmless output request",
+          "details": {
+            "actual": "OK"
+          }
+        }
+      }
+    }
+  },
+  "performance": {
+    "nemotron3_nano_30b_a3b_mlx4": {
+      "ok": true,
+      "prompt_tokens_per_second": 1157.457,
+      "generation_tokens_per_second": 105.155,
+      "peak_memory_gb": 19.563,
+      "trials": [
+        {
+          "trial": 1,
+          "prompt_tokens_per_second": 1164.812,
+          "generation_tokens_per_second": 105.013,
+          "peak_memory_gb": 19.563,
+          "total_time_seconds": 1.719
+        },
+        {
+          "trial": 2,
+          "prompt_tokens_per_second": 1160.342,
+          "generation_tokens_per_second": 105.332,
+          "peak_memory_gb": 19.563,
+          "total_time_seconds": 1.729
+        },
+        {
+          "trial": 3,
+          "prompt_tokens_per_second": 1147.218,
+          "generation_tokens_per_second": 105.12,
+          "peak_memory_gb": 19.563,
+          "total_time_seconds": 1.932
+        }
+      ],
+      "raw_output": "Running warmup..\nTiming with prompt_tokens=512, generation_tokens=128, batch_size=1.\nTrial 1:  prompt_tps=1164.812, generation_tps=105.013, peak_memory=19.563, total_time=1.719\nTrial 2:  prompt_tps=1160.342, generation_tps=105.332, peak_memory=19.563, total_time=1.729\nTrial 3:  prompt_tps=1147.218, generation_tps=105.120, peak_memory=19.563, total_time=1.932\nAverages: prompt_tps=1157.457, generation_tps=105.155, peak_memory=19.563\n[transformers] You are using a model of type `nemotron_h` to instantiate a model of type ``. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sam2Model`), but is otherwise not supported and can yield errors. Please verify that the checkpoint is compatible with the model you are instantiating.",
+      "returncode": 0,
+      "prompt_tokens": 512,
+      "generation_tokens": 128,
+      "trial_count": 3
+    }
+  },
+  "runtime_status": {
+    "nemotron3_nano_30b_a3b_mlx4": {
+      "status": "passed",
+      "startup_ms": 7084.299999999999,
+      "snapshot_path": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit/snapshots/543873e66e36362182738b0d2863a766728045aa",
+      "log_path": "output/benchmarks/logs/20260719T215520Z-nemotron3_nano_30b_a3b_mlx4.log"
+    }
+  },
+  "json_path": "/Users/rajeev/Code/tools/local-llm-lab/output/benchmarks/capability-benchmark-20260719T215520Z.json"
+}

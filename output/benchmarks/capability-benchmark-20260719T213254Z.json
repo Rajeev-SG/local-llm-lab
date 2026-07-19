@@ -1,0 +1,670 @@
+{
+  "schema_version": 2,
+  "benchmark_protocol": {
+    "name": "mlx-capability-v1",
+    "seed": 42,
+    "max_tokens": 256,
+    "performance_prompt_tokens": 512,
+    "performance_generation_tokens": 128,
+    "performance_trials": 3
+  },
+  "generated_at": "2026-07-19T21:32:54+00:00",
+  "environment": {
+    "machine": "arm64",
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "macos_version": "26.5.1",
+    "python": "3.14.3",
+    "mlx_lm_version": "0.31.3",
+    "seed": 42,
+    "hardware": "Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores"
+  },
+  "models": [
+    {
+      "slug": "gemma4_e4b_mlx4",
+      "label": "Gemma 4 E4B (MLX 4-bit)",
+      "kind": "mlx_vlm",
+      "model_name": "lmstudio-community/gemma-4-E4B-it-MLX-4bit",
+      "revision": "fa6f15978ba53de9ff3a95ce2821deb0ca4a15f0",
+      "download_size_gb": 6.86,
+      "base_model": "google/gemma-4-e4b-it",
+      "note": "Fast multimodal helper for summaries, extraction, and routine technical tasks"
+    }
+  ],
+  "tasks": [
+    {
+      "slug": "shell_scripting",
+      "label": "Shell scripting",
+      "category": "claimed"
+    },
+    {
+      "slug": "text_transformation",
+      "label": "Text transformation",
+      "category": "claimed"
+    },
+    {
+      "slug": "classification",
+      "label": "Classification",
+      "category": "claimed"
+    },
+    {
+      "slug": "short_summary",
+      "label": "Short summaries",
+      "category": "claimed"
+    },
+    {
+      "slug": "json_restructuring",
+      "label": "JSON restructuring",
+      "category": "claimed"
+    },
+    {
+      "slug": "translation",
+      "label": "Translation",
+      "category": "claimed"
+    },
+    {
+      "slug": "unknown_refusal",
+      "label": "Unknown refusal",
+      "category": "diagnostic"
+    },
+    {
+      "slug": "harmless_exactness",
+      "label": "Harmless exactness",
+      "category": "diagnostic"
+    }
+  ],
+  "results": {
+    "gemma4_e4b_mlx4": {
+      "shell_scripting": {
+        "content": "awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3 | awk '{print $1, $2}'",
+        "elapsed_ms": 951.0,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-6041cf6d-8bda-494e-a47e-51d2229bfce4",
+          "object": "chat.completion",
+          "created": 1784496779,
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-E4B-it-MLX-4bit/snapshots/fa6f15978ba53de9ff3a95ce2821deb0ca4a15f0",
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3 | awk '{print $1, $2}'",
+                "reasoning_content": null,
+                "reasoning": null,
+                "tool_calls": null,
+                "tool_call_id": null,
+                "name": null
+              },
+              "logprobs": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 612,
+            "completion_tokens": 33,
+            "total_tokens": 645,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "timings": {
+            "prompt_n": 612,
+            "cache_n": 0,
+            "predicted_n": 33,
+            "prompt_ms": 324.03887499822304,
+            "prompt_per_token_ms": 0.5294752859448089,
+            "prompt_per_second": 1888.6622785718414,
+            "predicted_ms": 594.9776250017749,
+            "predicted_per_token_ms": 18.029625000053784,
+            "predicted_per_second": 55.46427061001085,
+            "peak_memory": 7.781906034
+          }
+        },
+        "usage": {
+          "prompt_tokens": 612,
+          "completion_tokens": 33,
+          "total_tokens": 645,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 34.7,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact match on top-3 IP count pipeline",
+          "details": {
+            "command": "awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3 | awk '{print $1, $2}'",
+            "actual": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "expected": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "stderr": ""
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "* Version 2.4.1 fixes login loop.\n* CSV export repair is now complete.\n* Reports load significantly faster now.",
+        "elapsed_ms": 674.2,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-c7f96752-9a20-4b2e-87c7-1eed3cc1c80f",
+          "object": "chat.completion",
+          "created": 1784496780,
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-E4B-it-MLX-4bit/snapshots/fa6f15978ba53de9ff3a95ce2821deb0ca4a15f0",
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "* Version 2.4.1 fixes login loop.\n* CSV export repair is now complete.\n* Reports load significantly faster now.",
+                "reasoning_content": null,
+                "reasoning": null,
+                "tool_calls": null,
+                "tool_call_id": null,
+                "name": null
+              },
+              "logprobs": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 131,
+            "completion_tokens": 30,
+            "total_tokens": 161,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "timings": {
+            "prompt_n": 131,
+            "cache_n": 0,
+            "predicted_n": 30,
+            "prompt_ms": 109.66399998869747,
+            "prompt_per_token_ms": 0.8371297709060875,
+            "prompt_per_second": 1194.5579225042086,
+            "predicted_ms": 534.7821983139448,
+            "predicted_per_token_ms": 17.826073277131496,
+            "predicted_per_second": 56.09760402381316,
+            "peak_memory": 7.781906034
+          }
+        },
+        "usage": {
+          "prompt_tokens": 131,
+          "completion_tokens": 30,
+          "total_tokens": 161,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 44.497,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "6/6 rubric checks passed",
+          "details": {
+            "three_bullets": true,
+            "version": true,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": true
+          }
+        }
+      },
+      "classification": {
+        "content": "```json\n{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"account\"\n}\n```",
+        "elapsed_ms": 1575.8,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-607a3fac-8d96-4435-87ee-8a357da63f7b",
+          "object": "chat.completion",
+          "created": 1784496782,
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-E4B-it-MLX-4bit/snapshots/fa6f15978ba53de9ff3a95ce2821deb0ca4a15f0",
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "```json\n{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"account\"\n}\n```",
+                "reasoning_content": null,
+                "reasoning": null,
+                "tool_calls": null,
+                "tool_call_id": null,
+                "name": null
+              },
+              "logprobs": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 162,
+            "completion_tokens": 81,
+            "total_tokens": 243,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "timings": {
+            "prompt_n": 162,
+            "cache_n": 0,
+            "predicted_n": 81,
+            "prompt_ms": 111.66558298282325,
+            "prompt_per_token_ms": 0.6892937221161929,
+            "prompt_per_second": 1450.7603477511898,
+            "predicted_ms": 1433.8433952820196,
+            "predicted_per_token_ms": 17.7017703121237,
+            "predicted_per_second": 56.49152499256607,
+            "peak_memory": 7.781906034
+          }
+        },
+        "usage": {
+          "prompt_tokens": 162,
+          "completion_tokens": 81,
+          "total_tokens": 243,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 51.402,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "8/8 tickets classified correctly",
+          "details": {}
+        }
+      },
+      "short_summary": {
+        "content": "A 47-minute checkout failure occurred due to an expired Redis TLS certificate, impacting 18% of attempts, which was resolved by rolling back the certificate and restarting payment workers.",
+        "elapsed_ms": 834.9,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-f65280d5-6dde-4500-bdd9-4ec741407675",
+          "object": "chat.completion",
+          "created": 1784496783,
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-E4B-it-MLX-4bit/snapshots/fa6f15978ba53de9ff3a95ce2821deb0ca4a15f0",
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "A 47-minute checkout failure occurred due to an expired Redis TLS certificate, impacting 18% of attempts, which was resolved by rolling back the certificate and restarting payment workers.",
+                "reasoning_content": null,
+                "reasoning": null,
+                "tool_calls": null,
+                "tool_call_id": null,
+                "name": null
+              },
+              "logprobs": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 171,
+            "completion_tokens": 39,
+            "total_tokens": 210,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "timings": {
+            "prompt_n": 171,
+            "cache_n": 0,
+            "predicted_n": 39,
+            "prompt_ms": 113.0974999978207,
+            "prompt_per_token_ms": 0.6613888888761444,
+            "prompt_per_second": 1511.9697606339223,
+            "predicted_ms": 692.3537010029816,
+            "predicted_per_token_ms": 17.75265900007645,
+            "predicted_per_second": 56.329589837538904,
+            "peak_memory": 7.781906034
+          }
+        },
+        "usage": {
+          "prompt_tokens": 171,
+          "completion_tokens": 39,
+          "total_tokens": 210,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 46.712,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "5/5 summary checks passed",
+          "details": {
+            "word_range": true,
+            "duration": true,
+            "cause": true,
+            "impact": true,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "```json\n{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\n        \"o-100\"\n      ],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\n        \"o-103\"\n      ],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}\n```",
+        "elapsed_ms": 3528.7,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-fcab10c9-3e3f-48e9-889d-1a5a6d6b3af1",
+          "object": "chat.completion",
+          "created": 1784496786,
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-E4B-it-MLX-4bit/snapshots/fa6f15978ba53de9ff3a95ce2821deb0ca4a15f0",
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "```json\n{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\n        \"o-100\"\n      ],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\n        \"o-103\"\n      ],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}\n```",
+                "reasoning_content": null,
+                "reasoning": null,
+                "tool_calls": null,
+                "tool_call_id": null,
+                "name": null
+              },
+              "logprobs": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 285,
+            "completion_tokens": 187,
+            "total_tokens": 472,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "timings": {
+            "prompt_n": 285,
+            "cache_n": 0,
+            "predicted_n": 187,
+            "prompt_ms": 176.98774999007583,
+            "prompt_per_token_ms": 0.6210096490879854,
+            "prompt_per_second": 1610.2809376128048,
+            "predicted_ms": 3322.411741727152,
+            "predicted_per_token_ms": 17.766907709770866,
+            "predicted_per_second": 56.284414617072194,
+            "peak_memory": 7.781906034
+          }
+        },
+        "usage": {
+          "prompt_tokens": 285,
+          "completion_tokens": 187,
+          "total_tokens": 472,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 52.994,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "4/4 JSON checks passed",
+          "details": {
+            "checks": {
+              "grand_total": true,
+              "region_count": true,
+              "eu_total": true,
+              "us_high_priority": true
+            },
+            "parsed": {
+              "regions": [
+                {
+                  "region": "apac",
+                  "customer_count": 1,
+                  "high_priority_ids": [],
+                  "total_amount": 40
+                },
+                {
+                  "region": "eu",
+                  "customer_count": 1,
+                  "high_priority_ids": [
+                    "o-100"
+                  ],
+                  "total_amount": 150
+                },
+                {
+                  "region": "us",
+                  "customer_count": 2,
+                  "high_priority_ids": [
+                    "o-103"
+                  ],
+                  "total_amount": 130
+                }
+              ],
+              "grand_total": 320
+            }
+          }
+        }
+      },
+      "translation": {
+        "content": "```json\n{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Was kostet das?\",\n  \"t5\": \"Rote Apfel\"\n}\n```",
+        "elapsed_ms": 1300.2,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-54fb9747-141d-4676-a188-71eee45016aa",
+          "object": "chat.completion",
+          "created": 1784496787,
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-E4B-it-MLX-4bit/snapshots/fa6f15978ba53de9ff3a95ce2821deb0ca4a15f0",
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "```json\n{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Was kostet das?\",\n  \"t5\": \"Rote Apfel\"\n}\n```",
+                "reasoning_content": null,
+                "reasoning": null,
+                "tool_calls": null,
+                "tool_call_id": null,
+                "name": null
+              },
+              "logprobs": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 90,
+            "completion_tokens": 64,
+            "total_tokens": 154,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "timings": {
+            "prompt_n": 90,
+            "cache_n": 0,
+            "predicted_n": 64,
+            "prompt_ms": 116.77795898867771,
+            "prompt_per_token_ms": 1.2975328776519746,
+            "prompt_per_second": 770.6933806637776,
+            "predicted_ms": 1138.274243071912,
+            "predicted_per_token_ms": 17.785535047998625,
+            "predicted_per_second": 56.22546621742079,
+            "peak_memory": 7.781906034
+          }
+        },
+        "usage": {
+          "prompt_tokens": 90,
+          "completion_tokens": 64,
+          "total_tokens": 154,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 49.223,
+        "evaluation": {
+          "score": 0.6,
+          "summary": "3/5 translations accepted",
+          "details": {
+            "t2": {
+              "expected_any_of": [
+                "datei fehlt",
+                "die datei fehlt"
+              ],
+              "actual": "Die Datei fehlt."
+            },
+            "t5": {
+              "expected_any_of": [
+                "ein roter apfel",
+                "roter apfel"
+              ],
+              "actual": "Rote Apfel"
+            }
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "I do not have access to the release notes for version 7.4.1 of the \"quartzpickle\" package, so I cannot tell you what changed.",
+        "elapsed_ms": 718.7,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-74b3eea3-c098-4c67-893b-b5805617aa76",
+          "object": "chat.completion",
+          "created": 1784496788,
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-E4B-it-MLX-4bit/snapshots/fa6f15978ba53de9ff3a95ce2821deb0ca4a15f0",
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "I do not have access to the release notes for version 7.4.1 of the \"quartzpickle\" package, so I cannot tell you what changed.",
+                "reasoning_content": null,
+                "reasoning": null,
+                "tool_calls": null,
+                "tool_call_id": null,
+                "name": null
+              },
+              "logprobs": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 50,
+            "completion_tokens": 34,
+            "total_tokens": 84,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "timings": {
+            "prompt_n": 50,
+            "cache_n": 0,
+            "predicted_n": 34,
+            "prompt_ms": 79.48424998903647,
+            "prompt_per_token_ms": 1.5896849997807294,
+            "prompt_per_second": 629.0554418881309,
+            "predicted_ms": 605.5577294724627,
+            "predicted_per_token_ms": 17.810521455072433,
+            "predicted_per_second": 56.146587427130065,
+            "peak_memory": 7.781906034
+          }
+        },
+        "usage": {
+          "prompt_tokens": 50,
+          "completion_tokens": 34,
+          "total_tokens": 84,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 47.308,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Refused cleanly without inventing details",
+          "details": {
+            "uncertain": true,
+            "fabricated_markers_present": false
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "OK",
+        "elapsed_ms": 132.7,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-5fc4e957-3b75-47e4-be43-148cc0834115",
+          "object": "chat.completion",
+          "created": 1784496788,
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-E4B-it-MLX-4bit/snapshots/fa6f15978ba53de9ff3a95ce2821deb0ca4a15f0",
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "OK",
+                "reasoning_content": null,
+                "reasoning": null,
+                "tool_calls": null,
+                "tool_call_id": null,
+                "name": null
+              },
+              "logprobs": null
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 17,
+            "completion_tokens": 2,
+            "total_tokens": 19,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "timings": {
+            "prompt_n": 17,
+            "cache_n": 0,
+            "predicted_n": 2,
+            "prompt_ms": 55.56374997831881,
+            "prompt_per_token_ms": 3.268455881077577,
+            "prompt_per_second": 305.95487177581543,
+            "predicted_ms": 49.68850000295788,
+            "predicted_per_token_ms": 24.84425000147894,
+            "predicted_per_second": 40.25076224641402,
+            "peak_memory": 7.781906034
+          }
+        },
+        "usage": {
+          "prompt_tokens": 17,
+          "completion_tokens": 2,
+          "total_tokens": 19,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 15.072,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Matched exact harmless output request",
+          "details": {
+            "actual": "OK"
+          }
+        }
+      }
+    }
+  },
+  "performance": {
+    "gemma4_e4b_mlx4": {
+      "ok": false,
+      "error": "MLX-VLM throughput is derived from capability request counters"
+    }
+  },
+  "runtime_status": {
+    "gemma4_e4b_mlx4": {
+      "status": "passed",
+      "startup_ms": 3254.1,
+      "snapshot_path": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-E4B-it-MLX-4bit/snapshots/fa6f15978ba53de9ff3a95ce2821deb0ca4a15f0",
+      "log_path": "output/benchmarks/logs/20260719T213254Z-gemma4_e4b_mlx4.log"
+    }
+  },
+  "json_path": "/Users/rajeev/Code/tools/local-llm-lab/output/benchmarks/capability-benchmark-20260719T213254Z.json"
+}

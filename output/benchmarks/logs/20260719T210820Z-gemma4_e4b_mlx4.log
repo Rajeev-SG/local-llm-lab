@@ -1,0 +1,169 @@
+/Users/rajeev/.local/share/uv/tools/mlx-lm/lib/python3.13/site-packages/mlx_lm/server.py:1723: UserWarning: mlx_lm.server is not recommended for production as it only implements basic security checks.
+  warnings.warn(
+2026-07-19 22:08:23,222 - INFO - Starting httpd at 127.0.0.1 on port 8091...
+Exception in thread Thread-1 (_generate):
+Traceback (most recent call last):
+  File "/Users/rajeev/.local/share/uv/python/cpython-3.13.12-macos-aarch64-none/lib/python3.13/threading.py", line 1044, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/Users/rajeev/.local/share/uv/python/cpython-3.13.12-macos-aarch64-none/lib/python3.13/threading.py", line 995, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rajeev/.local/share/uv/tools/mlx-lm/lib/python3.13/site-packages/mlx_lm/server.py", line 695, in _generate
+    self.model_provider.load_default()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/rajeev/.local/share/uv/tools/mlx-lm/lib/python3.13/site-packages/mlx_lm/server.py", line 385, in load_default
+    self.load("default_model", None, "default_model")
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rajeev/.local/share/uv/tools/mlx-lm/lib/python3.13/site-packages/mlx_lm/server.py", line 394, in load
+    self._load(*model_key)
+    ~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/rajeev/.local/share/uv/tools/mlx-lm/lib/python3.13/site-packages/mlx_lm/server.py", line 349, in _load
+    model, tokenizer = load(
+                       ~~~~^
+        model_path,
+        ^^^^^^^^^^^
+        adapter_path=adapter_path,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        tokenizer_config=self._tokenizer_config,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/rajeev/.local/share/uv/tools/mlx-lm/lib/python3.13/site-packages/mlx_lm/utils.py", line 491, in load
+    model, config = load_model(model_path, lazy, model_config=model_config)
+                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rajeev/.local/share/uv/tools/mlx-lm/lib/python3.13/site-packages/mlx_lm/utils.py", line 415, in load_model
+    model.load_weights(list(weights.items()), strict=strict)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rajeev/.local/share/uv/tools/mlx-lm/lib/python3.13/site-packages/mlx/nn/layers/base.py", line 185, in load_weights
+    raise ValueError(
+        f"Received {num_extra} parameters not in model: \n{extras}."
+    )
+ValueError: Received 126 parameters not in model:
+language_model.model.layers.24.self_attn.k_norm.weight,
+language_model.model.layers.24.self_attn.k_proj.biases,
+language_model.model.layers.24.self_attn.k_proj.scales,
+language_model.model.layers.24.self_attn.k_proj.weight,
+language_model.model.layers.24.self_attn.v_proj.biases,
+language_model.model.layers.24.self_attn.v_proj.scales,
+language_model.model.layers.24.self_attn.v_proj.weight,
+language_model.model.layers.25.self_attn.k_norm.weight,
+language_model.model.layers.25.self_attn.k_proj.biases,
+language_model.model.layers.25.self_attn.k_proj.scales,
+language_model.model.layers.25.self_attn.k_proj.weight,
+language_model.model.layers.25.self_attn.v_proj.biases,
+language_model.model.layers.25.self_attn.v_proj.scales,
+language_model.model.layers.25.self_attn.v_proj.weight,
+language_model.model.layers.26.self_attn.k_norm.weight,
+language_model.model.layers.26.self_attn.k_proj.biases,
+language_model.model.layers.26.self_attn.k_proj.scales,
+language_model.model.layers.26.self_attn.k_proj.weight,
+language_model.model.layers.26.self_attn.v_proj.biases,
+language_model.model.layers.26.self_attn.v_proj.scales,
+language_model.model.layers.26.self_attn.v_proj.weight,
+language_model.model.layers.27.self_attn.k_norm.weight,
+language_model.model.layers.27.self_attn.k_proj.biases,
+language_model.model.layers.27.self_attn.k_proj.scales,
+language_model.model.layers.27.self_attn.k_proj.weight,
+language_model.model.layers.27.self_attn.v_proj.biases,
+language_model.model.layers.27.self_attn.v_proj.scales,
+language_model.model.layers.27.self_attn.v_proj.weight,
+language_model.model.layers.28.self_attn.k_norm.weight,
+language_model.model.layers.28.self_attn.k_proj.biases,
+language_model.model.layers.28.self_attn.k_proj.scales,
+language_model.model.layers.28.self_attn.k_proj.weight,
+language_model.model.layers.28.self_attn.v_proj.biases,
+language_model.model.layers.28.self_attn.v_proj.scales,
+language_model.model.layers.28.self_attn.v_proj.weight,
+language_model.model.layers.29.self_attn.k_norm.weight,
+language_model.model.layers.29.self_attn.k_proj.biases,
+language_model.model.layers.29.self_attn.k_proj.scales,
+language_model.model.layers.29.self_attn.k_proj.weight,
+language_model.model.layers.29.self_attn.v_proj.biases,
+language_model.model.layers.29.self_attn.v_proj.scales,
+language_model.model.layers.29.self_attn.v_proj.weight,
+language_model.model.layers.30.self_attn.k_norm.weight,
+language_model.model.layers.30.self_attn.k_proj.biases,
+language_model.model.layers.30.self_attn.k_proj.scales,
+language_model.model.layers.30.self_attn.k_proj.weight,
+language_model.model.layers.30.self_attn.v_proj.biases,
+language_model.model.layers.30.self_attn.v_proj.scales,
+language_model.model.layers.30.self_attn.v_proj.weight,
+language_model.model.layers.31.self_attn.k_norm.weight,
+language_model.model.layers.31.self_attn.k_proj.biases,
+language_model.model.layers.31.self_attn.k_proj.scales,
+language_model.model.layers.31.self_attn.k_proj.weight,
+language_model.model.layers.31.self_attn.v_proj.biases,
+language_model.model.layers.31.self_attn.v_proj.scales,
+language_model.model.layers.31.self_attn.v_proj.weight,
+language_model.model.layers.32.self_attn.k_norm.weight,
+language_model.model.layers.32.self_attn.k_proj.biases,
+language_model.model.layers.32.self_attn.k_proj.scales,
+language_model.model.layers.32.self_attn.k_proj.weight,
+language_model.model.layers.32.self_attn.v_proj.biases,
+language_model.model.layers.32.self_attn.v_proj.scales,
+language_model.model.layers.32.self_attn.v_proj.weight,
+language_model.model.layers.33.self_attn.k_norm.weight,
+language_model.model.layers.33.self_attn.k_proj.biases,
+language_model.model.layers.33.self_attn.k_proj.scales,
+language_model.model.layers.33.self_attn.k_proj.weight,
+language_model.model.layers.33.self_attn.v_proj.biases,
+language_model.model.layers.33.self_attn.v_proj.scales,
+language_model.model.layers.33.self_attn.v_proj.weight,
+language_model.model.layers.34.self_attn.k_norm.weight,
+language_model.model.layers.34.self_attn.k_proj.biases,
+language_model.model.layers.34.self_attn.k_proj.scales,
+language_model.model.layers.34.self_attn.k_proj.weight,
+language_model.model.layers.34.self_attn.v_proj.biases,
+language_model.model.layers.34.self_attn.v_proj.scales,
+language_model.model.layers.34.self_attn.v_proj.weight,
+language_model.model.layers.35.self_attn.k_norm.weight,
+language_model.model.layers.35.self_attn.k_proj.biases,
+language_model.model.layers.35.self_attn.k_proj.scales,
+language_model.model.layers.35.self_attn.k_proj.weight,
+language_model.model.layers.35.self_attn.v_proj.biases,
+language_model.model.layers.35.self_attn.v_proj.scales,
+language_model.model.layers.35.self_attn.v_proj.weight,
+language_model.model.layers.36.self_attn.k_norm.weight,
+language_model.model.layers.36.self_attn.k_proj.biases,
+language_model.model.layers.36.self_attn.k_proj.scales,
+language_model.model.layers.36.self_attn.k_proj.weight,
+language_model.model.layers.36.self_attn.v_proj.biases,
+language_model.model.layers.36.self_attn.v_proj.scales,
+language_model.model.layers.36.self_attn.v_proj.weight,
+language_model.model.layers.37.self_attn.k_norm.weight,
+language_model.model.layers.37.self_attn.k_proj.biases,
+language_model.model.layers.37.self_attn.k_proj.scales,
+language_model.model.layers.37.self_attn.k_proj.weight,
+language_model.model.layers.37.self_attn.v_proj.biases,
+language_model.model.layers.37.self_attn.v_proj.scales,
+language_model.model.layers.37.self_attn.v_proj.weight,
+language_model.model.layers.38.self_attn.k_norm.weight,
+language_model.model.layers.38.self_attn.k_proj.biases,
+language_model.model.layers.38.self_attn.k_proj.scales,
+language_model.model.layers.38.self_attn.k_proj.weight,
+language_model.model.layers.38.self_attn.v_proj.biases,
+language_model.model.layers.38.self_attn.v_proj.scales,
+language_model.model.layers.38.self_attn.v_proj.weight,
+language_model.model.layers.39.self_attn.k_norm.weight,
+language_model.model.layers.39.self_attn.k_proj.biases,
+language_model.model.layers.39.self_attn.k_proj.scales,
+language_model.model.layers.39.self_attn.k_proj.weight,
+language_model.model.layers.39.self_attn.v_proj.biases,
+language_model.model.layers.39.self_attn.v_proj.scales,
+language_model.model.layers.39.self_attn.v_proj.weight,
+language_model.model.layers.40.self_attn.k_norm.weight,
+language_model.model.layers.40.self_attn.k_proj.biases,
+language_model.model.layers.40.self_attn.k_proj.scales,
+language_model.model.layers.40.self_attn.k_proj.weight,
+language_model.model.layers.40.self_attn.v_proj.biases,
+language_model.model.layers.40.self_attn.v_proj.scales,
+language_model.model.layers.40.self_attn.v_proj.weight,
+language_model.model.layers.41.self_attn.k_norm.weight,
+language_model.model.layers.41.self_attn.k_proj.biases,
+language_model.model.layers.41.self_attn.k_proj.scales,
+language_model.model.layers.41.self_attn.k_proj.weight,
+language_model.model.layers.41.self_attn.v_proj.biases,
+language_model.model.layers.41.self_attn.v_proj.scales,
+language_model.model.layers.41.self_attn.v_proj.weight.
+127.0.0.1 - - [19/Jul/2026 22:08:23] "GET /v1/models HTTP/1.1" 200 -

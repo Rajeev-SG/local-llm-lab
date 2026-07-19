@@ -1,0 +1,33 @@
+INFO:     Started server process [65244]
+INFO:     Waiting for application startup.
+2026-07-19 22:53:19,310 - INFO - Pre-loading language model: /Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-26B-A4B-it-QAT-MLX-4bit/snapshots/f03a4a76828804e3b56758627383fbc7bd32015c
+/Users/rajeev/.local/share/uv/tools/mlx-vlm/lib/python3.14/site-packages/transformers/audio_utils.py:723: UserWarning: At least one mel filter has all zero values. The value for `num_mel_filters` (128) may be set too high. Or, the value for `num_frequency_bins` (257) may be set too low.
+  warnings.warn(
+2026-07-19 22:53:23,130 - INFO - Language model ready, continuous batching enabled.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8091 (Press CTRL+C to quit)
+Loading model from: /Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-26B-A4B-it-QAT-MLX-4bit/snapshots/f03a4a76828804e3b56758627383fbc7bd32015c
+Model and processor loaded successfully.
+INFO:     127.0.0.1:62665 - "GET /v1/models HTTP/1.1" 200 OK
+Using cached model: /Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-26B-A4B-it-QAT-MLX-4bit/snapshots/f03a4a76828804e3b56758627383fbc7bd32015c, Adapter: None
+INFO:     127.0.0.1:62666 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: /Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-26B-A4B-it-QAT-MLX-4bit/snapshots/f03a4a76828804e3b56758627383fbc7bd32015c, Adapter: None
+INFO:     127.0.0.1:62667 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: /Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-26B-A4B-it-QAT-MLX-4bit/snapshots/f03a4a76828804e3b56758627383fbc7bd32015c, Adapter: None
+INFO:     127.0.0.1:62668 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: /Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-26B-A4B-it-QAT-MLX-4bit/snapshots/f03a4a76828804e3b56758627383fbc7bd32015c, Adapter: None
+INFO:     127.0.0.1:62669 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: /Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-26B-A4B-it-QAT-MLX-4bit/snapshots/f03a4a76828804e3b56758627383fbc7bd32015c, Adapter: None
+INFO:     127.0.0.1:62670 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: /Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-26B-A4B-it-QAT-MLX-4bit/snapshots/f03a4a76828804e3b56758627383fbc7bd32015c, Adapter: None
+INFO:     127.0.0.1:62671 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: /Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-26B-A4B-it-QAT-MLX-4bit/snapshots/f03a4a76828804e3b56758627383fbc7bd32015c, Adapter: None
+INFO:     127.0.0.1:62673 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: /Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-26B-A4B-it-QAT-MLX-4bit/snapshots/f03a4a76828804e3b56758627383fbc7bd32015c, Adapter: None
+INFO:     127.0.0.1:62674 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+Using cached model: /Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--gemma-4-26B-A4B-it-QAT-MLX-4bit/snapshots/f03a4a76828804e3b56758627383fbc7bd32015c, Adapter: None
+INFO:     127.0.0.1:62675 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [65244]
