@@ -1,0 +1,541 @@
+{
+  "schema_version": 2,
+  "benchmark_protocol": {
+    "name": "mlx-capability-v1",
+    "seed": 42,
+    "max_tokens": 256,
+    "performance_prompt_tokens": 512,
+    "performance_generation_tokens": 128,
+    "performance_trials": 3
+  },
+  "generated_at": "2026-07-19T20:53:11+00:00",
+  "environment": {
+    "machine": "arm64",
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "macos_version": "26.5.1",
+    "python": "3.14.3",
+    "mlx_lm_version": "0.31.3",
+    "seed": 42,
+    "hardware": "Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores"
+  },
+  "models": [
+    {
+      "slug": "gpt_oss_20b_mlx4",
+      "label": "gpt-oss-20b (MLX MXFP4/Q4)",
+      "kind": "mlx",
+      "model_name": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+      "revision": "f356f2747216d7e98fee755df25987459fc19089",
+      "download_size_gb": 11.2,
+      "base_model": "openai/gpt-oss-20b",
+      "note": "Reasoning-heavy fallback and comparison baseline"
+    }
+  ],
+  "tasks": [
+    {
+      "slug": "shell_scripting",
+      "label": "Shell scripting",
+      "category": "claimed"
+    },
+    {
+      "slug": "text_transformation",
+      "label": "Text transformation",
+      "category": "claimed"
+    },
+    {
+      "slug": "classification",
+      "label": "Classification",
+      "category": "claimed"
+    },
+    {
+      "slug": "short_summary",
+      "label": "Short summaries",
+      "category": "claimed"
+    },
+    {
+      "slug": "json_restructuring",
+      "label": "JSON restructuring",
+      "category": "claimed"
+    },
+    {
+      "slug": "translation",
+      "label": "Translation",
+      "category": "claimed"
+    },
+    {
+      "slug": "unknown_refusal",
+      "label": "Unknown refusal",
+      "category": "diagnostic"
+    },
+    {
+      "slug": "harmless_exactness",
+      "label": "Harmless exactness",
+      "category": "diagnostic"
+    }
+  ],
+  "results": {
+    "gpt_oss_20b_mlx4": {
+      "shell_scripting": {
+        "content": "awk '{print $1}' | sort | uniq -c | sort -nr | head -n3",
+        "elapsed_ms": 3055.8,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-b485acb8-759d-42ae-af63-93b657f7a12b",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494394,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>Need pipeline: awk to extract first field, count, sort, head. Use awk '{print $1}' | sort | uniq -c | sort -nr | head -n3. Ensure format \"<count> <ip>\"? uniq -c gives count then field. So output \"count ip\". Use awk '{print $1}'? Actually first field is IP. So pipeline: awk '{print $1}' | sort | uniq -c | sort -nr | head -n3. That prints \"count ip\". Good.<|end|><|start|>assistant<|channel|>final<|message|>awk '{print $1}' | sort | uniq -c | sort -nr | head -n3"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 540,
+            "completion_tokens": 139,
+            "total_tokens": 679,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 540,
+          "completion_tokens": 139,
+          "total_tokens": 679,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 45.487,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact match on top-3 IP count pipeline",
+          "details": {
+            "command": "awk '{print $1}' | sort | uniq -c | sort -nr | head -n3",
+            "actual": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "expected": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "stderr": ""
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "- Version\u202f2.4.1 resolves the SSO login loop.  \n- Fixed broken CSV exports from the finance dashboard.  \n- Reports page now loads about 35\u202f% faster.",
+        "elapsed_ms": 2349.2,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-5b13e17f-299f-4bbd-a26b-42d9935b1851",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494397,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>Need 3 bullets, each 5-9 words. Include version number 2.4.1. Mention login loop fix, CSV export repair, reports load faster. Let's craft:\n\n1. Version 2.4.1 resolves SSO login loop. (words: 5? \"Version\"1 \"2.4.1\"2 \"resolves\"3 \"SSO\"4 \"login\"5 \"loop\"6. That's 6 words. Good.\n\n2. Fixed broken CSV exports from finance dashboard. Count: Fixed1 broken2 CSV3 exports4 from5 finance6 dashboard7. 7 words.\n\n3. Reports page loads 35% faster. Count: Reports1 page2 loads3 35%4 faster5. Good.\n\nAll 3 bullets.<|end|><|start|>assistant<|channel|>final<|message|>- Version\u202f2.4.1 resolves the SSO login loop.  \n- Fixed broken CSV exports from the finance dashboard.  \n- Reports page now loads about 35\u202f% faster."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 179,
+            "completion_tokens": 209,
+            "total_tokens": 388,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 179,
+          "completion_tokens": 209,
+          "total_tokens": 388,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 88.966,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "6/6 rubric checks passed",
+          "details": {
+            "three_bullets": true,
+            "version": true,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": true
+          }
+        }
+      },
+      "classification": {
+        "content": "```json\n{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"account\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"feature\"\n}\n```",
+        "elapsed_ms": 2600.8,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-23bb1791-8809-4863-a352-00b4b0ec4958",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494399,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>We need to classify each ticket into one of four labels: billing, bug, feature, account. Determine each ticket content.\n\nT1: invoice charged VAT twice -> billing issue. label billing.\n\nT2: mobile app crashes when tap export -> bug. label bug.\n\nT3: add dark mode -> feature request. label feature.\n\nT4: password reset email not arriving -> account? maybe account issue. label account.\n\nT5: support SAML login for contractors -> account? maybe account. label account.\n\nT6: checkout blank screen after coupon -> bug. label bug.\n\nT7: download receipts -> billing? maybe billing. label billing.\n\nT8: rename workspace without losing projects -> feature? maybe feature. label feature.<|end|><|start|>assistant<|channel|>final<|message|>```json\n{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"account\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"feature\"\n}\n```"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 208,
+            "completion_tokens": 228,
+            "total_tokens": 436,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 208,
+          "completion_tokens": 228,
+          "total_tokens": 436,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 87.665,
+        "evaluation": {
+          "score": 0.75,
+          "summary": "6/8 tickets classified correctly",
+          "details": {
+            "T5": {
+              "expected": "feature",
+              "actual": "account"
+            },
+            "T8": {
+              "expected": "account",
+              "actual": "feature"
+            }
+          }
+        }
+      },
+      "short_summary": {
+        "content": "Checkout failures lasted 47\u202fminutes due to an expired Redis TLS certificate, causing 18\u202f% of attempts to fail; we rolled back the cert, flushed stale connections, and restarted affected workers.",
+        "elapsed_ms": 1212.2,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-40831c79-c80b-45ff-9494-5da3666bfdc0",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494402,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>Need 1 sentence 18-30 words. Include outage duration 47 minutes, root cause expired Redis TLS cert, impact 18% failures, mitigation rollback and restart. Let's craft 22 words.<|end|><|start|>assistant<|channel|>final<|message|>Checkout failures lasted 47\u202fminutes due to an expired Redis TLS certificate, causing 18\u202f% of attempts to fail; we rolled back the cert, flushed stale connections, and restarted affected workers."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 221,
+            "completion_tokens": 91,
+            "total_tokens": 312,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 221,
+          "completion_tokens": 91,
+          "total_tokens": 312,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 75.07,
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 summary checks passed",
+          "details": {
+            "word_range": true,
+            "duration": true,
+            "cause": true,
+            "impact": false,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "<|channel|>analysis<|message|>We need to compute per region: unique customers count, high priority ids list, total amount. Then grand_total sum of all amounts. Let's compute.\n\nData:\n1: region eu, customer acme, amount120, priority high\n2: region us, customer beta, amount75, priority low\n3: region eu, customer acme, amount30, priority high\n4: region us, customer nova, amount55, priority high\n5: region apac, customer zen, amount40, priority low\n\nCompute per region:\n\neu: customers: acme only => unique count 1. high priority ids: o-100, o-102. total amount: 120+30=150.\n\nus: customers: beta, nova => 2 unique. high priority ids: o-103. total amount: 75+55=130.\n\napac: customers: zen =>1. high priority ids: none? priority low. total amount: 40.\n\nGrand total: 150+130+40=320.\n\nReturn JSON accordingly.",
+        "elapsed_ms": 2885.7,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-2bdfdb89-7229-4df7-bda6-82afc73916c6",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494403,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "length",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>We need to compute per region: unique customers count, high priority ids list, total amount. Then grand_total sum of all amounts. Let's compute.\n\nData:\n1: region eu, customer acme, amount120, priority high\n2: region us, customer beta, amount75, priority low\n3: region eu, customer acme, amount30, priority high\n4: region us, customer nova, amount55, priority high\n5: region apac, customer zen, amount40, priority low\n\nCompute per region:\n\neu: customers: acme only => unique count 1. high priority ids: o-100, o-102. total amount: 120+30=150.\n\nus: customers: beta, nova => 2 unique. high priority ids: o-103. total amount: 75+55=130.\n\napac: customers: zen =>1. high priority ids: none? priority low. total amount: 40.\n\nGrand total: 150+130+40=320.\n\nReturn JSON accordingly.<|end|><|start|>assistant<|channel|>commentary<|message|>We need output JSON with regions sorted alphabetically: apac, eu, us. high_priority_ids sorted alphabetically: for eu: [\"o-100\",\""
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 298,
+            "completion_tokens": 256,
+            "total_tokens": 554,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 298,
+          "completion_tokens": 256,
+          "total_tokens": 554,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 88.713,
+        "evaluation": {
+          "score": 0.0,
+          "summary": "No valid JSON found",
+          "details": {
+            "error": "No valid JSON found in model response"
+          }
+        }
+      },
+      "translation": {
+        "content": "```json\n{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Rote Apfel\"\n}\n```",
+        "elapsed_ms": 2501.0,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-ad8199e4-c80d-4fdd-b475-3a6edba69843",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494406,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>We need to output JSON with same keys mapping to German translations. Let's translate: \"Good night\" -> \"Gute Nacht\" actually \"Gute Nacht\" maybe \"Gute Nacht\" but proper \"Gute Nacht\" or \"Gute Nacht\". \"Good night\" maybe \"Gute Nacht\". \"The file is missing.\" -> \"Die Datei fehlt.\" \"Train station\" -> \"Bahnhof\" or \"Bahnhof\" maybe \"Bahnhof\". \"How much does this cost?\" -> \"Wie viel kostet das?\" \"Red apple\" -> \"Rote Apfel\" actually \"Rote Apfel\" but proper \"Rote Apfel\" maybe \"Rote Apfel\". Let's produce JSON.<|end|><|start|>assistant<|channel|>final<|message|>```json\n{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Rote Apfel\"\n}\n```"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 141,
+            "completion_tokens": 210,
+            "total_tokens": 351,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 141,
+          "completion_tokens": 210,
+          "total_tokens": 351,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 83.966,
+        "evaluation": {
+          "score": 0.6,
+          "summary": "3/5 translations accepted",
+          "details": {
+            "t2": {
+              "expected_any_of": [
+                "datei fehlt",
+                "die datei fehlt"
+              ],
+              "actual": "Die Datei fehlt."
+            },
+            "t5": {
+              "expected_any_of": [
+                "ein roter apfel",
+                "roter apfel"
+              ],
+              "actual": "Rote Apfel"
+            }
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "I\u2019m sorry, but I don\u2019t have any information about changes in version\u202f7.4.1 of the package \u201cquartzpickle.\u201d",
+        "elapsed_ms": 1294.4,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-df70da5b-449d-4401-a5f7-0fcf5791fcfb",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494409,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>We need to answer: \"Without using the internet: what changed in version 7.4.1 of the package 'quartzpickle'? If you cannot know, say so plainly in one sentence and do not invent details.\"\n\nWe don't have knowledge of that package. So we must say we don't know.<|end|><|start|>assistant<|channel|>final<|message|>I\u2019m sorry, but I don\u2019t have any information about changes in version\u202f7.4.1 of the package \u201cquartzpickle.\u201d"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 109,
+            "completion_tokens": 101,
+            "total_tokens": 210,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 109,
+          "completion_tokens": 101,
+          "total_tokens": 210,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 78.028,
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Did not clearly refuse or appeared to fabricate details",
+          "details": {
+            "uncertain": false,
+            "fabricated_markers_present": false
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "OK",
+        "elapsed_ms": 529.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-02f6f8ae-c45b-4df6-9bf0-b7ab23c04ced",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494410,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>User says: \"Respond with exactly OK and nothing else.\" So I must output exactly \"OK\".<|end|><|start|>assistant<|channel|>final<|message|>OK"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 75,
+            "completion_tokens": 31,
+            "total_tokens": 106,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 75,
+          "completion_tokens": 31,
+          "total_tokens": 106,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 58.546,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Matched exact harmless output request",
+          "details": {
+            "actual": "OK"
+          }
+        }
+      }
+    }
+  },
+  "performance": {
+    "gpt_oss_20b_mlx4": {
+      "ok": true,
+      "prompt_tokens_per_second": 1804.73,
+      "generation_tokens_per_second": 98.359,
+      "peak_memory_gb": 11.714,
+      "trials": [
+        {
+          "trial": 1,
+          "prompt_tokens_per_second": 1812.725,
+          "generation_tokens_per_second": 96.725,
+          "peak_memory_gb": 11.714,
+          "total_time_seconds": 1.701
+        },
+        {
+          "trial": 2,
+          "prompt_tokens_per_second": 1808.736,
+          "generation_tokens_per_second": 99.796,
+          "peak_memory_gb": 11.714,
+          "total_time_seconds": 1.785
+        },
+        {
+          "trial": 3,
+          "prompt_tokens_per_second": 1792.727,
+          "generation_tokens_per_second": 98.556,
+          "peak_memory_gb": 11.715,
+          "total_time_seconds": 1.785
+        }
+      ],
+      "raw_output": "Running warmup..\nTiming with prompt_tokens=512, generation_tokens=128, batch_size=1.\nTrial 1:  prompt_tps=1812.725, generation_tps=96.725, peak_memory=11.714, total_time=1.701\nTrial 2:  prompt_tps=1808.736, generation_tps=99.796, peak_memory=11.714, total_time=1.785\nTrial 3:  prompt_tps=1792.727, generation_tps=98.556, peak_memory=11.715, total_time=1.785\nAverages: prompt_tps=1804.730, generation_tps=98.359, peak_memory=11.714",
+      "returncode": 0,
+      "prompt_tokens": 512,
+      "generation_tokens": 128,
+      "trial_count": 3
+    }
+  },
+  "runtime_status": {
+    "gpt_oss_20b_mlx4": {
+      "status": "passed",
+      "startup_ms": 1584.9,
+      "snapshot_path": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--gpt-oss-20b-MXFP4-Q4/snapshots/f356f2747216d7e98fee755df25987459fc19089",
+      "log_path": "output/benchmarks/logs/20260719T205311Z-gpt_oss_20b_mlx4.log"
+    }
+  },
+  "json_path": "/Users/rajeev/Code/tools/local-llm-lab/output/benchmarks/capability-benchmark-20260719T205311Z.json"
+}

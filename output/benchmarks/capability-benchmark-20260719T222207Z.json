@@ -1,0 +1,570 @@
+{
+  "schema_version": 2,
+  "benchmark_protocol": {
+    "name": "mlx-capability-v1",
+    "seed": 42,
+    "max_tokens": 256,
+    "performance_prompt_tokens": 512,
+    "performance_generation_tokens": 128,
+    "performance_trials": 3
+  },
+  "generated_at": "2026-07-19T22:22:07+00:00",
+  "environment": {
+    "machine": "arm64",
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "macos_version": "26.5.1",
+    "python": "3.14.3",
+    "mlx_lm_version": "0.31.3",
+    "seed": 42,
+    "hardware": "Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores"
+  },
+  "models": [
+    {
+      "slug": "lfm2_24b_a2b_mlx4",
+      "label": "LFM2 24B A2B (MLX 4-bit)",
+      "kind": "mlx",
+      "model_name": "lmstudio-community/LFM2-24B-A2B-MLX-4bit",
+      "revision": "f86ea2ca24bcee27aa23f3552f199f3f92a48560",
+      "download_size_gb": 13.42,
+      "base_model": "LiquidAI/LFM2-24B-A2B",
+      "note": "Fast mixture-of-experts comparison for general technical assistance"
+    }
+  ],
+  "tasks": [
+    {
+      "slug": "shell_scripting",
+      "label": "Shell scripting",
+      "category": "claimed"
+    },
+    {
+      "slug": "text_transformation",
+      "label": "Text transformation",
+      "category": "claimed"
+    },
+    {
+      "slug": "classification",
+      "label": "Classification",
+      "category": "claimed"
+    },
+    {
+      "slug": "short_summary",
+      "label": "Short summaries",
+      "category": "claimed"
+    },
+    {
+      "slug": "json_restructuring",
+      "label": "JSON restructuring",
+      "category": "claimed"
+    },
+    {
+      "slug": "translation",
+      "label": "Translation",
+      "category": "claimed"
+    },
+    {
+      "slug": "unknown_refusal",
+      "label": "Unknown refusal",
+      "category": "diagnostic"
+    },
+    {
+      "slug": "harmless_exactness",
+      "label": "Harmless exactness",
+      "category": "diagnostic"
+    }
+  ],
+  "results": {
+    "lfm2_24b_a2b_mlx4": {
+      "shell_scripting": {
+        "content": "`sort -k2,2nr | head -n 4 | while read -r _ ip; do echo -n \"$ip \"; done`",
+        "elapsed_ms": 599.2,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-2db9acf0-c77c-4fe9-9f7f-98d57500fc6b",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--LFM2-24B-A2B-MLX-4bit/snapshots/f86ea2ca24bcee27aa23f3552f199f3f92a48560",
+          "created": 1784499730,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "`sort -k2,2nr | head -n 4 | while read -r _ ip; do echo -n \"$ip \"; done`"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 497,
+            "completion_tokens": 33,
+            "total_tokens": 530,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 497,
+          "completion_tokens": 33,
+          "total_tokens": 530,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 55.073,
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Command missing or unsafe to execute",
+          "details": {
+            "command": "`sort -k2,2nr | head -n 4 | while read -r _ ip; do echo -n \"$ip \"; done`"
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "- Fix login loop for SSO users in version 2.4.1  \n- Repair broken CSV exports from the finance dashboard  \n- Reports now load 35% faster on internal tests",
+        "elapsed_ms": 480.6,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-668bac65-4323-4d73-a820-7b96d428b928",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--LFM2-24B-A2B-MLX-4bit/snapshots/f86ea2ca24bcee27aa23f3552f199f3f92a48560",
+          "created": 1784499731,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "- Fix login loop for SSO users in version 2.4.1  \n- Repair broken CSV exports from the finance dashboard  \n- Reports now load 35% faster on internal tests"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 133,
+            "completion_tokens": 41,
+            "total_tokens": 174,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 133,
+          "completion_tokens": 41,
+          "total_tokens": 174,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 85.31,
+        "evaluation": {
+          "score": 0.833,
+          "summary": "5/6 rubric checks passed",
+          "details": {
+            "three_bullets": true,
+            "version": true,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": false
+          }
+        }
+      },
+      "classification": {
+        "content": "{\"T1\": \"billing\", \"T2\": \"bug\", \"T3\": \"feature\", \"T4\": \"feature\", \"T5\": \"feature\", \"T6\": \"bug\", \"T7\": \"feature\", \"T8\": \"feature\"}",
+        "elapsed_ms": 619.4,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-8421733e-e38d-450f-b61b-2e2ab880661c",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--LFM2-24B-A2B-MLX-4bit/snapshots/f86ea2ca24bcee27aa23f3552f199f3f92a48560",
+          "created": 1784499731,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\"T1\": \"billing\", \"T2\": \"bug\", \"T3\": \"feature\", \"T4\": \"feature\", \"T5\": \"feature\", \"T6\": \"bug\", \"T7\": \"feature\", \"T8\": \"feature\"}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 162,
+            "completion_tokens": 59,
+            "total_tokens": 221,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 162,
+          "completion_tokens": 59,
+          "total_tokens": 221,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 95.253,
+        "evaluation": {
+          "score": 0.625,
+          "summary": "5/8 tickets classified correctly",
+          "details": {
+            "T4": {
+              "expected": "account",
+              "actual": "feature"
+            },
+            "T7": {
+              "expected": "billing",
+              "actual": "feature"
+            },
+            "T8": {
+              "expected": "account",
+              "actual": "feature"
+            }
+          }
+        }
+      },
+      "short_summary": {
+        "content": "A 47-minute outage due to an expired Redis TLS cert caused 18% failed checkouts, mitigated by rolling back certs and restarting affected workers.",
+        "elapsed_ms": 467.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-38672ec7-ad67-40cf-92af-5bf2080cbdc3",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--LFM2-24B-A2B-MLX-4bit/snapshots/f86ea2ca24bcee27aa23f3552f199f3f92a48560",
+          "created": 1784499732,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "A 47-minute outage due to an expired Redis TLS cert caused 18% failed checkouts, mitigated by rolling back certs and restarting affected workers."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 175,
+            "completion_tokens": 37,
+            "total_tokens": 212,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 175,
+          "completion_tokens": 37,
+          "total_tokens": 212,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 79.144,
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 summary checks passed",
+          "details": {
+            "word_range": true,
+            "duration": true,
+            "cause": false,
+            "impact": true,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\"o-104\"],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-100\", \"o-102\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-101\", \"o-103\"],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}",
+        "elapsed_ms": 1362.1,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-54202549-f520-47cc-8e31-923dd24a35a5",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--LFM2-24B-A2B-MLX-4bit/snapshots/f86ea2ca24bcee27aa23f3552f199f3f92a48560",
+          "created": 1784499732,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\"o-104\"],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-100\", \"o-102\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-101\", \"o-103\"],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 266,
+            "completion_tokens": 158,
+            "total_tokens": 424,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 266,
+          "completion_tokens": 158,
+          "total_tokens": 424,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 115.997,
+        "evaluation": {
+          "score": 0.75,
+          "summary": "3/4 JSON checks passed",
+          "details": {
+            "checks": {
+              "grand_total": true,
+              "region_count": true,
+              "eu_total": true,
+              "us_high_priority": false
+            },
+            "parsed": {
+              "regions": [
+                {
+                  "region": "apac",
+                  "customer_count": 1,
+                  "high_priority_ids": [
+                    "o-104"
+                  ],
+                  "total_amount": 40
+                },
+                {
+                  "region": "eu",
+                  "customer_count": 2,
+                  "high_priority_ids": [
+                    "o-100",
+                    "o-102"
+                  ],
+                  "total_amount": 150
+                },
+                {
+                  "region": "us",
+                  "customer_count": 2,
+                  "high_priority_ids": [
+                    "o-101",
+                    "o-103"
+                  ],
+                  "total_amount": 130
+                }
+              ],
+              "grand_total": 320
+            }
+          }
+        }
+      },
+      "translation": {
+        "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Das kostet?\",\n  \"t5\": \"Roter Apfel\"\n}",
+        "elapsed_ms": 585.2,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-fbab7c30-78e7-473e-bb3c-3154182de8c3",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--LFM2-24B-A2B-MLX-4bit/snapshots/f86ea2ca24bcee27aa23f3552f199f3f92a48560",
+          "created": 1784499734,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Das kostet?\",\n  \"t5\": \"Roter Apfel\"\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 90,
+            "completion_tokens": 58,
+            "total_tokens": 148,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 90,
+          "completion_tokens": 58,
+          "total_tokens": 148,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 99.111,
+        "evaluation": {
+          "score": 0.6,
+          "summary": "3/5 translations accepted",
+          "details": {
+            "t2": {
+              "expected_any_of": [
+                "datei fehlt",
+                "die datei fehlt"
+              ],
+              "actual": "Die Datei fehlt."
+            },
+            "t4": {
+              "expected_any_of": [
+                "was kostet das",
+                "wie viel kostet das"
+              ],
+              "actual": "Das kostet?"
+            }
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "Version 7.4.1 of the \"quartzpickle\" package likely introduced bug fixes and possibly performance improvements over previous versions.",
+        "elapsed_ms": 333.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-247ff246-e1f5-4ad6-82d6-0581481fda97",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--LFM2-24B-A2B-MLX-4bit/snapshots/f86ea2ca24bcee27aa23f3552f199f3f92a48560",
+          "created": 1784499734,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "Version 7.4.1 of the \"quartzpickle\" package likely introduced bug fixes and possibly performance improvements over previous versions."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 55,
+            "completion_tokens": 29,
+            "total_tokens": 84,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 55,
+          "completion_tokens": 29,
+          "total_tokens": 84,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 86.957,
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Did not clearly refuse or appeared to fabricate details",
+          "details": {
+            "uncertain": false,
+            "fabricated_markers_present": true
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "OK",
+        "elapsed_ms": 73.6,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-42dd625f-2858-451a-bcf8-ca5f22e186b7",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--LFM2-24B-A2B-MLX-4bit/snapshots/f86ea2ca24bcee27aa23f3552f199f3f92a48560",
+          "created": 1784499735,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "OK"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 18,
+            "completion_tokens": 2,
+            "total_tokens": 20,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 18,
+          "completion_tokens": 2,
+          "total_tokens": 20,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 27.174,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Matched exact harmless output request",
+          "details": {
+            "actual": "OK"
+          }
+        }
+      }
+    }
+  },
+  "performance": {
+    "lfm2_24b_a2b_mlx4": {
+      "ok": true,
+      "prompt_tokens_per_second": 1879.052,
+      "generation_tokens_per_second": 139.221,
+      "peak_memory_gb": 13.83,
+      "trials": [
+        {
+          "trial": 1,
+          "prompt_tokens_per_second": 1894.356,
+          "generation_tokens_per_second": 139.621,
+          "peak_memory_gb": 13.83,
+          "total_time_seconds": 1.191
+        },
+        {
+          "trial": 2,
+          "prompt_tokens_per_second": 1885.598,
+          "generation_tokens_per_second": 139.569,
+          "peak_memory_gb": 13.83,
+          "total_time_seconds": 1.193
+        },
+        {
+          "trial": 3,
+          "prompt_tokens_per_second": 1857.202,
+          "generation_tokens_per_second": 138.474,
+          "peak_memory_gb": 13.83,
+          "total_time_seconds": 1.203
+        }
+      ],
+      "raw_output": "Running warmup..\nTiming with prompt_tokens=512, generation_tokens=128, batch_size=1.\nTrial 1:  prompt_tps=1894.356, generation_tps=139.621, peak_memory=13.830, total_time=1.191\nTrial 2:  prompt_tps=1885.598, generation_tps=139.569, peak_memory=13.830, total_time=1.193\nTrial 3:  prompt_tps=1857.202, generation_tps=138.474, peak_memory=13.830, total_time=1.203\nAverages: prompt_tps=1879.052, generation_tps=139.221, peak_memory=13.830",
+      "returncode": 0,
+      "prompt_tokens": 512,
+      "generation_tokens": 128,
+      "trial_count": 3
+    }
+  },
+  "runtime_status": {
+    "lfm2_24b_a2b_mlx4": {
+      "status": "passed",
+      "startup_ms": 1853.2,
+      "snapshot_path": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--LFM2-24B-A2B-MLX-4bit/snapshots/f86ea2ca24bcee27aa23f3552f199f3f92a48560",
+      "log_path": "output/benchmarks/logs/20260719T222207Z-lfm2_24b_a2b_mlx4.log"
+    }
+  },
+  "json_path": "/Users/rajeev/Code/tools/local-llm-lab/output/benchmarks/capability-benchmark-20260719T222207Z.json"
+}

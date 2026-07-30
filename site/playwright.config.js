@@ -28,8 +28,25 @@ export default defineConfig({
       },
     },
     {
+      name: "wide",
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1575, height: 1200 },
+      },
+    },
+    {
+      name: "tablet",
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 768, height: 1024 },
+      },
+    },
+    {
       name: "mobile",
-      use: devices["Pixel 7"],
+      use: {
+        ...devices["Pixel 7"],
+        viewport: { width: 375, height: 812 },
+      },
     },
   ],
 });

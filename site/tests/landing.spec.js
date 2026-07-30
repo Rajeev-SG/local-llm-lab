@@ -1,55 +1,65 @@
 import { expect, test } from "@playwright/test";
 
-test("landing page presents the core lab story and start path", async ({ page }, testInfo) => {
+test("the guide presents and filters the current installed model inventory", async ({
+  page,
+}, testInfo) => {
   const consoleErrors = [];
   page.on("console", (message) => {
-    if (message.type() === "error") {
-      consoleErrors.push(message.text());
-    }
+    if (message.type() === "error") consoleErrors.push(message.text());
   });
 
   await page.goto("/");
 
   await expect(page.locator("main h1")).toContainText(
-    "Build, test, and ship a serious local LLM workstation.",
+    "Every local model on this Mac, in one guide.",
   );
+  await expect(page.getByText("23", { exact: true }).first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Qwen3 Coder 30B A3B" }).first()).toBeVisible();
+  await expect(page.getByText("98.3", { exact: true }).first()).toBeVisible();
+  await expect(page.getByText("Text", { exact: true }).first()).toBeVisible();
 
-  await expect(page.locator("#models h2")).toContainText(
-    "Use the model that matches the job, not the one that sounds biggest.",
-  );
-
-  await expect(page.locator("#models").getByText("mistral-small:22b", { exact: true })).toBeVisible();
-  await expect(page.locator("#models").getByText("qwen2.5-coder:14b", { exact: true })).toBeVisible();
-
-  const startLink = page.getByRole("link", { name: "Run the lab" });
-  await startLink.click();
-  await expect(page.locator("#start")).toBeInViewport();
-
-  await expect(page.getByText("./scripts/start-ollama.sh")).toBeVisible();
-  await expect(page.getByRole("link", { name: "Open via OrbStack" })).toHaveAttribute(
-    "href",
-    "http://open-webui-lab.orb.local",
-  );
-  await expect(page.getByRole("link", { name: "Use localhost fallback" })).toHaveAttribute(
-    "href",
-    "http://localhost:3001",
-  );
-  await expect(page.getByRole("link", { name: "Open via Tailscale" })).toHaveAttribute(
-    "href",
-    "https://rajeevs-macbook-pro-2.tail33d641.ts.net/",
-  );
-  await expect(page.getByText("This only works on the Mac that is actually running the lab.")).toBeVisible();
+  await page.getByRole("button", { name: "Image input" }).click();
+  await expect(page.getByText(/of 23 installed builds/)).toBeVisible();
   await expect(
-    page.getByText("For safer access on your own devices from anywhere, this lab can expose Open WebUI through private Tailscale HTTPS"),
+    page.locator("#inventory").getByRole("heading", { name: "Qwen3.6 35B A3B" }),
   ).toBeVisible();
-  await expect(page.getByText("Install Tailscale on the device you want to use remotely.")).toBeVisible();
-  await expect(page.getByText("Sign into the same Tailscale tailnet as this Mac.")).toBeVisible();
-  await expect(page.getByText("Open the Tailscale link above, then sign into Open WebUI normally.")).toBeVisible();
+  await expect(
+    page.locator("#inventory").getByRole("heading", { name: "Whisper Large v3 Turbo" }),
+  ).toHaveCount(0);
+
+  await page.getByRole("button", { name: "All capabilities" }).click();
+  await page.getByRole("button", { name: "Ollama", exact: true }).click();
+  await page.getByPlaceholder("Model, task, capability, or alias").fill("local-helper-fast");
+  await expect(
+    page.locator("#inventory").getByRole("heading", { name: "Qwen3.5 9B", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText("1 of 23 installed builds")).toBeVisible();
+
+  await page.getByText("Details and source").click();
+  await expect(page.getByText(/aliases: local-helper-fast/)).toBeVisible();
+  await expect(page.getByRole("link", { name: "Open the exact model page ↗" })).toBeVisible();
+
+  await expect(page.getByRole("heading", { name: "Old evidence stays visible." })).toBeVisible();
+  await page.locator("#inventory").screenshot({
+    path: testInfo.outputPath("inventory-filtered.png"),
+  });
+  await page.locator("#aliases").screenshot({
+    path: testInfo.outputPath("aliases.png"),
+  });
+  await page.locator("#historical").screenshot({
+    path: testInfo.outputPath("historical.png"),
+  });
+
+  await page.getByPlaceholder("Model, task, capability, or alias").fill("");
+  await page.getByRole("button", { name: "All runtimes" }).click();
+  await expect(page.getByText("23 of 23 installed builds")).toBeVisible();
+  await page.locator(".hero").screenshot({
+    path: testInfo.outputPath("hero.png"),
+  });
   expect(consoleErrors).toEqual([]);
 
-  await page.waitForTimeout(500);
   await page.screenshot({
-    path: testInfo.outputPath("landing.png"),
+    path: testInfo.outputPath("model-guide.png"),
     fullPage: true,
   });
 });

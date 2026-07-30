@@ -1,0 +1,127 @@
+{
+  "protocol": {
+    "name": "mlx-capability-v1",
+    "seed": 42,
+    "max_tokens": 256,
+    "performance_prompt_tokens": 512,
+    "performance_generation_tokens": 128,
+    "performance_trials": 3
+  },
+  "models": [
+    {
+      "slug": "qwen36_35b_a3b_mlx4",
+      "label": "Qwen3.6 35B A3B (MLX 4-bit)",
+      "model": "mlx-community/Qwen3.6-35B-A3B-4bit",
+      "revision": "38740b847e4cb78f352aba30aa41c76e08e6eb46",
+      "download_size_gb": 20.4,
+      "base_model": "Qwen/Qwen3.6-35B-A3B",
+      "disable_thinking": true,
+      "recommended_use": "Default local helper for broad coding and tool-heavy work"
+    },
+    {
+      "slug": "qwen36_27b_mlx4",
+      "label": "Qwen3.6 27B (MLX 4-bit)",
+      "model": "mlx-community/Qwen3.6-27B-4bit",
+      "revision": "c000ac2c2057d94be3fa931000c31723aac53282",
+      "download_size_gb": 16.1,
+      "base_model": "Qwen/Qwen3.6-27B",
+      "disable_thinking": true,
+      "recommended_use": "Careful coding, review, and long-form technical synthesis"
+    },
+    {
+      "slug": "qwen35_9b_mlx4",
+      "label": "Qwen3.5 9B (MLX 4-bit)",
+      "model": "mlx-community/Qwen3.5-9B-4bit",
+      "revision": "8b2b98c00a6b4d291155e4890773ca8f769aee53",
+      "download_size_gb": 5.98,
+      "base_model": "Qwen/Qwen3.5-9B",
+      "disable_thinking": true,
+      "recommended_use": "Fast summaries, extraction, classification, and small code tasks"
+    },
+    {
+      "slug": "devstral_small_2_24b_mlx4",
+      "label": "Devstral Small 2 24B (MLX 4-bit)",
+      "model": "mlx-community/Devstral-Small-2-24B-Instruct-2512-4bit",
+      "revision": "97228558fcbdd1adefd39d515155db3a894b37f7",
+      "download_size_gb": 15.1,
+      "base_model": "mistralai/Devstral-Small-2-24B-Instruct-2512",
+      "disable_thinking": false,
+      "recommended_use": "Repository-level coding and software engineering tasks"
+    },
+    {
+      "slug": "glm47_flash_mlx4",
+      "label": "GLM-4.7-Flash (MLX 4-bit)",
+      "model": "lmstudio-community/GLM-4.7-Flash-MLX-4bit",
+      "revision": "a122231a36d90f7325a0f692e26197dadcd5ab9f",
+      "download_size_gb": 16.9,
+      "base_model": "zai-org/GLM-4.7-Flash",
+      "disable_thinking": true,
+      "recommended_use": "Fast mixture-of-experts helper for general technical work"
+    },
+    {
+      "slug": "gpt_oss_20b_mlx4",
+      "label": "gpt-oss-20b (MLX MXFP4/Q4)",
+      "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+      "revision": "f356f2747216d7e98fee755df25987459fc19089",
+      "download_size_gb": 11.2,
+      "base_model": "openai/gpt-oss-20b",
+      "disable_thinking": false,
+      "chat_template_args": {
+        "reasoning_effort": "low"
+      },
+      "recommended_use": "Reasoning-heavy fallback and comparison baseline"
+    },
+    {
+      "slug": "gemma4_26b_a4b_qat_mlx4",
+      "label": "Gemma 4 26B A4B QAT (MLX 4-bit)",
+      "model": "lmstudio-community/gemma-4-26B-A4B-it-QAT-MLX-4bit",
+      "revision": "f03a4a76828804e3b56758627383fbc7bd32015c",
+      "download_size_gb": 15.64,
+      "base_model": "google/gemma-4-26B-A4B-it-QAT",
+      "runtime": "mlx_vlm",
+      "disable_thinking": true,
+      "recommended_use": "Popular multimodal mixture-of-experts comparison for broad technical work"
+    },
+    {
+      "slug": "gemma4_e4b_mlx4",
+      "label": "Gemma 4 E4B (MLX 4-bit)",
+      "model": "lmstudio-community/gemma-4-E4B-it-MLX-4bit",
+      "revision": "fa6f15978ba53de9ff3a95ce2821deb0ca4a15f0",
+      "download_size_gb": 6.86,
+      "base_model": "google/gemma-4-e4b-it",
+      "runtime": "mlx_vlm",
+      "disable_thinking": true,
+      "recommended_use": "Fast multimodal helper for summaries, extraction, and routine technical tasks"
+    },
+    {
+      "slug": "lfm2_24b_a2b_mlx4",
+      "label": "LFM2 24B A2B (MLX 4-bit)",
+      "model": "lmstudio-community/LFM2-24B-A2B-MLX-4bit",
+      "revision": "f86ea2ca24bcee27aa23f3552f199f3f92a48560",
+      "download_size_gb": 13.42,
+      "base_model": "LiquidAI/LFM2-24B-A2B",
+      "disable_thinking": false,
+      "recommended_use": "Fast mixture-of-experts comparison for general technical assistance"
+    },
+    {
+      "slug": "nemotron3_nano_30b_a3b_mlx4",
+      "label": "Nemotron 3 Nano 30B A3B (MLX 4-bit)",
+      "model": "lmstudio-community/NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit",
+      "revision": "543873e66e36362182738b0d2863a766728045aa",
+      "download_size_gb": 17.79,
+      "base_model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+      "disable_thinking": true,
+      "recommended_use": "Efficient coding, reasoning, and tool-use comparison"
+    },
+    {
+      "slug": "qwen3_coder_30b_a3b_mlx4",
+      "label": "Qwen3 Coder 30B A3B (MLX 4-bit)",
+      "model": "lmstudio-community/Qwen3-Coder-30B-A3B-Instruct-MLX-4bit",
+      "revision": "bbecedefd826819d2c6b6465e88ca7b9b8ad3407",
+      "download_size_gb": 17.19,
+      "base_model": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+      "disable_thinking": false,
+      "recommended_use": "Coding-focused comparison for repository and terminal work"
+    }
+  ]
+}

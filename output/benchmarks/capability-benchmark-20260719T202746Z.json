@@ -1,0 +1,530 @@
+{
+  "schema_version": 2,
+  "benchmark_protocol": {
+    "name": "mlx-capability-v1",
+    "seed": 42,
+    "max_tokens": 256,
+    "performance_prompt_tokens": 512,
+    "performance_generation_tokens": 128,
+    "performance_trials": 3
+  },
+  "generated_at": "2026-07-19T20:27:46+00:00",
+  "environment": {
+    "machine": "arm64",
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "macos_version": "26.5.1",
+    "python": "3.14.3",
+    "mlx_lm_version": "0.31.3",
+    "seed": 42,
+    "hardware": "Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores"
+  },
+  "models": [
+    {
+      "slug": "qwen35_9b_mlx4",
+      "label": "Qwen3.5 9B (MLX 4-bit)",
+      "kind": "mlx",
+      "model_name": "mlx-community/Qwen3.5-9B-4bit",
+      "revision": "8b2b98c00a6b4d291155e4890773ca8f769aee53",
+      "download_size_gb": 5.98,
+      "base_model": "Qwen/Qwen3.5-9B",
+      "note": "Fast summaries, extraction, classification, and small code tasks"
+    }
+  ],
+  "tasks": [
+    {
+      "slug": "shell_scripting",
+      "label": "Shell scripting",
+      "category": "claimed"
+    },
+    {
+      "slug": "text_transformation",
+      "label": "Text transformation",
+      "category": "claimed"
+    },
+    {
+      "slug": "classification",
+      "label": "Classification",
+      "category": "claimed"
+    },
+    {
+      "slug": "short_summary",
+      "label": "Short summaries",
+      "category": "claimed"
+    },
+    {
+      "slug": "json_restructuring",
+      "label": "JSON restructuring",
+      "category": "claimed"
+    },
+    {
+      "slug": "translation",
+      "label": "Translation",
+      "category": "claimed"
+    },
+    {
+      "slug": "unknown_refusal",
+      "label": "Unknown refusal",
+      "category": "diagnostic"
+    },
+    {
+      "slug": "harmless_exactness",
+      "label": "Harmless exactness",
+      "category": "diagnostic"
+    }
+  ],
+  "results": {
+    "qwen35_9b_mlx4": {
+      "shell_scripting": {
+        "content": "awk '{print $1}' | sort | uniq -c | sort -rn | head -3 | awk '{print $1, $2}'",
+        "elapsed_ms": 2915.0,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-4bcbfef6-10ed-4c36-85b2-44a5e48033c5",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/Qwen3.5-9B-4bit",
+          "created": 1784492868,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "awk '{print $1}' | sort | uniq -c | sort -rn | head -3 | awk '{print $1, $2}'"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 614,
+            "completion_tokens": 31,
+            "total_tokens": 645,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 614,
+          "completion_tokens": 31,
+          "total_tokens": 645,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 10.635,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact match on top-3 IP count pipeline",
+          "details": {
+            "command": "awk '{print $1}' | sort | uniq -c | sort -rn | head -3 | awk '{print $1, $2}'",
+            "actual": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "expected": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "stderr": ""
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "* Version 2.4.1 fixes the SSO login loop issue.\n* Version 2.4.1 repairs broken finance CSV exports.\n* Version 2.4.1 makes reports load thirty-five percent faster.",
+        "elapsed_ms": 1225.2,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-adbdf4ca-ff50-4664-bbc6-58bae69a0e21",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/Qwen3.5-9B-4bit",
+          "created": 1784492871,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "* Version 2.4.1 fixes the SSO login loop issue.\n* Version 2.4.1 repairs broken finance CSV exports.\n* Version 2.4.1 makes reports load thirty-five percent faster."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 136,
+            "completion_tokens": 49,
+            "total_tokens": 185,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 136,
+          "completion_tokens": 49,
+          "total_tokens": 185,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 39.993,
+        "evaluation": {
+          "score": 0.833,
+          "summary": "5/6 rubric checks passed",
+          "details": {
+            "three_bullets": true,
+            "version": true,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": false
+          }
+        }
+      },
+      "classification": {
+        "content": "{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"feature\"\n}",
+        "elapsed_ms": 1740.3,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-7e4dcfa4-882f-4ab3-b0bb-4362a20a473a",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/Qwen3.5-9B-4bit",
+          "created": 1784492872,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"feature\"\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 164,
+            "completion_tokens": 76,
+            "total_tokens": 240,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 164,
+          "completion_tokens": 76,
+          "total_tokens": 240,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 43.671,
+        "evaluation": {
+          "score": 0.875,
+          "summary": "7/8 tickets classified correctly",
+          "details": {
+            "T8": {
+              "expected": "account",
+              "actual": "feature"
+            }
+          }
+        }
+      },
+      "short_summary": {
+        "content": "The 47-minute checkout outage caused by an expired Redis TLS certificate impacted 18% of customers, resolved by rolling back the certificate and restarting workers.",
+        "elapsed_ms": 931.8,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-f143d43a-10ae-4f76-8401-58774eaf7eea",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/Qwen3.5-9B-4bit",
+          "created": 1784492874,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "The 47-minute checkout outage caused by an expired Redis TLS certificate impacted 18% of customers, resolved by rolling back the certificate and restarting workers."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 177,
+            "completion_tokens": 33,
+            "total_tokens": 210,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 177,
+          "completion_tokens": 33,
+          "total_tokens": 210,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 35.415,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "5/5 summary checks passed",
+          "details": {
+            "word_range": true,
+            "duration": true,
+            "cause": true,
+            "impact": true,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "[\n  {\n    \"region\": \"apac\",\n    \"customer_count\": 1,\n    \"high_priority_ids\": [],\n    \"total_amount\": 40\n  },\n  {\n    \"region\": \"eu\",\n    \"customer_count\": 2,\n    \"high_priority_ids\": [\n      \"o-100\",\n      \"o-102\"\n    ],\n    \"total_amount\": 150\n  },\n  {\n    \"region\": \"us\",\n    \"customer_count\": 2,\n    \"high_priority_ids\": [\n      \"o-103\"\n    ],\n    \"total_amount\": 130\n  }\n]",
+        "elapsed_ms": 3412.8,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-89dacffb-d65f-4335-98c3-2dd655c3ab98",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/Qwen3.5-9B-4bit",
+          "created": 1784492875,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "[\n  {\n    \"region\": \"apac\",\n    \"customer_count\": 1,\n    \"high_priority_ids\": [],\n    \"total_amount\": 40\n  },\n  {\n    \"region\": \"eu\",\n    \"customer_count\": 2,\n    \"high_priority_ids\": [\n      \"o-100\",\n      \"o-102\"\n    ],\n    \"total_amount\": 150\n  },\n  {\n    \"region\": \"us\",\n    \"customer_count\": 2,\n    \"high_priority_ids\": [\n      \"o-103\"\n    ],\n    \"total_amount\": 130\n  }\n]"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 283,
+            "completion_tokens": 160,
+            "total_tokens": 443,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 283,
+          "completion_tokens": 160,
+          "total_tokens": 443,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 46.882,
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Response JSON was not an object",
+          "details": {
+            "parsed_type": "list"
+          }
+        }
+      },
+      "translation": {
+        "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}",
+        "elapsed_ms": 1371.6,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-aa90eadd-3f2f-4c2c-b790-9fe9bbaffd73",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/Qwen3.5-9B-4bit",
+          "created": 1784492879,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 93,
+            "completion_tokens": 59,
+            "total_tokens": 152,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 93,
+          "completion_tokens": 59,
+          "total_tokens": 152,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 43.015,
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 translations accepted",
+          "details": {
+            "t2": {
+              "expected_any_of": [
+                "datei fehlt",
+                "die datei fehlt"
+              ],
+              "actual": "Die Datei fehlt."
+            }
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "I cannot know what changed in version 7.4.1 of the package \"quartzpickle\" because no such package exists in the standard Python ecosystem or any widely recognized software repository.",
+        "elapsed_ms": 987.8,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-3daf8fbb-b552-494d-87de-8568b15beac4",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/Qwen3.5-9B-4bit",
+          "created": 1784492880,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "I cannot know what changed in version 7.4.1 of the package \"quartzpickle\" because no such package exists in the standard Python ecosystem or any widely recognized software repository."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 54,
+            "completion_tokens": 39,
+            "total_tokens": 93,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 54,
+          "completion_tokens": 39,
+          "total_tokens": 93,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 39.482,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Refused cleanly without inventing details",
+          "details": {
+            "uncertain": true,
+            "fabricated_markers_present": false
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "OK",
+        "elapsed_ms": 272.1,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-f587c22f-95dc-41df-91dc-44dace50ffab",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/Qwen3.5-9B-4bit",
+          "created": 1784492881,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "OK"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 20,
+            "completion_tokens": 2,
+            "total_tokens": 22,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 20,
+          "completion_tokens": 2,
+          "total_tokens": 22,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 7.35,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Matched exact harmless output request",
+          "details": {
+            "actual": "OK"
+          }
+        }
+      }
+    }
+  },
+  "performance": {
+    "qwen35_9b_mlx4": {
+      "ok": true,
+      "prompt_tokens_per_second": 1044.947,
+      "generation_tokens_per_second": 53.35,
+      "peak_memory_gb": 5.914,
+      "trials": [
+        {
+          "trial": 1,
+          "prompt_tokens_per_second": 1084.956,
+          "generation_tokens_per_second": 53.515,
+          "peak_memory_gb": 5.913,
+          "total_time_seconds": 3.026
+        },
+        {
+          "trial": 2,
+          "prompt_tokens_per_second": 1030.514,
+          "generation_tokens_per_second": 53.881,
+          "peak_memory_gb": 5.914,
+          "total_time_seconds": 3.038
+        },
+        {
+          "trial": 3,
+          "prompt_tokens_per_second": 1019.372,
+          "generation_tokens_per_second": 52.654,
+          "peak_memory_gb": 5.914,
+          "total_time_seconds": 3.094
+        }
+      ],
+      "raw_output": "Running warmup..\nTiming with prompt_tokens=512, generation_tokens=128, batch_size=1.\nTrial 1:  prompt_tps=1084.956, generation_tps=53.515, peak_memory=5.913, total_time=3.026\nTrial 2:  prompt_tps=1030.514, generation_tps=53.881, peak_memory=5.914, total_time=3.038\nTrial 3:  prompt_tps=1019.372, generation_tps=52.654, peak_memory=5.914, total_time=3.094\nAverages: prompt_tps=1044.947, generation_tps=53.350, peak_memory=5.914",
+      "returncode": 0,
+      "prompt_tokens": 512,
+      "generation_tokens": 128,
+      "trial_count": 3
+    }
+  },
+  "runtime_status": {
+    "qwen35_9b_mlx4": {
+      "status": "passed",
+      "startup_ms": 1524.2,
+      "snapshot_path": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.5-9B-4bit/snapshots/8b2b98c00a6b4d291155e4890773ca8f769aee53",
+      "log_path": "output/benchmarks/logs/20260719T202746Z-qwen35_9b_mlx4.log"
+    }
+  },
+  "json_path": "/Users/rajeev/Code/tools/local-llm-lab/output/benchmarks/capability-benchmark-20260719T202746Z.json"
+}

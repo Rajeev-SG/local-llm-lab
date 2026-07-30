@@ -1,337 +1,617 @@
-const highlights = [
-  { value: "22B", label: "largest model proven through Open WebUI" },
-  { value: "8", label: "useful local models verified on this machine" },
-  { value: "48 GB", label: "Apple Silicon host memory behind the lab" },
-  { value: "Playwright", label: "real browser proof, not script-only smoke tests" },
+import { useMemo, useState } from "react";
+import guide from "./current-models.json";
+
+const runtimeLabels = {
+  mlx: "MLX · text",
+  mlx_vlm: "MLX · vision",
+  mlx_audio: "MLX · audio",
+  ollama: "Ollama",
+  apfel: "Apple system",
+};
+
+const benchmarkLabels = {
+  passed: "Full benchmark",
+  benchmarked: "Full benchmark",
+  passed_with_notes: "Smoke test notes",
+  runtime_failed: "Earlier load failed",
+};
+
+const capabilityFilters = [
+  { value: "all", label: "All capabilities" },
+  { value: "vision", label: "Image input" },
+  { value: "code", label: "Coding" },
+  { value: "tools", label: "Tools" },
+  { value: "thinking", label: "Reasoning mode" },
+  { value: "audio", label: "Audio" },
 ];
 
-const pillars = [
-  {
-    title: "Actually tested",
-    text: "This lab is built around proof. Models were pulled, run, and then verified in a live Open WebUI browser session with Playwright.",
-  },
-  {
-    title: "Role tuned",
-    text: "Instead of one vague default, the setup uses helper roles for fast compression, safer summaries, code-aware extraction, heavier synthesis, and opt-in reasoning.",
-  },
-  {
-    title: "Honest about limits",
-    text: "The current Docker Ollama runtime only sees about 15.7 GiB, so 30B+ experiments are documented as constrained rather than hand-waved as 'should work'.",
-  },
+const runtimeFilters = [
+  { value: "all", label: "All runtimes" },
+  { value: "mlx", label: "MLX" },
+  { value: "ollama", label: "Ollama" },
+  { value: "apfel", label: "Apple system" },
 ];
 
-const models = [
-  {
-    role: "Fast helper",
-    alias: "local-helper-fast",
-    model: "qwen3.5:9b",
-    note: "Best for context compression and clustering when you want speed and cleaner output with thinking disabled.",
-  },
-  {
-    role: "Safe helper",
-    alias: "local-helper-safe",
-    model: "phi4",
-    note: "Great for conservative summaries, checklists, and lower-drama utility work.",
-  },
-  {
-    role: "Code helper",
-    alias: "local-coder-helper",
-    model: "qwen2.5-coder:14b",
-    note: "Best local coding-focused helper for API surfaces, diffs, and contract extraction.",
-  },
-  {
-    role: "Heavy helper",
-    alias: "local-helper-heavy",
-    model: "mistral-small:22b",
-    note: "The strongest clean local general model proven in both CLI and Open WebUI on this machine.",
-  },
-  {
-    role: "Reasoning fallback",
-    alias: "local-reasoner-clean",
-    model: "gpt-oss:20b",
-    note: "Useful when you want heavier reasoning behavior, but it works best with lower visible thinking in tuned clients.",
-  },
-  {
-    role: "Synthesis fallback",
-    alias: "local-thinker-clean",
-    model: "qwen2.5:14b",
-    note: "Good for broader synthesis when the fast helper starts feeling too lossy.",
-  },
-];
+function compactNumber(value, suffix = "") {
+  if (value === null || value === undefined) return "—";
+  return `${Number(value).toFixed(1)}${suffix}`;
+}
 
-const workflow = [
-  {
-    step: "01",
-    title: "Retrieve narrowly",
-    text: "Start with search and direct evidence: rg, probe, qmd, context7, or logs. The cheapest token win is not sending junk upstream.",
-  },
-  {
-    step: "02",
-    title: "Compress locally",
-    text: "Offload repetitive context digestion to a tuned local helper with deterministic settings and a clear role.",
-  },
-  {
-    step: "03",
-    title: "Reason where it counts",
-    text: "Keep final planning, code edits, and judgment with the stronger primary agent or the heaviest proven local fallback.",
-  },
-  {
-    step: "04",
-    title: "Prove behavior",
-    text: "Validate with real browser behavior, logs, and artifacts so the lab stays grounded in what works on this hardware.",
-  },
-];
+function contextLabel(tokens) {
+  if (!tokens) return "—";
+  if (tokens >= 1000) {
+    const thousands = tokens / 1000;
+    return `${Number.isInteger(thousands) ? thousands : thousands.toFixed(1)}K`;
+  }
+  return String(tokens);
+}
 
-const evidence = [
-  "Open WebUI chat was tested in a real browser session and returned a live model answer.",
-  "mistral-small:22b is the biggest model proven working locally right now.",
-  "qwen2.5-coder:14b is the best verified coding-oriented local model in the sweet spot.",
-  "The setup documents why 30B+ attempts fail instead of pretending capacity is unlimited.",
-];
+function matchesRuntime(model, runtime) {
+  if (runtime === "all") return true;
+  if (runtime === "mlx") return model.runtime.startsWith("mlx");
+  return model.runtime === runtime;
+}
+
+function matchesCapability(model, capability) {
+  if (capability === "all") return true;
+  const terms = [...model.modalities, ...model.capabilities].map((item) =>
+    item.toLowerCase(),
+  );
+  if (capability === "vision") return terms.includes("image") || terms.includes("vision");
+  return terms.some((term) => term.includes(capability));
+}
+
+function benchmarkStatus(model) {
+  if (!model.benchmark) return "Not in text suite";
+  return benchmarkLabels[model.benchmark.status] || model.benchmark.status;
+}
+
+function ModelRow({ model }) {
+  const benchmark = model.benchmark;
+
+  return (
+    <li className="model-row" data-runtime={model.runtime}>
+      <div className="rank-cell" aria-label={benchmark?.rank ? `Rank ${benchmark.rank}` : "Unranked"}>
+        {benchmark?.rank ? (
+          <>
+            <span className="rank-number">{benchmark.rank}</span>
+            <span className="rank-label">local</span>
+          </>
+        ) : (
+          <span className="rank-dash">—</span>
+        )}
+      </div>
+
+      <div className="model-identity">
+        <div className="model-title-line">
+          <h3>{model.label}</h3>
+          <span className={`runtime-tag runtime-${model.runtime}`}>
+            {runtimeLabels[model.runtime]}
+          </span>
+        </div>
+        <p className="model-id">{model.model_name}</p>
+        <p className="best-for">{model.best_for}</p>
+        <div className="tag-line" aria-label="Inputs and capabilities">
+          {model.modalities.map((item) => (
+            <span className="tag tag-input" key={item}>
+              {item}
+            </span>
+          ))}
+          {model.capabilities.map((item) => (
+            <span className="tag" key={item}>
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <dl className="spec-cell">
+        <div>
+          <dt>Model</dt>
+          <dd>{model.parameters}</dd>
+        </div>
+        <div>
+          <dt>Context</dt>
+          <dd>{contextLabel(model.context_tokens)}</dd>
+        </div>
+        <div>
+          <dt>Local file</dt>
+          <dd>{compactNumber(model.size_gb, " GB")}</dd>
+        </div>
+      </dl>
+
+      <div className="evidence-cell">
+        {benchmark?.work_fit_score !== null &&
+        benchmark?.work_fit_score !== undefined ? (
+          <div className="score-lockup">
+            <span className="score">{compactNumber(benchmark.work_fit_score)}</span>
+            <span className="score-label">work-fit / 100</span>
+          </div>
+        ) : (
+          <div className="score-lockup score-empty">
+            <span className="score">—</span>
+            <span className="score-label">not comparable</span>
+          </div>
+        )}
+        <dl className="benchmark-mini">
+          <div>
+            <dt>Quality</dt>
+            <dd>{compactNumber(benchmark?.quality_score)}</dd>
+          </div>
+          <div>
+            <dt>Speed</dt>
+            <dd>
+              {benchmark?.generation_tokens_per_second
+                ? compactNumber(benchmark.generation_tokens_per_second, " tok/s")
+                : "—"}
+            </dd>
+          </div>
+          <div>
+            <dt>Peak memory</dt>
+            <dd>{compactNumber(benchmark?.peak_memory_gb, " GB")}</dd>
+          </div>
+        </dl>
+        <span className={`proof-status proof-${benchmark?.status || "none"}`}>
+          {benchmarkStatus(model)}
+        </span>
+      </div>
+
+      <details className="model-details">
+        <summary>Details and source</summary>
+        <div className="details-layout">
+          <div>
+            <span className="detail-label">Use with care</span>
+            <p>{model.caution}</p>
+          </div>
+          <div>
+            <span className="detail-label">Build</span>
+            <p>
+              {model.quantization}
+              {model.aliases?.length ? ` · aliases: ${model.aliases.join(", ")}` : ""}
+            </p>
+          </div>
+          <div>
+            <span className="detail-label">Evidence</span>
+            <p>
+              {benchmark?.artifact ? (
+                <a href={`https://github.com/Rajeev-SG/local-llm-lab/blob/main/${benchmark.artifact}`}>
+                  Open local benchmark artifact
+                </a>
+              ) : (
+                "No comparable text benchmark yet"
+              )}
+            </p>
+          </div>
+          <div>
+            <span className="detail-label">Model information</span>
+            <p>
+              <a href={model.source_url} target="_blank" rel="noreferrer">
+                Open the exact model page ↗
+              </a>
+            </p>
+          </div>
+        </div>
+      </details>
+    </li>
+  );
+}
 
 export default function App() {
+  const [query, setQuery] = useState("");
+  const [runtime, setRuntime] = useState("all");
+  const [capability, setCapability] = useState("all");
+  const [sort, setSort] = useState("rank");
+
+  const installed = guide.installed_models;
+  const recommendations = {
+    code: installed.find((model) => model.benchmark?.rank === 1),
+    broad: installed.find((model) => model.benchmark?.rank === 2),
+    compact: installed.find((model) => model.benchmark?.rank === 3),
+    speech: installed.find((model) => model.runtime === "mlx_audio"),
+  };
+
+  const visibleModels = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+    const result = installed.filter((model) => {
+      const searchable = [
+        model.label,
+        model.model_name,
+        model.best_for,
+        model.caution,
+        ...model.modalities,
+        ...model.capabilities,
+        ...(model.aliases || []),
+      ]
+        .join(" ")
+        .toLowerCase();
+      return (
+        (!normalizedQuery || searchable.includes(normalizedQuery)) &&
+        matchesRuntime(model, runtime) &&
+        matchesCapability(model, capability)
+      );
+    });
+
+    return result.sort((a, b) => {
+      if (sort === "score") {
+        return (
+          (b.benchmark?.work_fit_score ?? -1) - (a.benchmark?.work_fit_score ?? -1)
+        );
+      }
+      if (sort === "speed") {
+        return (
+          (b.benchmark?.generation_tokens_per_second ?? -1) -
+          (a.benchmark?.generation_tokens_per_second ?? -1)
+        );
+      }
+      if (sort === "size") return (a.size_gb ?? Infinity) - (b.size_gb ?? Infinity);
+      if (sort === "name") return a.label.localeCompare(b.label);
+      return (
+        (a.benchmark?.rank ?? 10_000) - (b.benchmark?.rank ?? 10_000) ||
+        a.label.localeCompare(b.label)
+      );
+    });
+  }, [capability, installed, query, runtime, sort]);
+
+  const generatedDate = new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(guide.generated_at));
+
   return (
     <div className="page-shell">
-      <div className="noise" />
       <header className="topbar">
-        <a className="brand" href="#top">
-          <span className="brand-mark" />
+        <a className="brand" href="#top" aria-label="Local LLM Lab home">
+          <span className="brand-mark" aria-hidden="true">
+            L
+          </span>
           <span>
             <strong>Local LLM Lab</strong>
-            <em>Proof-backed local AI on Apple Silicon</em>
+            <em>Rajeev’s Apple Silicon model field guide</em>
           </span>
         </a>
-        <nav className="nav">
-          <a href="#models">Models</a>
-          <a href="#proof">Proof</a>
-          <a href="#workflow">Workflow</a>
-          <a href="#start">Start</a>
+        <nav className="nav" aria-label="Page sections">
+          <a href="#recommendations">Start here</a>
+          <a href="#inventory">All models</a>
+          <a href="#aliases">Aliases</a>
+          <a href="#method">Method</a>
         </nav>
       </header>
 
       <main id="top">
         <section className="hero">
-          <div className="hero-copy reveal">
-            <p className="eyebrow">Local AI that earns trust the hard way</p>
-            <h1>Build, test, and ship a serious local LLM workstation.</h1>
+          <div className="hero-copy">
+            <p className="eyebrow">Live local inventory · {generatedDate}</p>
+            <h1>Every local model on this Mac, in one guide.</h1>
             <p className="lede">
-              Local LLM Lab packages Ollama, Open WebUI, role-tuned helper models,
-              and browser-backed validation into one credible Apple Silicon setup.
-              It is equal parts workstation, benchmark notebook, and public proof.
+              Choose a model without reopening benchmark notes or searching model
+              cards. This page joins the current installed inventory with measured
+              local quality, speed, memory, context length, modalities, capabilities,
+              tuned aliases, and exact source builds.
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#start">
-                Run the lab
+              <a className="button button-primary" href="#inventory">
+                Compare all models
               </a>
-              <a className="button button-secondary" href="#proof">
-                See proof
+              <a className="button button-secondary" href="#recommendations">
+                See the short list
               </a>
-            </div>
-            <div className="hero-note">
-              <span>Reality check</span>
-              <p>
-                Current Docker Ollama capacity favors the 9B to 14B class, with
-                <strong> mistral-small:22b </strong>
-                as the heaviest browser-proven model.
-              </p>
             </div>
           </div>
 
-          <aside className="hero-panel reveal">
-            <div className="panel-label">Featured proof</div>
-            <h2>Open WebUI validated with a real prompt</h2>
-            <p>
-              The browser session selected a tuned helper role, submitted a prompt,
-              and confirmed a clean answer in the live transcript.
-            </p>
-            <img
-              src="/assets/openwebui-proof.png"
-              alt="Open WebUI proof screenshot showing a local helper response"
-            />
-            <dl className="mini-stats">
+          <aside className="inventory-summary" aria-label="Current inventory summary">
+            <p className="summary-kicker">On this machine now</p>
+            <dl>
               <div>
-                <dt>Runtime</dt>
-                <dd>Docker Ollama + Docker Open WebUI</dd>
+                <dt>Installed builds</dt>
+                <dd>{guide.summary.installed_builds}</dd>
               </div>
               <div>
-                <dt>Browser</dt>
-                <dd>Playwright acceptance proof</dd>
+                <dt>Comparable local scores</dt>
+                <dd>{guide.summary.ranked_installed_builds}</dd>
               </div>
               <div>
-                <dt>Outcome</dt>
-                <dd>Local prompt-response path verified</dd>
+                <dt>Tuned names</dt>
+                <dd>{guide.summary.aliases}</dd>
+              </div>
+              <div>
+                <dt>Model data</dt>
+                <dd>{guide.summary.installed_storage_gb} GB</dd>
               </div>
             </dl>
+            <p className="summary-note">
+              MLX uses host unified memory directly. Ollama provides the easiest chat
+              path. Apple’s system model is always on-device but has a 4K context.
+            </p>
           </aside>
         </section>
 
-        <section className="stats-grid reveal">
-          {highlights.map((item) => (
-            <article className="stat-card" key={item.label}>
-              <span>{item.value}</span>
-              <p>{item.label}</p>
+        <section className="recommendations section" id="recommendations">
+          <div className="section-heading split-heading">
+            <div>
+              <p className="eyebrow">Start here</p>
+              <h2>Four models cover most local work.</h2>
+            </div>
+            <p>
+              These are recommendations from this Mac’s local measurements, not
+              vendor benchmark claims.
+            </p>
+          </div>
+          <div className="recommendation-grid">
+            <article>
+              <p className="recommendation-role">Coding default</p>
+              <h3>{recommendations.code?.label}</h3>
+              <p>{recommendations.code?.best_for}</p>
+              <a href="#inventory">Local rank #1 · 98.3 work-fit</a>
             </article>
-          ))}
+            <article>
+              <p className="recommendation-role">Broad and visual</p>
+              <h3>{recommendations.broad?.label}</h3>
+              <p>{recommendations.broad?.best_for}</p>
+              <a href="#inventory">Local rank #2 · image input</a>
+            </article>
+            <article>
+              <p className="recommendation-role">Small high-quality helper</p>
+              <h3>{recommendations.compact?.label}</h3>
+              <p>{recommendations.compact?.best_for}</p>
+              <a href="#inventory">Local rank #3 · 6.9 GB</a>
+            </article>
+            <article>
+              <p className="recommendation-role">Speech</p>
+              <h3>{recommendations.speech?.label}</h3>
+              <p>{recommendations.speech?.best_for}</p>
+              <a href="#inventory">Audio input · 1.6 GB</a>
+            </article>
+          </div>
         </section>
 
-        <section className="section reveal">
-          <div className="section-heading">
-            <p className="eyebrow">Why this lab exists</p>
-            <h2>Local AI is most compelling when it is both useful and accountable.</h2>
-          </div>
-          <div className="pillars">
-            {pillars.map((pillar) => (
-              <article className="pillar-card" key={pillar.title}>
-                <h3>{pillar.title}</h3>
-                <p>{pillar.text}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="section reveal" id="models">
-          <div className="section-heading split">
+        <section className="inventory section" id="inventory">
+          <div className="section-heading split-heading">
             <div>
-              <p className="eyebrow">Role-tuned local models</p>
-              <h2>Use the model that matches the job, not the one that sounds biggest.</h2>
+              <p className="eyebrow">Current installed inventory</p>
+              <h2>Compare every exact build.</h2>
             </div>
-            <p className="section-copy">
-              The lab’s strongest setup is a helper tier: fast, safe, coding-focused,
-              heavy, and reasoning-flavored roles that fit the machine’s real envelope.
+            <p>
+              Different runtime builds stay separate because their speed, memory use,
+              and reliability can differ even when the base model name is the same.
             </p>
           </div>
-          <div className="model-grid">
-            {models.map((model) => (
-              <article className="model-card" key={model.alias}>
-                <p className="model-role">{model.role}</p>
-                <h3>{model.alias}</h3>
-                <p className="model-base">{model.model}</p>
-                <p>{model.note}</p>
-              </article>
-            ))}
-          </div>
-        </section>
 
-        <section className="section reveal" id="proof">
-          <div className="proof-layout">
-            <div className="proof-copy">
-              <p className="eyebrow">Proof-backed recommendations</p>
-              <h2>Not just “compatible.” Actually run, actually seen, actually documented.</h2>
-              <ul className="evidence-list">
-                {evidence.map((item) => (
-                  <li key={item}>{item}</li>
+          <div className="filter-panel">
+            <label className="search-field">
+              <span>Search</span>
+              <input
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Model, task, capability, or alias"
+              />
+            </label>
+            <label className="sort-field">
+              <span>Sort</span>
+              <select value={sort} onChange={(event) => setSort(event.target.value)}>
+                <option value="rank">Local recommendation</option>
+                <option value="score">Work-fit score</option>
+                <option value="speed">Generation speed</option>
+                <option value="size">Smallest file</option>
+                <option value="name">Model name</option>
+              </select>
+            </label>
+            <fieldset>
+              <legend>Runtime</legend>
+              <div className="filter-buttons">
+                {runtimeFilters.map((item) => (
+                  <button
+                    type="button"
+                    key={item.value}
+                    aria-pressed={runtime === item.value}
+                    onClick={() => setRuntime(item.value)}
+                  >
+                    {item.label}
+                  </button>
                 ))}
-              </ul>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Capability</legend>
+              <div className="filter-buttons">
+                {capabilityFilters.map((item) => (
+                  <button
+                    type="button"
+                    key={item.value}
+                    aria-pressed={capability === item.value}
+                    onClick={() => setCapability(item.value)}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+          </div>
+
+          <div className="results-line" aria-live="polite">
+            <strong>{visibleModels.length}</strong> of {installed.length} installed builds
+          </div>
+
+          {visibleModels.length ? (
+            <ol className="model-list">
+              {visibleModels.map((model) => (
+                <ModelRow model={model} key={model.build_id} />
+              ))}
+            </ol>
+          ) : (
+            <div className="empty-state">
+              <h3>No installed model matches those filters.</h3>
+              <button
+                type="button"
+                onClick={() => {
+                  setQuery("");
+                  setRuntime("all");
+                  setCapability("all");
+                }}
+              >
+                Clear filters
+              </button>
             </div>
-            <div className="proof-callout">
-              <p className="callout-label">Current recommendation</p>
-              <h3>Best clean general model</h3>
-              <p className="callout-main">mistral-small:22b</p>
-              <h3>Best coding-focused helper</h3>
-              <p className="callout-main">qwen2.5-coder:14b</p>
-              <h3>Best fast helper</h3>
-              <p className="callout-main">qwen3.5:9b</p>
+          )}
+        </section>
+
+        <section className="section reference-grid" id="aliases">
+          <div>
+            <p className="eyebrow">Tuned Ollama names</p>
+            <h2>Aliases change behaviour, not weights.</h2>
+            <p className="section-intro">
+              These names reuse an installed base model with deterministic settings
+              and a narrower job. They do not consume another full copy of the model.
+            </p>
+          </div>
+          <div className="alias-table" role="table" aria-label="Tuned model aliases">
+            <div className="alias-head" role="row">
+              <span role="columnheader">Use this name</span>
+              <span role="columnheader">Based on</span>
             </div>
+            {guide.aliases.map((item) => (
+              <div className="alias-row" role="row" key={item.alias}>
+                <code role="cell">{item.alias}</code>
+                <span role="cell">{item.base_model}</span>
+              </div>
+            ))}
           </div>
         </section>
 
-        <section className="section reveal" id="workflow">
-          <div className="section-heading">
-            <p className="eyebrow">Agent offload architecture</p>
-            <h2>A practical local workflow for coding agents and heavy context.</h2>
+        <section className="section historical" id="historical">
+          <div className="section-heading split-heading">
+            <div>
+              <p className="eyebrow">Previously tested, not installed</p>
+              <h2>Old evidence stays visible.</h2>
+            </div>
+            <p>
+              These builds were removed from the cache on 30 July 2026. Their results
+              remain in the historical leaderboard, but they are not presented as
+              currently available.
+            </p>
           </div>
-          <div className="workflow-grid">
-            {workflow.map((item) => (
-              <article className="workflow-card" key={item.step}>
-                <span>{item.step}</span>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
+          <div className="historical-table">
+            {guide.previously_tested.map((model) => (
+              <article key={model.build_id}>
+                <div>
+                  <h3>{model.label}</h3>
+                  <p>{model.runtime}</p>
+                </div>
+                <dl>
+                  <div>
+                    <dt>Old rank</dt>
+                    <dd>{model.rank || "—"}</dd>
+                  </div>
+                  <div>
+                    <dt>Work-fit</dt>
+                    <dd>{compactNumber(model.work_fit_score)}</dd>
+                  </div>
+                  <div>
+                    <dt>Quality</dt>
+                    <dd>{compactNumber(model.quality_score)}</dd>
+                  </div>
+                </dl>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="section reveal" id="start">
-          <div className="section-heading split">
-            <div>
-              <p className="eyebrow">Get started</p>
-              <h2>Stand up the lab, create the role aliases, then validate in the browser.</h2>
-            </div>
-            <p className="section-copy">
-              This setup is designed to be educational as well as practical, so the
-              repo includes the scripts, model roles, and proof artifacts side by side.
-            </p>
+        <section className="section method" id="method">
+          <div>
+            <p className="eyebrow">How to read the numbers</p>
+            <h2>Local evidence first.</h2>
           </div>
-          <div className="start-grid">
-            <pre className="terminal-card">
-              <code>{`./scripts/start-ollama.sh
+          <div className="method-columns">
+            <article>
+              <span>01</span>
+              <h3>Work-fit score</h3>
+              <p>
+                A 100-point local score: 80% task quality, 15% response-time
+                usefulness, and 5% successful invocations. Tasks favour shell work,
+                structured data, classification, and concise technical writing.
+              </p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Quality score</h3>
+              <p>
+                The weighted result from the shared eight-task suite without the
+                speed adjustment. A dash means the exact build did not complete the
+                comparable suite.
+              </p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Speed and memory</h3>
+              <p>
+                MLX text speed uses three fixed 512-token prompt and 128-token
+                completion trials. Vision-model speed uses end-to-end requests, so
+                it should not be compared directly with isolated text trials.
+              </p>
+            </article>
+          </div>
+          <div className="method-links">
+            <a href="https://github.com/Rajeev-SG/local-llm-lab/blob/main/overall-leaderboard.md">
+              Read the complete leaderboard
+            </a>
+            <a href="https://github.com/Rajeev-SG/local-llm-lab/tree/main/output/benchmarks">
+              Inspect raw benchmark data
+            </a>
+            <a href="https://github.com/Rajeev-SG/local-llm-lab">
+              Open the repository
+            </a>
+          </div>
+        </section>
+
+        <section className="section run-guide" id="run">
+          <div>
+            <p className="eyebrow">Run the models</p>
+            <h2>Three local entry points.</h2>
+          </div>
+          <div className="run-columns">
+            <article>
+              <h3>Ollama and Open WebUI</h3>
+              <pre>
+                <code>{`./scripts/start-ollama.sh
 ./scripts/start-openwebui.sh
-./scripts/setup-agent-offload-models.sh
-OPENWEBUI_PASSWORD='<your-password>' ./scripts/setup-openwebui-role-models.sh`}</code>
-            </pre>
-            <div className="start-card">
-              <h3>What you get</h3>
-              <ul className="check-list">
-                <li>Open WebUI running against your local Ollama runtime</li>
-                <li>Role-named helper models for offload workflows</li>
-                <li>Proof notes documenting what passed and what failed</li>
-                <li>A clean landing page for sharing the project publicly</li>
-              </ul>
-              <div className="local-ui-card">
-                <p className="callout-label">Open WebUI on this machine</p>
-                <div className="local-ui-actions">
-                  <a
-                    className="button button-primary"
-                    href="http://open-webui-lab.orb.local"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Open via OrbStack
-                  </a>
-                  <a
-                    className="button button-secondary"
-                    href="http://localhost:3001"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Use localhost fallback
-                  </a>
-                  <a
-                    className="button button-secondary"
-                    href="https://rajeevs-macbook-pro-2.tail33d641.ts.net/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Open via Tailscale
-                  </a>
-                </div>
-                <p className="local-ui-note">
-                  This only works on the Mac that is actually running the lab. If
-                  the OrbStack hostname does not resolve, open OrbStack and make
-                  sure the <strong>ollama-lab</strong> and <strong>open-webui-lab</strong>
-                  containers are up, then fall back to the local port reported by
-                  <code> ./scripts/status.sh</code>.
-                </p>
-                <p className="local-ui-note tailscale-note">
-                  For safer access on your own devices from anywhere, this lab can
-                  expose Open WebUI through private Tailscale HTTPS with
-                  <code> ./scripts/enable-tailscale-openwebui.sh</code>. That keeps
-                  the app inside your tailnet instead of publishing it openly to
-                  the internet.
-                </p>
-                <ol className="tailscale-steps">
-                  <li>Install Tailscale on the device you want to use remotely.</li>
-                  <li>Sign into the same Tailscale tailnet as this Mac.</li>
-                  <li>Open the Tailscale link above, then sign into Open WebUI normally.</li>
-                </ol>
+ollama run qwen3.5:9b`}</code>
+              </pre>
+              <div className="run-links">
+                <a href="http://open-webui-lab.orb.local">OrbStack</a>
+                <a href="http://localhost:3001">Localhost</a>
+                <a href="https://rajeevs-macbook-pro-2.tail33d641.ts.net/">
+                  Private remote link
+                </a>
               </div>
-            </div>
+            </article>
+            <article>
+              <h3>Direct MLX</h3>
+              <pre>
+                <code>{`mlx_lm.generate \\
+  --model mlx-community/Qwen3.6-35B-A3B-4bit \\
+  --prompt "Summarise this repository"`}</code>
+              </pre>
+              <p>Use MLX directly for the leading benchmarked builds and full host memory.</p>
+            </article>
+            <article>
+              <h3>Apple system model</h3>
+              <pre>
+                <code>{`apfel "Summarise this text"
+apfel --model-info`}</code>
+              </pre>
+              <p>No separate download; best for small private text tasks.</p>
+            </article>
           </div>
         </section>
       </main>
 
       <footer className="footer">
-        <p>Local LLM Lab is a practical Apple Silicon lab for local AI, model role design, and proof-backed workflows.</p>
+        <p>
+          Generated from the live caches on {generatedDate}. Historical benchmark
+          evidence is preserved when a model is removed.
+        </p>
+        <a href="#top">Back to top ↑</a>
       </footer>
     </div>
   );

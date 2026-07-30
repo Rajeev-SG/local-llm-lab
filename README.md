@@ -1,214 +1,216 @@
 # Local LLM Lab
 
-A proof-backed local AI workstation for Apple Silicon: Ollama, Open WebUI, tuned helper roles, and browser-validated evidence of what actually works.
+A measured guide to the local AI models available on this Apple Silicon Mac.
 
-Live site: [local-llm-lab.vercel.app](https://local-llm-lab.vercel.app)
+- Live guide: [local-llm-lab.vercel.app](https://local-llm-lab.vercel.app)
+- Complete historical results: [overall-leaderboard.md](./overall-leaderboard.md)
+- Raw benchmark data: [output/benchmarks](./output/benchmarks)
 
-GitHub repo: [Rajeev-SG/local-llm-lab](https://github.com/Rajeev-SG/local-llm-lab)
+![The current installed-model guide](./output/playwright/model-guide-20260730/hero-desktop.png)
 
-![Open WebUI proof](site/public/assets/openwebui-proof.png)
+## What this repository answers
 
-## Why this repo exists
+The repository keeps the information needed to choose a local model in one place:
 
-Most “local AI setup” repos stop at install instructions. This one is built around a more useful question:
+- which exact builds are installed now
+- what each model is best used for
+- whether it accepts text, images, or audio
+- whether the local build supports tools, reasoning mode, or code completion
+- context length, model-file size, quantization, and runtime
+- measured local task quality, generation speed, and peak memory
+- which tested models were removed or failed to load
+- which tuned Ollama names reuse the same underlying weights
 
-> Which local models are actually worth running on this machine, in this runtime, with this UI, and how do we prove it?
+The public site reads a generated inventory snapshot rather than presenting every historical benchmark row as currently installed.
 
-Local LLM Lab answers that with:
+## Current machine
 
-- a working Ollama + Open WebUI stack
-- role-tuned helper aliases instead of one vague default model
-- explicit notes about what passed, what failed, and why
-- real browser proof using Playwright, not only shell smoke tests
-- a practical agent-offload workflow for coding and research tasks
+| Item | Current value |
+|---|---|
+| Hardware | Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores |
+| Installed exact builds | 23 |
+| Fully comparable installed builds | 13 |
+| Tuned aliases | 7 |
+| Local model data represented | 304.7 GB in decimal file sizes |
+| Current free disk space after cleanup | About 285 GiB |
+| Available runtimes | Direct MLX, Ollama, MLX audio/vision, and Apple Foundation Models through `apfel` |
 
-## What is proven right now
+The inventory was refreshed on 30 July 2026 from the live Hugging Face cache, Ollama manifests, and `apfel --model-info`.
 
-| Area | Current answer |
-|------|----------------|
-| Best clean general local model | `mistral-small:22b` |
-| Best clean coding-focused local model | `qwen2.5-coder:14b` |
-| Best fast helper | `qwen3.5:9b` with `think=false` |
-| Best conservative helper | `phi4` |
-| Largest model proven through Open WebUI | `mistral-small:22b` |
-| Browser validation | Real Open WebUI prompt-response path verified with Playwright |
+## Recommended models
 
-The strongest current proof artifacts are:
+| Job | Exact build | Why |
+|---|---|---|
+| Coding default | `lmstudio-community/Qwen3-Coder-30B-A3B-Instruct-MLX-4bit` | Local rank 1; 98.3 work-fit, 98.8 task quality, and about 98.8 generated tokens per second |
+| Broad text and image work | `mlx-community/Qwen3.6-35B-A3B-4bit` | Local rank 2; almost tied on quality, with image input and very fast sparse generation |
+| Small high-quality helper | `lmstudio-community/gemma-4-E4B-it-MLX-4bit` | Local rank 3 from a 6.9 GB model file |
+| Careful dense comparison | `mlx-community/Qwen3.6-27B-4bit` | High task quality when slower generation is acceptable |
+| Very fast comparison | `lmstudio-community/NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit` | About 103 generated tokens per second, but less reliable than the leading Qwen builds |
+| Open WebUI helper | `qwen3.5:9b` through Ollama | The strongest convenient Ollama helper in the comparable local suite |
+| Speech transcription | `mlx-community/whisper-large-v3-turbo` | Local audio transcription and speech-to-English translation |
 
-- [benchmark-results.md](./benchmark-results.md)
-- [model-sweep-20260322.md](./output/acceptance/model-sweep-20260322.md)
-- [agent-offload-role-proof-20260322.md](./output/acceptance/agent-offload-role-proof-20260322.md)
-- [desktop-final.png](./output/playwright/agent-offload-role-proof-20260322/desktop-final.png)
+Different runtime builds of the same base model remain separate. Quantization and inference software materially change speed, memory use, and output reliability.
 
-Latest benchmark takeaway:
+## Recently removed model files
 
-- `apfel` is the fastest option in the lab for tiny offline tasks, but it underperforms the stronger Ollama models on shell generation and structured JSON work.
-- `gemma4:e4b` is now tracked in the benchmark visuals, but the model is still runtime-blocked on this machine through Ollama, so it is listed as `n/a` rather than scored.
-- The current Apfel benchmark and workflow recommendation are captured in [apfel-benchmark-20260409.md](./output/acceptance/apfel-benchmark-20260409.md).
+The following Hugging Face caches were removed on 30 July 2026, recovering 47.5 GB:
 
-## Benchmark Graphs
+| Removed exact build | Historical local rank | Reason |
+|---|---:|---|
+| `lmstudio-community/GLM-4.7-Flash-MLX-4bit` | 12 | Lower quality than the retained sparse Qwen and Nemotron builds |
+| `mlx-community/Qwen3.5-9B-4bit` | 14 | The retained Ollama build performed much better, and Gemma 4 E4B is the stronger small MLX model |
+| `mlx-community/gpt-oss-20b-MXFP4-Q4` | 15 | Low local task quality |
+| `lmstudio-community/LFM2-24B-A2B-MLX-4bit` | 17 | Very fast but unreliable on important structured and factual tasks |
 
-The current chart set is generated from the scored benchmark JSON plus the Gemma 4 blocked-run artifact:
+Their raw benchmark evidence remains checked in. The site lists them under “Previously tested, not installed.”
 
-- [chart index](./output/charts/benchmark-20260409/README.md)
+## Qwen3 Coder Next warning
 
-### Overview dashboard
+The 4-bit Qwen3 Coder Next download is roughly 44.9 GB. Disk space is available, but its weights would consume almost all of this Mac’s 48 GB unified memory before context data, macOS, Codex, or other applications are counted. Removing cached model files creates disk space; it does not create more runtime memory.
 
-![Benchmark dashboard](./output/charts/benchmark-20260409/overview-dashboard.svg)
+Keep the proven Qwen3 Coder 30B A3B build until Coder Next has loaded successfully and completed the same benchmark.
 
-### Master comparison charts
+## Refresh the current-model guide
 
-![Capability heatmap](./output/charts/benchmark-20260409/master-capability-heatmap.svg)
+The metadata file records model capabilities and exact source links. The generator checks the local caches and joins installed builds with the historical leaderboard.
 
-![Average score ranking](./output/charts/benchmark-20260409/master-average-score-ranking.svg)
+```bash
+python3 ./scripts/generate-current-model-guide.py
+```
 
-![Quality vs speed](./output/charts/benchmark-20260409/master-quality-vs-speed.svg)
+Inputs:
 
-![Latency by task](./output/charts/benchmark-20260409/master-latency-by-task.svg)
+- [config/model-guide-metadata.json](./config/model-guide-metadata.json)
+- [output/leaderboard/overall-leaderboard.json](./output/leaderboard/overall-leaderboard.json)
+- the local Hugging Face cache
+- the local Ollama manifest directory
+- `apfel --model-info`
 
-![Guardrail diagnostics](./output/charts/benchmark-20260409/master-guardrails.svg)
+Generated outputs:
 
-![Gemma runtime status](./output/charts/benchmark-20260409/master-gemma-runtime-status.svg)
+- [output/inventory/current-models.json](./output/inventory/current-models.json)
+- [site/src/current-models.json](./site/src/current-models.json)
 
-## Practical hardware takeaway
+After installing or removing a model, rerun the generator and review the resulting inventory before publishing the site.
 
-This lab was tuned on a `48 GB` Apple Silicon machine, but the currently reliable Docker Ollama runtime only exposes about `15.7 GiB` to the model runner. That changes the real model envelope:
+## Benchmark method
 
-- `9B` to `14B` models are the sweet spot
-- `mistral-small:22b` is the heaviest model proven cleanly working end-to-end
-- `30B+` models are still documented as constrained or failing under the current runtime ceiling
+The comparable suite tests:
 
-That honesty matters. A useful local AI lab should explain the limits as clearly as the wins.
+- shell scripting
+- structured JSON changes
+- classification
+- concise summaries
+- text transformation
+- translation
+- refusal when information is unknown
+- exact harmless instruction following
 
-## Model roles
+The work-fit score is:
 
-| Role | Alias | Base model | Best use |
-|------|-------|------------|----------|
-| Fast helper | `local-helper-fast` | `qwen3.5:9b` | Context compression, clustering, cheap first-pass digestion |
-| Safe helper | `local-helper-safe` | `phi4` | Conservative summaries, checklists, lower-loss extraction |
-| Code helper | `local-coder-helper` | `qwen2.5-coder:14b` | API surfaces, diffs, code-aware distillation |
-| Heavy helper | `local-helper-heavy` | `mistral-small:22b` | Harder local synthesis and stronger general chat |
-| Reasoning fallback | `local-reasoner-clean` | `gpt-oss:20b` | Optional heavier reasoning-style fallback |
-| Synthesis fallback | `local-thinker-clean` | `qwen2.5:14b` | Broader local synthesis without visible reasoning by default |
+- 80% weighted task quality
+- 15% response-time usefulness
+- 5% successful invocations
+
+MLX text speed comes from three trials using a 512-token prompt and a 128-token completion. Vision-model speed is measured from end-to-end capability requests, so the two speed types should not be compared directly.
+
+Run or regenerate the benchmark data with:
+
+```bash
+python3 ./scripts/benchmark-recommended-models.py --models qwen3_coder_30b_a3b_mlx4
+python3 ./scripts/generate-overall-leaderboard.py
+./scripts/generate-benchmark-charts.py
+```
 
 ## Quick start
 
-### 1. Start the runtime
+### Ollama and Open WebUI
 
 ```bash
 ./scripts/start-ollama.sh
 ./scripts/start-openwebui.sh
-```
-
-### 2. Create role-tuned helper aliases
-
-```bash
 ./scripts/setup-agent-offload-models.sh
 ```
 
-### 3. Create tuned Open WebUI role presets
+Run a model directly:
 
 ```bash
-OPENWEBUI_PASSWORD='<your-openwebui-password>' ./scripts/setup-openwebui-role-models.sh
+ollama run qwen3.5:9b
 ```
 
-### 4. Check status
+### Direct MLX
+
+```bash
+mlx_lm.generate \
+  --model mlx-community/Qwen3.6-35B-A3B-4bit \
+  --prompt "Summarise this repository"
+```
+
+### Apple system model
+
+```bash
+apfel --model-info
+apfel "Summarise this text"
+```
+
+## Tuned Ollama names
+
+These names reuse existing weights with deterministic settings and a narrower purpose:
+
+| Alias | Base model | Intended use |
+|---|---|---|
+| `local-helper-fast` | `qwen3.5:9b` | Fast context compression and classification |
+| `local-coder-helper` | `qwen2.5-coder:14b` | Diffs, APIs, and code-aware extraction |
+| `local-thinker-clean` | `qwen2.5:14b` | Broader synthesis without visible reasoning by default |
+| `local-helper-safe` | `phi4:latest` | Conservative summaries and checklists |
+| `local-helper-heavy` | `mistral-small:22b` | Heavier general synthesis |
+| `local-reasoner-clean` | `gpt-oss:20b` | Cleaner reasoning-style output |
+| `llama3.2:3b-cpu` | `llama3.2:3b` | CPU fallback testing |
+
+## Private Open WebUI access
+
+Check the active local addresses with:
 
 ```bash
 ./scripts/status.sh
 ```
 
-### 5. Enable private remote access on your own devices
+The normal entry points are:
+
+- OrbStack: `http://open-webui-lab.orb.local`
+- localhost: `http://localhost:3001`
+- private remote access: enable with `./scripts/enable-tailscale-openwebui.sh`
+
+The remote link is intended for devices signed into the same private Tailscale network. Disable it with:
 
 ```bash
-./scripts/enable-tailscale-openwebui.sh
-```
-
-This does not publish Open WebUI to the open internet. It exposes the UI over Tailscale Serve so only devices signed into the same tailnet can reach it. Use this when you want your phone, tablet, or another laptop to reach the lab safely.
-
-## Day-to-day commands
-
-### Core services
-
-```bash
-./scripts/start-ollama.sh
-./scripts/stop-ollama.sh
-./scripts/start-openwebui.sh
-./scripts/stop-openwebui.sh
-./scripts/enable-tailscale-openwebui.sh
 ./scripts/disable-tailscale-openwebui.sh
 ```
 
-### Model setup and testing
-
-```bash
-./scripts/setup-agent-offload-models.sh
-./scripts/test-models.sh
-./scripts/benchmark-model.sh mistral-small:22b
-./scripts/generate-benchmark-charts.py
-```
-
-### Agent offload workflow
-
-```bash
-agent-offload-sync
-./scripts/test-agent-offload.sh
-agent-offload audit-codex
-```
-
-### Raw Ollama
-
-```bash
-ollama list
-ollama run mistral-small:22b
-ollama show qwen2.5-coder:14b
-```
-
-## How the architecture works
-
-This repo recommends a two-tier system rather than a full local-agent swap:
-
-1. Retrieve narrowly with tools like `rg`, `probe`, `qmd`, and `context7`.
-2. Offload repetitive context digestion to a tuned local helper role.
-3. Keep final judgment, edits, and planning in the stronger main coding agent.
-4. Validate outcomes with real acceptance proof.
-
-That architecture is documented in [agent-offload-setup-recommendation.md](./agent-offload-setup-recommendation.md).
-
-## Repo layout
+## Repository map
 
 | Path | Purpose |
-|------|---------|
-| `scripts/` | Service control, model setup, tuning, and test scripts |
-| `modelfiles/` | Deterministic helper model wrappers |
-| `config/agent-offload.toml` | Shared broker configuration |
-| `broker/agent_offload.py` | Role-aware offload broker |
-| `output/charts/` | Generated benchmark comparison charts |
-| `output/acceptance/` | Human-readable proof notes |
-| `output/playwright/` | Browser-level acceptance artifacts |
-| `site/` | Public landing page for the lab |
+|---|---|
+| `config/model-guide-metadata.json` | Curated capabilities, contexts, cautions, and source links |
+| `config/recommended-mlx-models.json` | Revision-pinned benchmark targets, including historical builds |
+| `scripts/generate-current-model-guide.py` | Detect installed builds and generate the public guide data |
+| `scripts/benchmark-recommended-models.py` | Install and benchmark exact MLX revisions |
+| `scripts/generate-overall-leaderboard.py` | Merge all benchmark evidence into the historical leaderboard |
+| `output/inventory/` | Current installed-model snapshot |
+| `output/benchmarks/` | Raw benchmark results and runtime logs |
+| `output/leaderboard/` | Historical JSON and CSV leaderboard |
+| `output/acceptance/` | Human-readable proof summaries |
+| `output/playwright/` | Browser screenshots and proof artifacts |
+| `modelfiles/` | Tuned Ollama aliases |
+| `site/` | React/Vite public guide |
 
-## Current recommendation
+## Validate and deploy
 
-Use this lab for:
+```bash
+cd site
+pnpm install --frozen-lockfile
+pnpm build
+pnpm test:smoke
+```
 
-- local AI experimentation that is grounded in real runtime evidence
-- role-based helper design for coding agents
-- Apple Silicon model selection without guesswork
-- Open WebUI setups that need actual browser proof
-
-## Safe remote access
-
-If you want access away from the Mac without broadly exposing your laptop to the public internet, the recommended path is Tailscale Serve.
-
-- enable it with `./scripts/enable-tailscale-openwebui.sh`
-- inspect the current private URL with `./scripts/status.sh`
-- disable it with `./scripts/disable-tailscale-openwebui.sh`
-
-This gives you HTTPS access on devices signed into the same Tailscale tailnet. That is a much safer default than putting Open WebUI directly on the public internet and relying only on the app login screen.
-
-Do not use this repo as if it were a claim that all large models fit comfortably on this hardware. The value here is that the repo distinguishes clean wins from constrained experiments.
-
-## Security and publishing note
-
-This repo is meant to be publishable. Temporary auth state, local browser cookies, transient WebUI database files, and temp caches are intentionally excluded from version control.
+The Vercel project is linked from `site/.vercel/project.json`. Production deployment is performed only after the inventory, build, browser tests, screenshots, and repository checks pass.

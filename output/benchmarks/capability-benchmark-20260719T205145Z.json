@@ -1,0 +1,510 @@
+{
+  "schema_version": 2,
+  "benchmark_protocol": {
+    "name": "mlx-capability-v1",
+    "seed": 42,
+    "max_tokens": 256,
+    "performance_prompt_tokens": 512,
+    "performance_generation_tokens": 128,
+    "performance_trials": 3
+  },
+  "generated_at": "2026-07-19T20:51:45+00:00",
+  "environment": {
+    "machine": "arm64",
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "macos_version": "26.5.1",
+    "python": "3.14.3",
+    "mlx_lm_version": "0.31.3",
+    "seed": 42,
+    "hardware": "Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores"
+  },
+  "models": [
+    {
+      "slug": "gpt_oss_20b_mlx4",
+      "label": "gpt-oss-20b (MLX MXFP4/Q4)",
+      "kind": "mlx",
+      "model_name": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+      "revision": "f356f2747216d7e98fee755df25987459fc19089",
+      "download_size_gb": 11.2,
+      "base_model": "openai/gpt-oss-20b",
+      "note": "Reasoning-heavy fallback and comparison baseline"
+    }
+  ],
+  "tasks": [
+    {
+      "slug": "shell_scripting",
+      "label": "Shell scripting",
+      "category": "claimed"
+    },
+    {
+      "slug": "text_transformation",
+      "label": "Text transformation",
+      "category": "claimed"
+    },
+    {
+      "slug": "classification",
+      "label": "Classification",
+      "category": "claimed"
+    },
+    {
+      "slug": "short_summary",
+      "label": "Short summaries",
+      "category": "claimed"
+    },
+    {
+      "slug": "json_restructuring",
+      "label": "JSON restructuring",
+      "category": "claimed"
+    },
+    {
+      "slug": "translation",
+      "label": "Translation",
+      "category": "claimed"
+    },
+    {
+      "slug": "unknown_refusal",
+      "label": "Unknown refusal",
+      "category": "diagnostic"
+    },
+    {
+      "slug": "harmless_exactness",
+      "label": "Harmless exactness",
+      "category": "diagnostic"
+    }
+  ],
+  "results": {
+    "gpt_oss_20b_mlx4": {
+      "shell_scripting": {
+        "content": "<|channel|>analysis<|message|>We need to produce a POSIX shell pipeline that reads from stdin and prints top 3 IP addresses with counts sorted descending. Input lines: first field is IP. We need to count occurrences. Use awk to extract first field, then sort, then uniq -c, then sort -nr, then head -n 3. Format \"<count> <ip>\" lines. So pipeline: awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3. But we need to output \"<count> <ip>\" exactly. uniq -c prints count then space then line. That matches. So final pipeline: awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3. That prints count and IP. That is correct. Ensure no extra spaces. uniq -c prints count then space then line. Good. Provide pipeline.<|end|><|start|>assistant<|channel|>final<|message|>awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3",
+        "elapsed_ms": 4672.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-820d5017-f6ad-4cad-9ca3-9e70e3575ca6",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494308,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>We need to produce a POSIX shell pipeline that reads from stdin and prints top 3 IP addresses with counts sorted descending. Input lines: first field is IP. We need to count occurrences. Use awk to extract first field, then sort, then uniq -c, then sort -nr, then head -n 3. Format \"<count> <ip>\" lines. So pipeline: awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3. But we need to output \"<count> <ip>\" exactly. uniq -c prints count then space then line. That matches. So final pipeline: awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3. That prints count and IP. That is correct. Ensure no extra spaces. uniq -c prints count then space then line. Good. Provide pipeline.<|end|><|start|>assistant<|channel|>final<|message|>awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 540,
+            "completion_tokens": 216,
+            "total_tokens": 756,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 540,
+          "completion_tokens": 216,
+          "total_tokens": 756,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 46.228,
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Command missing or unsafe to execute",
+          "details": {
+            "command": "<|channel|>analysis<|message|>We need to produce a POSIX shell pipeline that reads from stdin and prints top 3 IP addresses with counts sorted descending. Input lines: first field is IP. We need to count occurrences. Use awk to extract first field, then sort, then uniq -c, then sort -nr, then head -n 3. Format \"<count> <ip>\" lines. So pipeline: awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3. But we need to output \"<count> <ip>\" exactly. uniq -c prints count then space then line. That matches. So final pipeline: awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3. That prints count and IP. That is correct. Ensure no extra spaces. uniq -c prints count then space then line. Good. Provide pipeline.<|end|><|start|>assistant<|channel|>final<|message|>awk '{print $1}' | sort | uniq -c | sort -nr | head -n 3"
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "<|channel|>analysis<|message|>We need to rewrite the release note as exactly three bullet points. Each bullet must be 5 to 9 words. Must preserve the version number 2.4.1. Must mention the login loop fix, mention the CSV export repair, mention that reports load faster. So we need three bullet points, each 5-9 words. Must mention all three items across bullets? The instructions: \"Mention the login loop fix. Mention the CSV export repair. Mention that reports load faster.\" So each bullet must mention? Or at least mention each? The instruction says mention each. So each bullet must mention each? Or at least mention each somewhere across bullets. But we have only three bullets. We need to mention all three items across bullets. We can mention each in separate bullet. But we need to preserve version number 2.4.1. So each bullet must mention that? Or at least one bullet mention version number. But we need to preserve the version number. So we can mention \"Version 2.4.1\" in one bullet. But we need to mention login loop fix, CSV export repair, reports load faster. We can mention all three in one bullet? But we have three bullets. We can do:\n\n- Version",
+        "elapsed_ms": 3957.9,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-a3162259-3dc6-4dbe-8dee-f82196454a23",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494313,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "length",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>We need to rewrite the release note as exactly three bullet points. Each bullet must be 5 to 9 words. Must preserve the version number 2.4.1. Must mention the login loop fix, mention the CSV export repair, mention that reports load faster. So we need three bullet points, each 5-9 words. Must mention all three items across bullets? The instructions: \"Mention the login loop fix. Mention the CSV export repair. Mention that reports load faster.\" So each bullet must mention? Or at least mention each? The instruction says mention each. So each bullet must mention each? Or at least mention each somewhere across bullets. But we have only three bullets. We need to mention all three items across bullets. We can mention each in separate bullet. But we need to preserve version number 2.4.1. So each bullet must mention that? Or at least one bullet mention version number. But we need to preserve the version number. So we can mention \"Version 2.4.1\" in one bullet. But we need to mention login loop fix, CSV export repair, reports load faster. We can mention all three in one bullet? But we have three bullets. We can do:\n\n- Version "
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 179,
+            "completion_tokens": 256,
+            "total_tokens": 435,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 179,
+          "completion_tokens": 256,
+          "total_tokens": 435,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 64.681,
+        "evaluation": {
+          "score": 0.667,
+          "summary": "4/6 rubric checks passed",
+          "details": {
+            "three_bullets": false,
+            "version": true,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": false
+          }
+        }
+      },
+      "classification": {
+        "content": "<|channel|>analysis<|message|>We need to classify each support ticket into one label from set [\"billing\",\"bug\",\"feature\",\"account\"].\n\nWe have 8 tickets: T1 to T8.\n\nWe need to output JSON mapping ticket IDs to labels.\n\nWe need to analyze each ticket:\n\nT1: \"My invoice charged VAT twice this month.\" This is billing issue: duplicate VAT. So label \"billing\".\n\nT2: \"The mobile app crashes when I tap export.\" This is bug. So label \"bug\".\n\nT3: \"Please add dark mode for the analytics dashboard.\" This is feature request. So label \"feature\".\n\nT4: \"I can't reset my password because the email never arrives.\" This is account issue: password reset. So label \"account\".\n\nT5: \"Can you support SAML login for contractors?\" This is account? Actually SAML login is account management. So label \"account\".\n\nT6: \"Checkout shows a blank screen after I apply a coupon.\" This is bug? Actually checkout blank screen after applying coupon. Could be bug. So label \"bug\".\n\nT7: \"Where can I download receipts for the last quarter?\" This is billing? Actually receipts for last quarter: billing. So label \"billing\".\n\nT8: \"Please rename",
+        "elapsed_ms": 3163.1,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-882454e0-6579-47e6-a693-af1c4b721c05",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494317,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "length",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>We need to classify each support ticket into one label from set [\"billing\",\"bug\",\"feature\",\"account\"].\n\nWe have 8 tickets: T1 to T8.\n\nWe need to output JSON mapping ticket IDs to labels.\n\nWe need to analyze each ticket:\n\nT1: \"My invoice charged VAT twice this month.\" This is billing issue: duplicate VAT. So label \"billing\".\n\nT2: \"The mobile app crashes when I tap export.\" This is bug. So label \"bug\".\n\nT3: \"Please add dark mode for the analytics dashboard.\" This is feature request. So label \"feature\".\n\nT4: \"I can't reset my password because the email never arrives.\" This is account issue: password reset. So label \"account\".\n\nT5: \"Can you support SAML login for contractors?\" This is account? Actually SAML login is account management. So label \"account\".\n\nT6: \"Checkout shows a blank screen after I apply a coupon.\" This is bug? Actually checkout blank screen after applying coupon. Could be bug. So label \"bug\".\n\nT7: \"Where can I download receipts for the last quarter?\" This is billing? Actually receipts for last quarter: billing. So label \"billing\".\n\nT8: \"Please rename"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 208,
+            "completion_tokens": 256,
+            "total_tokens": 464,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 208,
+          "completion_tokens": 256,
+          "total_tokens": 464,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 80.933,
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Response JSON was not an object",
+          "details": {
+            "parsed_type": "list"
+          }
+        }
+      },
+      "short_summary": {
+        "content": "<|channel|>analysis<|message|>We need to produce a single sentence of 18 to 30 words summarizing the incident note. Must include outage duration, root cause, customer impact, mitigation. Must be exactly one sentence. Must be 18-30 words inclusive. Let's craft.\n\nWe have: \"Checkout failures lasted 47 minutes due to expired Redis TLS certificate, causing ~18% checkout failures for returning customers; resolved by rolling back certificate, flushing stale connections, and restarting affected payment workers.\"\n\nCount words: Let's count.\n\n\"Checkout\" (1) \"failures\" (2) \"lasted\" (3) \"47\" (4) \"minutes\" (5) \"due\" (6) \"to\" (7) \"expired\" (8) \"Redis\" (9) \"TLS\" (10) \"certificate,\" (11) \"causing\" (12) \"\u223c18%\" (13) \"checkout\" (14) \"failures\" (15) \"for\" (16) \"returning\" (17) \"customers;\" (18) \"resolved\" (19) \"by\" (20) \"rolling\" (21) \"back\" (22) \"certificate,\" (23) \"flushing\" (24) \"",
+        "elapsed_ms": 2962.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-840945da-8c66-4e92-b387-bc0ffaebf351",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494320,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "length",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>We need to produce a single sentence of 18 to 30 words summarizing the incident note. Must include outage duration, root cause, customer impact, mitigation. Must be exactly one sentence. Must be 18-30 words inclusive. Let's craft.\n\nWe have: \"Checkout failures lasted 47 minutes due to expired Redis TLS certificate, causing ~18% checkout failures for returning customers; resolved by rolling back certificate, flushing stale connections, and restarting affected payment workers.\"\n\nCount words: Let's count.\n\n\"Checkout\" (1) \"failures\" (2) \"lasted\" (3) \"47\" (4) \"minutes\" (5) \"due\" (6) \"to\" (7) \"expired\" (8) \"Redis\" (9) \"TLS\" (10) \"certificate,\" (11) \"causing\" (12) \"\u223c18%\" (13) \"checkout\" (14) \"failures\" (15) \"for\" (16) \"returning\" (17) \"customers;\" (18) \"resolved\" (19) \"by\" (20) \"rolling\" (21) \"back\" (22) \"certificate,\" (23) \"flushing\" (24) \""
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 221,
+            "completion_tokens": 256,
+            "total_tokens": 477,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 221,
+          "completion_tokens": 256,
+          "total_tokens": 477,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 86.414,
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 summary checks passed",
+          "details": {
+            "word_range": false,
+            "duration": true,
+            "cause": true,
+            "impact": true,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "<|channel|>analysis<|message|>We need to transform input JSON array of objects into output structure. Input: list of 5 orders. We need to compute per region: region name, customer_count unique customers in that region, high_priority_ids list of ids with priority high sorted alphabetically, total_amount sum of amounts in that region. Then grand_total sum of all amounts.\n\nLet's parse:\n\nOrders:\n\n1. id o-100 region eu customer acme amount 120 priority high\n2. id o-101 region us customer beta amount 75 priority low\n3. id o-102 region eu customer acme amount 30 priority high\n4. id o-103 region us customer nova amount 55 priority high\n5. id o-104 region apac customer zen amount 40 priority low\n\nCompute per region:\n\nRegions: eu, us, apac.\n\nFor eu: orders 1 and 3. Customer acme appears twice. Unique customers: acme only. So customer_count=1. high_priority_ids: both have priority high. ids: o-100, o-102. Sorted alphabetically: \"o-100\", \"o-102\". total_amount: 120+30=150.\n\nFor us: orders 2 and 4. Customers",
+        "elapsed_ms": 2959.1,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-8fd8f74c-d897-4be6-b21a-323e6cebcf15",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494323,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "length",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>We need to transform input JSON array of objects into output structure. Input: list of 5 orders. We need to compute per region: region name, customer_count unique customers in that region, high_priority_ids list of ids with priority high sorted alphabetically, total_amount sum of amounts in that region. Then grand_total sum of all amounts.\n\nLet's parse:\n\nOrders:\n\n1. id o-100 region eu customer acme amount 120 priority high\n2. id o-101 region us customer beta amount 75 priority low\n3. id o-102 region eu customer acme amount 30 priority high\n4. id o-103 region us customer nova amount 55 priority high\n5. id o-104 region apac customer zen amount 40 priority low\n\nCompute per region:\n\nRegions: eu, us, apac.\n\nFor eu: orders 1 and 3. Customer acme appears twice. Unique customers: acme only. So customer_count=1. high_priority_ids: both have priority high. ids: o-100, o-102. Sorted alphabetically: \"o-100\", \"o-102\". total_amount: 120+30=150.\n\nFor us: orders 2 and 4. Customers"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 298,
+            "completion_tokens": 256,
+            "total_tokens": 554,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 298,
+          "completion_tokens": 256,
+          "total_tokens": 554,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 86.513,
+        "evaluation": {
+          "score": 0.0,
+          "summary": "No valid JSON found",
+          "details": {
+            "error": "No valid JSON found in model response"
+          }
+        }
+      },
+      "translation": {
+        "content": "<|channel|>analysis<|message|>We need to translate each phrase to German. Provide JSON object mapping same IDs to German strings. Must be JSON only. So output:\n\n{\n  \"t1\": \"Gute Nacht\"?? Wait \"Good night\" in German: \"Gute Nacht\" is wrong. Should be \"Gute Nacht\" maybe \"Gute Nacht\" but \"Gute\" is wrong. Actually \"Gute\" is not correct. \"Gute\" is not a word. \"Gute\" is not correct. The phrase \"Good night\" maybe \"Gute Nacht\" but \"Gute\" is not correct. The correct translation: \"Gute Nacht\" maybe \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation:",
+        "elapsed_ms": 2884.6,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-65297918-9389-40a6-82bc-6bcd648c61e2",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494326,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "length",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>We need to translate each phrase to German. Provide JSON object mapping same IDs to German strings. Must be JSON only. So output:\n\n{\n  \"t1\": \"Gute Nacht\"?? Wait \"Good night\" in German: \"Gute Nacht\" is wrong. Should be \"Gute Nacht\" maybe \"Gute Nacht\" but \"Gute\" is wrong. Actually \"Gute\" is not correct. \"Gute\" is not a word. \"Gute\" is not correct. The phrase \"Good night\" maybe \"Gute Nacht\" but \"Gute\" is not correct. The correct translation: \"Gute Nacht\" maybe \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation: \"Gute\" is not correct. The correct translation:"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 141,
+            "completion_tokens": 256,
+            "total_tokens": 397,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 141,
+          "completion_tokens": 256,
+          "total_tokens": 397,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 88.747,
+        "evaluation": {
+          "score": 0.0,
+          "summary": "No valid JSON found",
+          "details": {
+            "error": "No valid JSON found in model response"
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "<|channel|>analysis<|message|>The user asks: \"Without using the internet: what changed in version 7.4.1 of the package 'quartzpickle'? If you cannot know, say so plainly in one sentence and do not invent details.\"\n\nWe need to answer. The user wants to know what changed in version 7.4.1 of the package \"quartzpickle\". We need to check if we have knowledge about that package. I don't think we have knowledge about \"quartzpickle\". It's likely a fictional or obscure package. We don't have knowledge. We cannot provide details. We must say we don't know. The user says: \"If you cannot know, say so plainly in one sentence and do not invent details.\" So we must say we don't know. We must not provide invented details. So we should respond: \"I don't have information about that package.\" Or \"I don't know what changed in that version.\" The user specifically says: \"If you cannot know, say so plainly in one sentence and do not invent details.\" So we must say: \"I don't know what changed in that version.\" That is the answer.<|end|><|start|>assistant<|channel|>final<|message|>I\u2019m sorry, but I don\u2019t have any information about the changes in version\u202f7.4",
+        "elapsed_ms": 2861.0,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-4cf5647d-b2d1-4927-af03-774f939bbc1a",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494329,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "length",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>The user asks: \"Without using the internet: what changed in version 7.4.1 of the package 'quartzpickle'? If you cannot know, say so plainly in one sentence and do not invent details.\"\n\nWe need to answer. The user wants to know what changed in version 7.4.1 of the package \"quartzpickle\". We need to check if we have knowledge about that package. I don't think we have knowledge about \"quartzpickle\". It's likely a fictional or obscure package. We don't have knowledge. We cannot provide details. We must say we don't know. The user says: \"If you cannot know, say so plainly in one sentence and do not invent details.\" So we must say we don't know. We must not provide invented details. So we should respond: \"I don't have information about that package.\" Or \"I don't know what changed in that version.\" The user specifically says: \"If you cannot know, say so plainly in one sentence and do not invent details.\" So we must say: \"I don't know what changed in that version.\" That is the answer.<|end|><|start|>assistant<|channel|>final<|message|>I\u2019m sorry, but I don\u2019t have any information about the changes in version\u202f7.4"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 109,
+            "completion_tokens": 256,
+            "total_tokens": 365,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 109,
+          "completion_tokens": 256,
+          "total_tokens": 365,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 89.479,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Refused cleanly without inventing details",
+          "details": {
+            "uncertain": true,
+            "fabricated_markers_present": false
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "<|channel|>analysis<|message|>The user says: \"Respond with exactly OK and nothing else.\" So I should respond with \"OK\". No other text.<|end|><|start|>assistant<|channel|>final<|message|>OK",
+        "elapsed_ms": 609.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-ba897621-683c-4479-9810-496752bcf763",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.1-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "mlx-community/gpt-oss-20b-MXFP4-Q4",
+          "created": 1784494332,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "<|channel|>analysis<|message|>The user says: \"Respond with exactly OK and nothing else.\" So I should respond with \"OK\". No other text.<|end|><|start|>assistant<|channel|>final<|message|>OK"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 75,
+            "completion_tokens": 36,
+            "total_tokens": 111,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 75,
+          "completion_tokens": 36,
+          "total_tokens": 111,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 59.065,
+        "evaluation": {
+          "score": 0.0,
+          "summary": "Did not follow exact harmless output request",
+          "details": {
+            "actual": "<|channel|>analysis<|message|>The user says: \"Respond with exactly OK and nothing else.\" So I should respond with \"OK\". No other text.<|end|><|start|>assistant<|channel|>final<|message|>OK"
+          }
+        }
+      }
+    }
+  },
+  "performance": {
+    "gpt_oss_20b_mlx4": {
+      "ok": true,
+      "prompt_tokens_per_second": 1334.762,
+      "generation_tokens_per_second": 69.549,
+      "peak_memory_gb": 11.714,
+      "trials": [
+        {
+          "trial": 1,
+          "prompt_tokens_per_second": 1329.842,
+          "generation_tokens_per_second": 71.653,
+          "peak_memory_gb": 11.714,
+          "total_time_seconds": 2.282
+        },
+        {
+          "trial": 2,
+          "prompt_tokens_per_second": 1325.792,
+          "generation_tokens_per_second": 73.831,
+          "peak_memory_gb": 11.714,
+          "total_time_seconds": 2.243
+        },
+        {
+          "trial": 3,
+          "prompt_tokens_per_second": 1348.65,
+          "generation_tokens_per_second": 63.163,
+          "peak_memory_gb": 11.715,
+          "total_time_seconds": 2.51
+        }
+      ],
+      "raw_output": "Running warmup..\nTiming with prompt_tokens=512, generation_tokens=128, batch_size=1.\nTrial 1:  prompt_tps=1329.842, generation_tps=71.653, peak_memory=11.714, total_time=2.282\nTrial 2:  prompt_tps=1325.792, generation_tps=73.831, peak_memory=11.714, total_time=2.243\nTrial 3:  prompt_tps=1348.650, generation_tps=63.163, peak_memory=11.715, total_time=2.510\nAverages: prompt_tps=1334.762, generation_tps=69.549, peak_memory=11.714",
+      "returncode": 0,
+      "prompt_tokens": 512,
+      "generation_tokens": 128,
+      "trial_count": 3
+    }
+  },
+  "runtime_status": {
+    "gpt_oss_20b_mlx4": {
+      "status": "passed",
+      "startup_ms": 1785.3,
+      "snapshot_path": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--gpt-oss-20b-MXFP4-Q4/snapshots/f356f2747216d7e98fee755df25987459fc19089",
+      "log_path": "output/benchmarks/logs/20260719T205145Z-gpt_oss_20b_mlx4.log"
+    }
+  },
+  "json_path": "/Users/rajeev/Code/tools/local-llm-lab/output/benchmarks/capability-benchmark-20260719T205145Z.json"
+}
