@@ -13,13 +13,14 @@ test("the guide presents and filters the current installed model inventory", asy
   await expect(page.locator("main h1")).toContainText(
     "Every local model on this Mac, in one guide.",
   );
-  await expect(page.getByText("23", { exact: true }).first()).toBeVisible();
+  await expect(page.getByText("24", { exact: true }).first()).toBeVisible();
   await expect(page.getByRole("heading", { name: "Qwen3 Coder 30B A3B" }).first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Qwen3.8 27B" }).first()).toBeVisible();
   await expect(page.getByText("98.3", { exact: true }).first()).toBeVisible();
   await expect(page.getByText("Text", { exact: true }).first()).toBeVisible();
 
   await page.getByRole("button", { name: "Image input" }).click();
-  await expect(page.getByText(/of 23 installed builds/)).toBeVisible();
+  await expect(page.getByText(/of 24 installed builds/)).toBeVisible();
   await expect(
     page.locator("#inventory").getByRole("heading", { name: "Qwen3.6 35B A3B" }),
   ).toBeVisible();
@@ -33,7 +34,7 @@ test("the guide presents and filters the current installed model inventory", asy
   await expect(
     page.locator("#inventory").getByRole("heading", { name: "Qwen3.5 9B", exact: true }),
   ).toBeVisible();
-  await expect(page.getByText("1 of 23 installed builds")).toBeVisible();
+  await expect(page.getByText("1 of 24 installed builds")).toBeVisible();
 
   await page.getByText("Details and source").click();
   await expect(page.getByText(/aliases: local-helper-fast/)).toBeVisible();
@@ -52,7 +53,7 @@ test("the guide presents and filters the current installed model inventory", asy
 
   await page.getByPlaceholder("Model, task, capability, or alias").fill("");
   await page.getByRole("button", { name: "All runtimes" }).click();
-  await expect(page.getByText("23 of 23 installed builds")).toBeVisible();
+  await expect(page.getByText("24 of 24 installed builds")).toBeVisible();
   await page.locator(".hero").screenshot({
     path: testInfo.outputPath("hero.png"),
   });

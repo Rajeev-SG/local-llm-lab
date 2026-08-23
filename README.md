@@ -28,14 +28,14 @@ The public site reads a generated inventory snapshot rather than presenting ever
 | Item | Current value |
 |---|---|
 | Hardware | Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores |
-| Installed exact builds | 23 |
-| Fully comparable installed builds | 13 |
+| Installed exact builds | 24 |
+| Fully comparable installed builds | 14 |
 | Tuned aliases | 7 |
-| Local model data represented | 304.7 GB in decimal file sizes |
-| Current free disk space after cleanup | About 285 GiB |
+| Local model data represented | 320.8 GB in decimal file sizes |
+| Current free disk space | About 187 GiB |
 | Available runtimes | Direct MLX, Ollama, MLX audio/vision, and Apple Foundation Models through `apfel` |
 
-The inventory was refreshed on 30 July 2026 from the live Hugging Face cache, Ollama manifests, and `apfel --model-info`.
+The inventory was refreshed on 23 August 2026 from the live Hugging Face cache, Ollama manifests, and `apfel --model-info`.
 
 ## Recommended models
 
@@ -44,7 +44,7 @@ The inventory was refreshed on 30 July 2026 from the live Hugging Face cache, Ol
 | Coding default | `lmstudio-community/Qwen3-Coder-30B-A3B-Instruct-MLX-4bit` | Local rank 1; 98.3 work-fit, 98.8 task quality, and about 98.8 generated tokens per second |
 | Broad text and image work | `mlx-community/Qwen3.6-35B-A3B-4bit` | Local rank 2; almost tied on quality, with image input and very fast sparse generation |
 | Small high-quality helper | `lmstudio-community/gemma-4-E4B-it-MLX-4bit` | Local rank 3 from a 6.9 GB model file |
-| Careful dense comparison | `mlx-community/Qwen3.6-27B-4bit` | High task quality when slower generation is acceptable |
+| Strongest current dense Qwen | `mlx-community/Qwen3.8-27B-4bit` | Local rank 5; tied the leaders at 98.8 task quality while using 16.4 GB peak memory, but generated only 17.7 tokens per second |
 | Very fast comparison | `lmstudio-community/NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit` | About 103 generated tokens per second, but less reliable than the leading Qwen builds |
 | Open WebUI helper | `qwen3.5:9b` through Ollama | The strongest convenient Ollama helper in the comparable local suite |
 | Speech transcription | `mlx-community/whisper-large-v3-turbo` | Local audio transcription and speech-to-English translation |

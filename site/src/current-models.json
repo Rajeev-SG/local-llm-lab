@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-30T10:50:23+00:00",
+  "generated_at": "2026-08-23T20:56:17+00:00",
   "machine": "Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores",
   "summary": {
-    "installed_builds": 23,
-    "ranked_installed_builds": 13,
+    "installed_builds": 24,
+    "ranked_installed_builds": 14,
     "aliases": 7,
     "runtimes": [
       "apfel",
@@ -13,7 +13,7 @@
       "mlx_vlm",
       "ollama"
     ],
-    "installed_storage_gb": 304.7,
+    "installed_storage_gb": 320.8,
     "top_model": "Qwen3 Coder 30B A3B"
   },
   "installed_models": [
@@ -44,12 +44,12 @@
         "status": "passed",
         "work_fit_score": 98.3,
         "quality_score": 98.8,
-        "generation_tokens_per_second": 98.846,
+        "generation_tokens_per_second": 96.987,
         "generation_speed_basis": "isolated MLX trial",
         "peak_memory_gb": 17.755,
         "successful_tasks": 8,
         "task_count": 8,
-        "artifact": "output/benchmarks/capability-benchmark-20260719T215751Z.json"
+        "artifact": "output/benchmarks/capability-benchmark-20260823T202232Z.json"
       }
     },
     {
@@ -79,14 +79,14 @@
       "benchmark": {
         "rank": 2,
         "status": "passed",
-        "work_fit_score": 98.2,
+        "work_fit_score": 98.3,
         "quality_score": 98.8,
-        "generation_tokens_per_second": 93.965,
+        "generation_tokens_per_second": 99.276,
         "generation_speed_basis": "isolated MLX trial",
         "peak_memory_gb": 20.176,
         "successful_tasks": 8,
         "task_count": 8,
-        "artifact": "output/benchmarks/capability-benchmark-20260719T203015Z.json"
+        "artifact": "output/benchmarks/capability-benchmark-20260823T202232Z.json"
       }
     },
     {
@@ -162,6 +162,44 @@
       }
     },
     {
+      "build_id": "mlx:mlx-community/Qwen3.8-27B-4bit",
+      "label": "Qwen3.8 27B",
+      "runtime": "mlx",
+      "model_name": "mlx-community/Qwen3.8-27B-4bit",
+      "cache_repo": "mlx-community/Qwen3.8-27B-4bit",
+      "size_gb": 16.1,
+      "parameters": "27B dense",
+      "quantization": "4-bit MLX",
+      "context_tokens": 262144,
+      "modalities": [
+        "Text",
+        "Image"
+      ],
+      "capabilities": [
+        "Vision",
+        "Code",
+        "Tools",
+        "Thinking",
+        "Long context"
+      ],
+      "best_for": "High-quality coding, technical synthesis, tool use, and multimodal work",
+      "caution": "The dense model is expected to generate more slowly than the sparse Qwen leaders; use measured local results to choose the default.",
+      "source_url": "https://huggingface.co/mlx-community/Qwen3.8-27B-4bit",
+      "installed": true,
+      "benchmark": {
+        "rank": 5,
+        "status": "passed",
+        "work_fit_score": 96.3,
+        "quality_score": 98.8,
+        "generation_tokens_per_second": 17.741,
+        "generation_speed_basis": "isolated MLX trial",
+        "peak_memory_gb": 16.389,
+        "successful_tasks": 8,
+        "task_count": 8,
+        "artifact": "output/benchmarks/capability-benchmark-20260823T202232Z.json"
+      }
+    },
+    {
       "build_id": "mlx:mlx-community/Qwen3.6-27B-4bit",
       "label": "Qwen3.6 27B",
       "runtime": "mlx",
@@ -186,7 +224,7 @@
       "source_url": "https://huggingface.co/mlx-community/Qwen3.6-27B-4bit",
       "installed": true,
       "benchmark": {
-        "rank": 5,
+        "rank": 6,
         "status": "passed",
         "work_fit_score": 95.6,
         "quality_score": 98.8,
@@ -226,7 +264,7 @@
       "source_url": "https://ollama.com/library/qwen3.5:9b",
       "installed": true,
       "benchmark": {
-        "rank": 6,
+        "rank": 7,
         "status": "benchmarked",
         "work_fit_score": 91.1,
         "quality_score": 96.8,
@@ -264,7 +302,7 @@
       "source_url": "https://ollama.com/library/qwen2.5-coder:14b",
       "installed": true,
       "benchmark": {
-        "rank": 7,
+        "rank": 8,
         "status": "benchmarked",
         "work_fit_score": 89.9,
         "quality_score": 96.0,
@@ -301,7 +339,7 @@
       "source_url": "https://huggingface.co/mlx-community/Devstral-Small-2-24B-Instruct-2512-4bit",
       "installed": true,
       "benchmark": {
-        "rank": 8,
+        "rank": 9,
         "status": "passed",
         "work_fit_score": 89.9,
         "quality_score": 92.0,
@@ -337,7 +375,7 @@
       "source_url": "https://huggingface.co/lmstudio-community/NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit",
       "installed": true,
       "benchmark": {
-        "rank": 9,
+        "rank": 10,
         "status": "passed",
         "work_fit_score": 89.0,
         "quality_score": 87.2,
@@ -373,7 +411,7 @@
       "source_url": "https://ollama.com/library/qwen2.5:14b",
       "installed": true,
       "benchmark": {
-        "rank": 10,
+        "rank": 11,
         "status": "benchmarked",
         "work_fit_score": 88.4,
         "quality_score": 93.8,
@@ -409,7 +447,7 @@
       "source_url": "https://ollama.com/library/phi4",
       "installed": true,
       "benchmark": {
-        "rank": 11,
+        "rank": 12,
         "status": "benchmarked",
         "work_fit_score": 86.2,
         "quality_score": 90.8,
@@ -446,7 +484,7 @@
       "source_url": "https://ollama.com/library/mistral-small:22b",
       "installed": true,
       "benchmark": {
-        "rank": 13,
+        "rank": 14,
         "status": "benchmarked",
         "work_fit_score": 82.6,
         "quality_score": 90.0,
@@ -478,7 +516,7 @@
       "source_url": "https://github.com/steipete/apfel",
       "installed": true,
       "benchmark": {
-        "rank": 16,
+        "rank": 17,
         "status": "benchmarked",
         "work_fit_score": 63.7,
         "quality_score": 55.8,
@@ -875,7 +913,7 @@
       "label": "GLM-4.7-Flash (MLX 4-bit)",
       "runtime": "mlx",
       "status": "passed",
-      "rank": 12,
+      "rank": 13,
       "work_fit_score": 86.0,
       "quality_score": 84.0,
       "artifact": "output/benchmarks/capability-benchmark-20260719T205001Z.json",
@@ -886,7 +924,7 @@
       "label": "Qwen3.5 9B (MLX 4-bit)",
       "runtime": "mlx",
       "status": "passed",
-      "rank": 14,
+      "rank": 15,
       "work_fit_score": 78.6,
       "quality_score": 74.8,
       "artifact": "output/benchmarks/capability-benchmark-20260719T202746Z.json",
@@ -897,7 +935,7 @@
       "label": "gpt-oss-20b (MLX MXFP4/Q4)",
       "runtime": "mlx",
       "status": "passed",
-      "rank": 15,
+      "rank": 16,
       "work_fit_score": 70.6,
       "quality_score": 65.8,
       "artifact": "output/benchmarks/capability-benchmark-20260719T205311Z.json",
@@ -908,7 +946,7 @@
       "label": "LFM2 24B A2B (MLX 4-bit)",
       "runtime": "mlx",
       "status": "passed",
-      "rank": 17,
+      "rank": 18,
       "work_fit_score": 63.3,
       "quality_score": 54.8,
       "artifact": "output/benchmarks/capability-benchmark-20260719T222207Z.json",
