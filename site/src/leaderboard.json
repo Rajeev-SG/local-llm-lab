@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-19T22:27:48+00:00",
+  "generated_at": "2026-08-23T20:56:17+00:00",
   "machine": "Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores",
   "score_definition": {
     "task_weights": {
@@ -16,8 +16,8 @@
     "work_fit": "80% task quality + 15% median response-time utility + 5% invocation reliability"
   },
   "summary": {
-    "total_builds": 26,
-    "ranked_builds": 17,
+    "total_builds": 27,
+    "ranked_builds": 18,
     "unranked_builds": 9,
     "best_model": "Qwen3 Coder 30B A3B (MLX 4-bit)"
   },
@@ -32,17 +32,17 @@
       "download_size_gb": 17.19,
       "status": "passed",
       "test_level": "capability",
-      "generated_at": "2026-07-19T21:57:51+00:00",
-      "artifact": "output/benchmarks/capability-benchmark-20260719T215751Z.json",
+      "generated_at": "2026-08-23T20:22:32+00:00",
+      "artifact": "output/benchmarks/capability-benchmark-20260823T202232Z.json",
       "successful_tasks": 8,
       "successful_claimed_tasks": 6,
       "task_count": 8,
       "quality_score": 98.8,
       "work_fit_score": 98.3,
-      "median_latency_ms": 738.0,
-      "generation_tokens_per_second": 98.846,
+      "median_latency_ms": 752.2,
+      "generation_tokens_per_second": 96.987,
       "generation_speed_basis": "isolated MLX trial",
-      "prompt_tokens_per_second": 1357.189,
+      "prompt_tokens_per_second": 1331.691,
       "peak_memory_gb": 17.755,
       "recommended_use": "Coding-focused comparison for repository and terminal work",
       "runtime_error": null,
@@ -68,17 +68,17 @@
       "download_size_gb": 20.4,
       "status": "passed",
       "test_level": "capability",
-      "generated_at": "2026-07-19T20:30:15+00:00",
-      "artifact": "output/benchmarks/capability-benchmark-20260719T203015Z.json",
+      "generated_at": "2026-08-23T20:22:32+00:00",
+      "artifact": "output/benchmarks/capability-benchmark-20260823T202232Z.json",
       "successful_tasks": 8,
       "successful_claimed_tasks": 6,
       "task_count": 8,
       "quality_score": 98.8,
-      "work_fit_score": 98.2,
-      "median_latency_ms": 892.2,
-      "generation_tokens_per_second": 93.965,
+      "work_fit_score": 98.3,
+      "median_latency_ms": 782.9,
+      "generation_tokens_per_second": 99.276,
       "generation_speed_basis": "isolated MLX trial",
-      "prompt_tokens_per_second": 1257.578,
+      "prompt_tokens_per_second": 980.316,
       "peak_memory_gb": 20.176,
       "recommended_use": "Default local helper for broad coding and tool-heavy work",
       "runtime_error": null,
@@ -167,6 +167,42 @@
       "rank": 4
     },
     {
+      "build_id": "mlx:mlx-community/Qwen3.8-27B-4bit",
+      "label": "Qwen3.8 27B (MLX 4-bit)",
+      "runtime": "mlx",
+      "model_name": "mlx-community/Qwen3.8-27B-4bit",
+      "base_model": "Qwen/Qwen3.8-27B",
+      "revision": "3e6447f082e89cc7f0bc6e5441afd38dfce760ff",
+      "download_size_gb": 16.1,
+      "status": "passed",
+      "test_level": "capability",
+      "generated_at": "2026-08-23T20:22:32+00:00",
+      "artifact": "output/benchmarks/capability-benchmark-20260823T202232Z.json",
+      "successful_tasks": 8,
+      "successful_claimed_tasks": 6,
+      "task_count": 8,
+      "quality_score": 98.8,
+      "work_fit_score": 96.3,
+      "median_latency_ms": 3279.4,
+      "generation_tokens_per_second": 17.741,
+      "generation_speed_basis": "isolated MLX trial",
+      "prompt_tokens_per_second": 364.051,
+      "peak_memory_gb": 16.389,
+      "recommended_use": "High-quality coding, technical synthesis, tool use, and multimodal work",
+      "runtime_error": null,
+      "task_scores": {
+        "shell_scripting": 1.0,
+        "json_restructuring": 1.0,
+        "classification": 1.0,
+        "short_summary": 1.0,
+        "text_transformation": 1.0,
+        "translation": 0.8,
+        "unknown_refusal": 1.0,
+        "harmless_exactness": 1.0
+      },
+      "rank": 5
+    },
+    {
       "build_id": "mlx:mlx-community/Qwen3.6-27B-4bit",
       "label": "Qwen3.6 27B (MLX 4-bit)",
       "runtime": "mlx",
@@ -200,7 +236,7 @@
         "unknown_refusal": 1.0,
         "harmless_exactness": 1.0
       },
-      "rank": 5
+      "rank": 6
     },
     {
       "build_id": "ollama:qwen3.5:9b",
@@ -236,7 +272,7 @@
         "unknown_refusal": 1.0,
         "harmless_exactness": 1.0
       },
-      "rank": 6
+      "rank": 7
     },
     {
       "build_id": "ollama:qwen2.5-coder:14b",
@@ -272,7 +308,7 @@
         "unknown_refusal": 1.0,
         "harmless_exactness": 1.0
       },
-      "rank": 7
+      "rank": 8
     },
     {
       "build_id": "mlx:mlx-community/Devstral-Small-2-24B-Instruct-2512-4bit",
@@ -308,7 +344,7 @@
         "unknown_refusal": 1.0,
         "harmless_exactness": 1.0
       },
-      "rank": 8
+      "rank": 9
     },
     {
       "build_id": "mlx:lmstudio-community/NVIDIA-Nemotron-3-Nano-30B-A3B-MLX-4bit",
@@ -344,7 +380,7 @@
         "unknown_refusal": 1.0,
         "harmless_exactness": 1.0
       },
-      "rank": 9
+      "rank": 10
     },
     {
       "build_id": "ollama:qwen2.5:14b",
@@ -380,7 +416,7 @@
         "unknown_refusal": 1.0,
         "harmless_exactness": 1.0
       },
-      "rank": 10
+      "rank": 11
     },
     {
       "build_id": "ollama:phi4:latest",
@@ -416,7 +452,7 @@
         "unknown_refusal": 1.0,
         "harmless_exactness": 1.0
       },
-      "rank": 11
+      "rank": 12
     },
     {
       "build_id": "mlx:lmstudio-community/GLM-4.7-Flash-MLX-4bit",
@@ -452,7 +488,7 @@
         "unknown_refusal": 1.0,
         "harmless_exactness": 1.0
       },
-      "rank": 12
+      "rank": 13
     },
     {
       "build_id": "ollama:mistral-small:22b",
@@ -488,7 +524,7 @@
         "unknown_refusal": 1.0,
         "harmless_exactness": 1.0
       },
-      "rank": 13
+      "rank": 14
     },
     {
       "build_id": "mlx:mlx-community/Qwen3.5-9B-4bit",
@@ -524,7 +560,7 @@
         "unknown_refusal": 1.0,
         "harmless_exactness": 1.0
       },
-      "rank": 14
+      "rank": 15
     },
     {
       "build_id": "mlx:mlx-community/gpt-oss-20b-MXFP4-Q4",
@@ -560,7 +596,7 @@
         "unknown_refusal": 0.0,
         "harmless_exactness": 1.0
       },
-      "rank": 15
+      "rank": 16
     },
     {
       "build_id": "apfel:apple-foundationmodel",
@@ -596,7 +632,7 @@
         "unknown_refusal": 1.0,
         "harmless_exactness": 0.0
       },
-      "rank": 16
+      "rank": 17
     },
     {
       "build_id": "mlx:lmstudio-community/LFM2-24B-A2B-MLX-4bit",
@@ -632,7 +668,7 @@
         "unknown_refusal": 0.0,
         "harmless_exactness": 1.0
       },
-      "rank": 17
+      "rank": 18
     }
   ],
   "unranked": [
@@ -862,7 +898,6 @@
     "output/benchmarks/capability-benchmark-20260409T173011Z.json",
     "output/benchmarks/capability-benchmark-20260409T175237Z.json",
     "output/benchmarks/capability-benchmark-20260719T202746Z.json",
-    "output/benchmarks/capability-benchmark-20260719T203015Z.json",
     "output/benchmarks/capability-benchmark-20260719T204036Z.json",
     "output/benchmarks/capability-benchmark-20260719T204241Z.json",
     "output/benchmarks/capability-benchmark-20260719T205001Z.json",
@@ -870,7 +905,7 @@
     "output/benchmarks/capability-benchmark-20260719T213254Z.json",
     "output/benchmarks/capability-benchmark-20260719T215317Z.json",
     "output/benchmarks/capability-benchmark-20260719T215650Z.json",
-    "output/benchmarks/capability-benchmark-20260719T215751Z.json",
-    "output/benchmarks/capability-benchmark-20260719T222207Z.json"
+    "output/benchmarks/capability-benchmark-20260719T222207Z.json",
+    "output/benchmarks/capability-benchmark-20260823T202232Z.json"
   ]
 }

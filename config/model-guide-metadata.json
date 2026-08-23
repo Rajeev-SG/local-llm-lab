@@ -3,6 +3,22 @@
   "machine": "Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores",
   "models": [
     {
+      "build_id": "mlx:mlx-community/Qwen3.8-27B-4bit",
+      "label": "Qwen3.8 27B",
+      "runtime": "mlx",
+      "model_name": "mlx-community/Qwen3.8-27B-4bit",
+      "cache_repo": "mlx-community/Qwen3.8-27B-4bit",
+      "size_gb": 16.1,
+      "parameters": "27B dense",
+      "quantization": "4-bit MLX",
+      "context_tokens": 262144,
+      "modalities": ["Text", "Image"],
+      "capabilities": ["Vision", "Code", "Tools", "Thinking", "Long context"],
+      "best_for": "High-quality coding, technical synthesis, tool use, and multimodal work",
+      "caution": "The dense model is expected to generate more slowly than the sparse Qwen leaders; use measured local results to choose the default.",
+      "source_url": "https://huggingface.co/mlx-community/Qwen3.8-27B-4bit"
+    },
+    {
       "build_id": "mlx:lmstudio-community/Qwen3-Coder-30B-A3B-Instruct-MLX-4bit",
       "label": "Qwen3 Coder 30B A3B",
       "runtime": "mlx",

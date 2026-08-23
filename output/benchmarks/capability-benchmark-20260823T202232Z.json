@@ -1,0 +1,1425 @@
+{
+  "schema_version": 2,
+  "benchmark_protocol": {
+    "name": "mlx-capability-v1",
+    "seed": 42,
+    "max_tokens": 256,
+    "performance_prompt_tokens": 512,
+    "performance_generation_tokens": 128,
+    "performance_trials": 3
+  },
+  "generated_at": "2026-08-23T20:22:32+00:00",
+  "environment": {
+    "machine": "arm64",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "macos_version": "26.5.2",
+    "python": "3.14.3",
+    "mlx_lm_version": "0.31.3",
+    "seed": 42,
+    "hardware": "Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores"
+  },
+  "models": [
+    {
+      "slug": "qwen38_27b_mlx4",
+      "label": "Qwen3.8 27B (MLX 4-bit)",
+      "kind": "mlx",
+      "model_name": "mlx-community/Qwen3.8-27B-4bit",
+      "revision": "3e6447f082e89cc7f0bc6e5441afd38dfce760ff",
+      "download_size_gb": 16.1,
+      "base_model": "Qwen/Qwen3.8-27B",
+      "note": "High-quality coding, technical synthesis, tool use, and multimodal work"
+    },
+    {
+      "slug": "qwen36_35b_a3b_mlx4",
+      "label": "Qwen3.6 35B A3B (MLX 4-bit)",
+      "kind": "mlx",
+      "model_name": "mlx-community/Qwen3.6-35B-A3B-4bit",
+      "revision": "38740b847e4cb78f352aba30aa41c76e08e6eb46",
+      "download_size_gb": 20.4,
+      "base_model": "Qwen/Qwen3.6-35B-A3B",
+      "note": "Default local helper for broad coding and tool-heavy work"
+    },
+    {
+      "slug": "qwen3_coder_30b_a3b_mlx4",
+      "label": "Qwen3 Coder 30B A3B (MLX 4-bit)",
+      "kind": "mlx",
+      "model_name": "lmstudio-community/Qwen3-Coder-30B-A3B-Instruct-MLX-4bit",
+      "revision": "bbecedefd826819d2c6b6465e88ca7b9b8ad3407",
+      "download_size_gb": 17.19,
+      "base_model": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+      "note": "Coding-focused comparison for repository and terminal work"
+    }
+  ],
+  "tasks": [
+    {
+      "slug": "shell_scripting",
+      "label": "Shell scripting",
+      "category": "claimed"
+    },
+    {
+      "slug": "text_transformation",
+      "label": "Text transformation",
+      "category": "claimed"
+    },
+    {
+      "slug": "classification",
+      "label": "Classification",
+      "category": "claimed"
+    },
+    {
+      "slug": "short_summary",
+      "label": "Short summaries",
+      "category": "claimed"
+    },
+    {
+      "slug": "json_restructuring",
+      "label": "JSON restructuring",
+      "category": "claimed"
+    },
+    {
+      "slug": "translation",
+      "label": "Translation",
+      "category": "claimed"
+    },
+    {
+      "slug": "unknown_refusal",
+      "label": "Unknown refusal",
+      "category": "diagnostic"
+    },
+    {
+      "slug": "harmless_exactness",
+      "label": "Harmless exactness",
+      "category": "diagnostic"
+    }
+  ],
+  "results": {
+    "qwen38_27b_mlx4": {
+      "shell_scripting": {
+        "content": "awk '{print $1}' | sort | uniq -c | sort -rn | head -3 | awk '{print $1, $2}'",
+        "elapsed_ms": 3500.3,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-fa1e2bb3-6f23-428d-9890-948421accfed",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/3e6447f082e89cc7f0bc6e5441afd38dfce760ff",
+          "created": 1787518431,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "awk '{print $1}' | sort | uniq -c | sort -rn | head -3 | awk '{print $1, $2}'"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 614,
+            "completion_tokens": 31,
+            "total_tokens": 645,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 614,
+          "completion_tokens": 31,
+          "total_tokens": 645,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 8.856,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact match on top-3 IP count pipeline",
+          "details": {
+            "command": "awk '{print $1}' | sort | uniq -c | sort -rn | head -3 | awk '{print $1, $2}'",
+            "actual": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "expected": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "stderr": ""
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "* Version 2.4.1 fixes the login loop.\n* Version 2.4.1 repairs broken CSV exports.\n* Version 2.4.1 makes reports load faster.",
+        "elapsed_ms": 3058.4,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-bbbd3fbf-a185-4974-b8be-d6dd24b25274",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/3e6447f082e89cc7f0bc6e5441afd38dfce760ff",
+          "created": 1787518435,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "* Version 2.4.1 fixes the login loop.\n* Version 2.4.1 repairs broken CSV exports.\n* Version 2.4.1 makes reports load faster."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 136,
+            "completion_tokens": 42,
+            "total_tokens": 178,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 136,
+          "completion_tokens": 42,
+          "total_tokens": 178,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 13.733,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "6/6 rubric checks passed",
+          "details": {
+            "three_bullets": true,
+            "version": true,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": true
+          }
+        }
+      },
+      "classification": {
+        "content": "{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"account\"\n}",
+        "elapsed_ms": 4982.6,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-7096d5b7-5102-44ff-be0b-826438f6d467",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/3e6447f082e89cc7f0bc6e5441afd38dfce760ff",
+          "created": 1787518438,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"account\"\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 164,
+            "completion_tokens": 76,
+            "total_tokens": 240,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 164,
+          "completion_tokens": 76,
+          "total_tokens": 240,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 15.253,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "8/8 tickets classified correctly",
+          "details": {}
+        }
+      },
+      "short_summary": {
+        "content": "The 47-minute outage, caused by an expired Redis TLS certificate, impacted 18% of checkouts and was mitigated by rolling back the certificate bundle, flushing connections, and restarting workers.",
+        "elapsed_ms": 3052.3,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-e406691f-52ce-451f-b672-2f176a20f570",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/3e6447f082e89cc7f0bc6e5441afd38dfce760ff",
+          "created": 1787518443,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "The 47-minute outage, caused by an expired Redis TLS certificate, impacted 18% of checkouts and was mitigated by rolling back the certificate bundle, flushing connections, and restarting workers."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 177,
+            "completion_tokens": 42,
+            "total_tokens": 219,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 177,
+          "completion_tokens": 42,
+          "total_tokens": 219,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 13.76,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "5/5 summary checks passed",
+          "details": {
+            "word_range": true,
+            "duration": true,
+            "cause": true,
+            "impact": true,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "```json\n{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\"o-100\", \"o-102\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-103\"],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}\n```",
+        "elapsed_ms": 10714.0,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-bb9c7c7b-ee0a-4bb9-9666-68ae252aafc9",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/3e6447f082e89cc7f0bc6e5441afd38dfce760ff",
+          "created": 1787518446,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "```json\n{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\"o-100\", \"o-102\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-103\"],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}\n```"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 283,
+            "completion_tokens": 170,
+            "total_tokens": 453,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 283,
+          "completion_tokens": 170,
+          "total_tokens": 453,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 15.867,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact semantic JSON restructure match",
+          "details": {}
+        }
+      },
+      "translation": {
+        "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}",
+        "elapsed_ms": 3951.4,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-97bf90a6-38cf-46ec-98fb-a7b1acfba8bb",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/3e6447f082e89cc7f0bc6e5441afd38dfce760ff",
+          "created": 1787518457,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 93,
+            "completion_tokens": 59,
+            "total_tokens": 152,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 93,
+          "completion_tokens": 59,
+          "total_tokens": 152,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 14.931,
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 translations accepted",
+          "details": {
+            "t2": {
+              "expected_any_of": [
+                "datei fehlt",
+                "die datei fehlt"
+              ],
+              "actual": "Die Datei fehlt."
+            }
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "I cannot know the specific changes in version 7.4.1 of the package \"quartzpickle\" without internet access, so I will not invent details.",
+        "elapsed_ms": 2336.8,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-33fc2267-6922-469e-ab30-e4ebf791aa48",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/3e6447f082e89cc7f0bc6e5441afd38dfce760ff",
+          "created": 1787518461,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "I cannot know the specific changes in version 7.4.1 of the package \"quartzpickle\" without internet access, so I will not invent details."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 54,
+            "completion_tokens": 34,
+            "total_tokens": 88,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 54,
+          "completion_tokens": 34,
+          "total_tokens": 88,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 14.55,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Refused cleanly without inventing details",
+          "details": {
+            "uncertain": true,
+            "fabricated_markers_present": false
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "OK",
+        "elapsed_ms": 518.2,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-9aa3ee49-88f8-443c-90bf-601bdd237e90",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/3e6447f082e89cc7f0bc6e5441afd38dfce760ff",
+          "created": 1787518463,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "OK"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 20,
+            "completion_tokens": 2,
+            "total_tokens": 22,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 20,
+          "completion_tokens": 2,
+          "total_tokens": 22,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 3.86,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Matched exact harmless output request",
+          "details": {
+            "actual": "OK"
+          }
+        }
+      }
+    },
+    "qwen36_35b_a3b_mlx4": {
+      "shell_scripting": {
+        "content": "awk '{print $1}' | sort | uniq -c | sort -rn | head -n 3 | awk '{print $1, $2}'",
+        "elapsed_ms": 891.3,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-19e886a8-8b29-4735-b458-060c62a0f865",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.6-35B-A3B-4bit/snapshots/38740b847e4cb78f352aba30aa41c76e08e6eb46",
+          "created": 1787518514,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "awk '{print $1}' | sort | uniq -c | sort -rn | head -n 3 | awk '{print $1, $2}'"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 614,
+            "completion_tokens": 33,
+            "total_tokens": 647,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 614,
+          "completion_tokens": 33,
+          "total_tokens": 647,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 37.025,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact match on top-3 IP count pipeline",
+          "details": {
+            "command": "awk '{print $1}' | sort | uniq -c | sort -rn | head -n 3 | awk '{print $1, $2}'",
+            "actual": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "expected": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "stderr": ""
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "* Version 2.4.1 fixes annoying SSO login loop\n* Repairs broken CSV exports from finance dashboard\n* Reports page loads about 35 percent faster",
+        "elapsed_ms": 674.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-8eebd8aa-2c9b-4058-947d-b7722e516e31",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.6-35B-A3B-4bit/snapshots/38740b847e4cb78f352aba30aa41c76e08e6eb46",
+          "created": 1787518515,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "* Version 2.4.1 fixes annoying SSO login loop\n* Repairs broken CSV exports from finance dashboard\n* Reports page loads about 35 percent faster"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 136,
+            "completion_tokens": 36,
+            "total_tokens": 172,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 136,
+          "completion_tokens": 36,
+          "total_tokens": 172,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 53.373,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "6/6 rubric checks passed",
+          "details": {
+            "three_bullets": true,
+            "version": true,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": true
+          }
+        }
+      },
+      "classification": {
+        "content": "{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"account\"\n}",
+        "elapsed_ms": 1090.1,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-51fe05c1-836a-4632-b108-8c27c140e405",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.6-35B-A3B-4bit/snapshots/38740b847e4cb78f352aba30aa41c76e08e6eb46",
+          "created": 1787518516,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"account\"\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 164,
+            "completion_tokens": 76,
+            "total_tokens": 240,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 164,
+          "completion_tokens": 76,
+          "total_tokens": 240,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 69.718,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "8/8 tickets classified correctly",
+          "details": {}
+        }
+      },
+      "short_summary": {
+        "content": "A 47-minute checkout outage caused by an expired Redis TLS certificate impacted 18 percent of customers, resolved by rolling back the certificate and restarting affected workers.",
+        "elapsed_ms": 671.9,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-232acab7-0070-440f-9634-06522ef125ef",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.6-35B-A3B-4bit/snapshots/38740b847e4cb78f352aba30aa41c76e08e6eb46",
+          "created": 1787518517,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "A 47-minute checkout outage caused by an expired Redis TLS certificate impacted 18 percent of customers, resolved by rolling back the certificate and restarting affected workers."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 177,
+            "completion_tokens": 34,
+            "total_tokens": 211,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 177,
+          "completion_tokens": 34,
+          "total_tokens": 211,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 50.603,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "5/5 summary checks passed",
+          "details": {
+            "word_range": true,
+            "duration": true,
+            "cause": true,
+            "impact": true,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\n        \"o-100\",\n        \"o-102\"\n      ],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\n        \"o-103\"\n      ],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}",
+        "elapsed_ms": 2277.7,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-be3c9b58-5428-41fa-98dd-ec712c51259a",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.6-35B-A3B-4bit/snapshots/38740b847e4cb78f352aba30aa41c76e08e6eb46",
+          "created": 1787518517,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\n        \"o-100\",\n        \"o-102\"\n      ],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\n        \"o-103\"\n      ],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 283,
+            "completion_tokens": 179,
+            "total_tokens": 462,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 283,
+          "completion_tokens": 179,
+          "total_tokens": 462,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 78.588,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact semantic JSON restructure match",
+          "details": {}
+        }
+      },
+      "translation": {
+        "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}",
+        "elapsed_ms": 896.5,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-86843e8a-e84f-4a14-a84b-afae05a1aac4",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.6-35B-A3B-4bit/snapshots/38740b847e4cb78f352aba30aa41c76e08e6eb46",
+          "created": 1787518520,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 93,
+            "completion_tokens": 59,
+            "total_tokens": 152,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 93,
+          "completion_tokens": 59,
+          "total_tokens": 152,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 65.811,
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 translations accepted",
+          "details": {
+            "t2": {
+              "expected_any_of": [
+                "datei fehlt",
+                "die datei fehlt"
+              ],
+              "actual": "Die Datei fehlt."
+            }
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "I do not have information on a package named \"quartzpickle\" in my training data, so I cannot state what changed in version 7.4.1.",
+        "elapsed_ms": 576.7,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-7f203d3c-af97-4436-9de7-e2c6171d4c7e",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.6-35B-A3B-4bit/snapshots/38740b847e4cb78f352aba30aa41c76e08e6eb46",
+          "created": 1787518521,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "I do not have information on a package named \"quartzpickle\" in my training data, so I cannot state what changed in version 7.4.1."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 54,
+            "completion_tokens": 35,
+            "total_tokens": 89,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 54,
+          "completion_tokens": 35,
+          "total_tokens": 89,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 60.69,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Refused cleanly without inventing details",
+          "details": {
+            "uncertain": true,
+            "fabricated_markers_present": false
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "OK",
+        "elapsed_ms": 196.3,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-aa89cda4-5e5f-44f5-842b-51c5f82f22f7",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.6-35B-A3B-4bit/snapshots/38740b847e4cb78f352aba30aa41c76e08e6eb46",
+          "created": 1787518521,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "OK"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 20,
+            "completion_tokens": 2,
+            "total_tokens": 22,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 20,
+          "completion_tokens": 2,
+          "total_tokens": 22,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "wall_tokens_per_second": 10.188,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Matched exact harmless output request",
+          "details": {
+            "actual": "OK"
+          }
+        }
+      }
+    },
+    "qwen3_coder_30b_a3b_mlx4": {
+      "shell_scripting": {
+        "content": "awk '{ip[$1]++} END {for (i in ip) printf \"%d %s\\n\", ip[i], i}' | sort -nr | head -3",
+        "elapsed_ms": 1025.1,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-b1f37fb0-fabe-464a-822c-7d2f49268644",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--Qwen3-Coder-30B-A3B-Instruct-MLX-4bit/snapshots/bbecedefd826819d2c6b6465e88ca7b9b8ad3407",
+          "created": 1787518542,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "awk '{ip[$1]++} END {for (i in ip) printf \"%d %s\\n\", ip[i], i}' | sort -nr | head -3"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 607,
+            "completion_tokens": 37,
+            "total_tokens": 644,
+            "prompt_tokens_details": {
+              "cached_tokens": 3
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 607,
+          "completion_tokens": 37,
+          "total_tokens": 644,
+          "prompt_tokens_details": {
+            "cached_tokens": 3
+          }
+        },
+        "wall_tokens_per_second": 36.094,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact match on top-3 IP count pipeline",
+          "details": {
+            "command": "awk '{ip[$1]++} END {for (i in ip) printf \"%d %s\\n\", ip[i], i}' | sort -nr | head -3",
+            "actual": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "expected": [
+              "4 10.0.0.8",
+              "3 10.0.0.5",
+              "2 10.0.0.9"
+            ],
+            "stderr": ""
+          }
+        }
+      },
+      "text_transformation": {
+        "content": "\u2022 Version 2.4.1 fixes SSO login loop\n\u2022 CSV export repair from finance dashboard\n\u2022 Reports load 35% faster in internal tests",
+        "elapsed_ms": 618.7,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-079deb60-d31c-4792-8221-f791d4d41e15",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--Qwen3-Coder-30B-A3B-Instruct-MLX-4bit/snapshots/bbecedefd826819d2c6b6465e88ca7b9b8ad3407",
+          "created": 1787518543,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "\u2022 Version 2.4.1 fixes SSO login loop\n\u2022 CSV export repair from finance dashboard\n\u2022 Reports load 35% faster in internal tests"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 122,
+            "completion_tokens": 34,
+            "total_tokens": 156,
+            "prompt_tokens_details": {
+              "cached_tokens": 3
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 122,
+          "completion_tokens": 34,
+          "total_tokens": 156,
+          "prompt_tokens_details": {
+            "cached_tokens": 3
+          }
+        },
+        "wall_tokens_per_second": 54.954,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "6/6 rubric checks passed",
+          "details": {
+            "three_bullets": true,
+            "version": true,
+            "login_loop": true,
+            "csv_export": true,
+            "faster_reports": true,
+            "word_limits": true
+          }
+        }
+      },
+      "classification": {
+        "content": "{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"account\"\n}",
+        "elapsed_ms": 918.1,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-975c05ad-3596-47c6-90ff-39a939d8a0e9",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--Qwen3-Coder-30B-A3B-Instruct-MLX-4bit/snapshots/bbecedefd826819d2c6b6465e88ca7b9b8ad3407",
+          "created": 1787518544,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"T1\": \"billing\",\n  \"T2\": \"bug\",\n  \"T3\": \"feature\",\n  \"T4\": \"account\",\n  \"T5\": \"feature\",\n  \"T6\": \"bug\",\n  \"T7\": \"billing\",\n  \"T8\": \"account\"\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 150,
+            "completion_tokens": 67,
+            "total_tokens": 217,
+            "prompt_tokens_details": {
+              "cached_tokens": 3
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 150,
+          "completion_tokens": 67,
+          "total_tokens": 217,
+          "prompt_tokens_details": {
+            "cached_tokens": 3
+          }
+        },
+        "wall_tokens_per_second": 72.977,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "8/8 tickets classified correctly",
+          "details": {}
+        }
+      },
+      "short_summary": {
+        "content": "Checkout failures lasted 47 minutes due to expired Redis TLS certificate, affecting 18% of returning customers' saved cart attempts, resolved by rolling back certificate bundle and restarting affected payment workers.",
+        "elapsed_ms": 670.2,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-9406920a-ac36-45e5-87fd-baecb77bab1f",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--Qwen3-Coder-30B-A3B-Instruct-MLX-4bit/snapshots/bbecedefd826819d2c6b6465e88ca7b9b8ad3407",
+          "created": 1787518545,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "Checkout failures lasted 47 minutes due to expired Redis TLS certificate, affecting 18% of returning customers' saved cart attempts, resolved by rolling back certificate bundle and restarting affected payment workers."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 170,
+            "completion_tokens": 40,
+            "total_tokens": 210,
+            "prompt_tokens_details": {
+              "cached_tokens": 3
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 170,
+          "completion_tokens": 40,
+          "total_tokens": 210,
+          "prompt_tokens_details": {
+            "cached_tokens": 3
+          }
+        },
+        "wall_tokens_per_second": 59.684,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "5/5 summary checks passed",
+          "details": {
+            "word_range": true,
+            "duration": true,
+            "cause": true,
+            "impact": true,
+            "mitigation": true
+          }
+        }
+      },
+      "json_restructuring": {
+        "content": "{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\"o-100\", \"o-102\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-103\"],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}",
+        "elapsed_ms": 1790.1,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-2ec519f8-edaa-4f9e-bb0f-02978894866d",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--Qwen3-Coder-30B-A3B-Instruct-MLX-4bit/snapshots/bbecedefd826819d2c6b6465e88ca7b9b8ad3407",
+          "created": 1787518546,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"regions\": [\n    {\n      \"region\": \"apac\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [],\n      \"total_amount\": 40\n    },\n    {\n      \"region\": \"eu\",\n      \"customer_count\": 1,\n      \"high_priority_ids\": [\"o-100\", \"o-102\"],\n      \"total_amount\": 150\n    },\n    {\n      \"region\": \"us\",\n      \"customer_count\": 2,\n      \"high_priority_ids\": [\"o-103\"],\n      \"total_amount\": 130\n    }\n  ],\n  \"grand_total\": 320\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 256,
+            "completion_tokens": 147,
+            "total_tokens": 403,
+            "prompt_tokens_details": {
+              "cached_tokens": 3
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 256,
+          "completion_tokens": 147,
+          "total_tokens": 403,
+          "prompt_tokens_details": {
+            "cached_tokens": 3
+          }
+        },
+        "wall_tokens_per_second": 82.118,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Exact semantic JSON restructure match",
+          "details": {}
+        }
+      },
+      "translation": {
+        "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}",
+        "elapsed_ms": 834.3,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-ddaceec6-a423-4891-a8a3-8f1c193e44db",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--Qwen3-Coder-30B-A3B-Instruct-MLX-4bit/snapshots/bbecedefd826819d2c6b6465e88ca7b9b8ad3407",
+          "created": 1787518547,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"t1\": \"Gute Nacht\",\n  \"t2\": \"Die Datei fehlt.\",\n  \"t3\": \"Bahnhof\",\n  \"t4\": \"Wie viel kostet das?\",\n  \"t5\": \"Roter Apfel\"\n}"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 82,
+            "completion_tokens": 59,
+            "total_tokens": 141,
+            "prompt_tokens_details": {
+              "cached_tokens": 3
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 82,
+          "completion_tokens": 59,
+          "total_tokens": 141,
+          "prompt_tokens_details": {
+            "cached_tokens": 3
+          }
+        },
+        "wall_tokens_per_second": 70.718,
+        "evaluation": {
+          "score": 0.8,
+          "summary": "4/5 translations accepted",
+          "details": {
+            "t2": {
+              "expected_any_of": [
+                "datei fehlt",
+                "die datei fehlt"
+              ],
+              "actual": "Die Datei fehlt."
+            }
+          }
+        }
+      },
+      "unknown_refusal": {
+        "content": "I cannot determine what changed in version 7.4.1 of the \"quartzpickle\" package without being able to access external resources or version control information.",
+        "elapsed_ms": 551.2,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-12d6a582-be92-4ce6-b02f-63fd7716b71b",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--Qwen3-Coder-30B-A3B-Instruct-MLX-4bit/snapshots/bbecedefd826819d2c6b6465e88ca7b9b8ad3407",
+          "created": 1787518548,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "I cannot determine what changed in version 7.4.1 of the \"quartzpickle\" package without being able to access external resources or version control information."
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 50,
+            "completion_tokens": 34,
+            "total_tokens": 84,
+            "prompt_tokens_details": {
+              "cached_tokens": 3
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 50,
+          "completion_tokens": 34,
+          "total_tokens": 84,
+          "prompt_tokens_details": {
+            "cached_tokens": 3
+          }
+        },
+        "wall_tokens_per_second": 61.684,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Refused cleanly without inventing details",
+          "details": {
+            "uncertain": true,
+            "fabricated_markers_present": false
+          }
+        }
+      },
+      "harmless_exactness": {
+        "content": "OK",
+        "elapsed_ms": 135.2,
+        "ok": true,
+        "error": null,
+        "raw": {
+          "id": "chatcmpl-074f1d7e-f706-456a-ae89-3e78d1253b43",
+          "system_fingerprint": "0.31.3-0.32.0-macOS-26.5.2-arm64-arm-64bit-Mach-O-applegpu_g17s",
+          "object": "chat.completion",
+          "model": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--Qwen3-Coder-30B-A3B-Instruct-MLX-4bit/snapshots/bbecedefd826819d2c6b6465e88ca7b9b8ad3407",
+          "created": 1787518549,
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "OK"
+              }
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 16,
+            "completion_tokens": 2,
+            "total_tokens": 18,
+            "prompt_tokens_details": {
+              "cached_tokens": 3
+            }
+          }
+        },
+        "usage": {
+          "prompt_tokens": 16,
+          "completion_tokens": 2,
+          "total_tokens": 18,
+          "prompt_tokens_details": {
+            "cached_tokens": 3
+          }
+        },
+        "wall_tokens_per_second": 14.793,
+        "evaluation": {
+          "score": 1.0,
+          "summary": "Matched exact harmless output request",
+          "details": {
+            "actual": "OK"
+          }
+        }
+      }
+    }
+  },
+  "performance": {
+    "qwen38_27b_mlx4": {
+      "ok": true,
+      "prompt_tokens_per_second": 364.051,
+      "generation_tokens_per_second": 17.741,
+      "peak_memory_gb": 16.389,
+      "trials": [
+        {
+          "trial": 1,
+          "prompt_tokens_per_second": 364.009,
+          "generation_tokens_per_second": 17.689,
+          "peak_memory_gb": 16.389,
+          "total_time_seconds": 8.79
+        },
+        {
+          "trial": 2,
+          "prompt_tokens_per_second": 363.557,
+          "generation_tokens_per_second": 17.692,
+          "peak_memory_gb": 16.389,
+          "total_time_seconds": 8.78
+        },
+        {
+          "trial": 3,
+          "prompt_tokens_per_second": 364.587,
+          "generation_tokens_per_second": 17.842,
+          "peak_memory_gb": 16.39,
+          "total_time_seconds": 8.714
+        }
+      ],
+      "raw_output": "Running warmup..\nTiming with prompt_tokens=512, generation_tokens=128, batch_size=1.\nTrial 1:  prompt_tps=364.009, generation_tps=17.689, peak_memory=16.389, total_time=8.790\nTrial 2:  prompt_tps=363.557, generation_tps=17.692, peak_memory=16.389, total_time=8.780\nTrial 3:  prompt_tps=364.587, generation_tps=17.842, peak_memory=16.390, total_time=8.714\nAverages: prompt_tps=364.051, generation_tps=17.741, peak_memory=16.389",
+      "returncode": 0,
+      "prompt_tokens": 512,
+      "generation_tokens": 128,
+      "trial_count": 3
+    },
+    "qwen36_35b_a3b_mlx4": {
+      "ok": true,
+      "prompt_tokens_per_second": 980.316,
+      "generation_tokens_per_second": 99.276,
+      "peak_memory_gb": 20.176,
+      "trials": [
+        {
+          "trial": 1,
+          "prompt_tokens_per_second": 865.509,
+          "generation_tokens_per_second": 100.258,
+          "peak_memory_gb": 20.176,
+          "total_time_seconds": 1.998
+        },
+        {
+          "trial": 2,
+          "prompt_tokens_per_second": 771.198,
+          "generation_tokens_per_second": 99.21,
+          "peak_memory_gb": 20.176,
+          "total_time_seconds": 2.091
+        },
+        {
+          "trial": 3,
+          "prompt_tokens_per_second": 1304.24,
+          "generation_tokens_per_second": 98.359,
+          "peak_memory_gb": 20.177,
+          "total_time_seconds": 1.809
+        }
+      ],
+      "raw_output": "Running warmup..\nTiming with prompt_tokens=512, generation_tokens=128, batch_size=1.\nTrial 1:  prompt_tps=865.509, generation_tps=100.258, peak_memory=20.176, total_time=1.998\nTrial 2:  prompt_tps=771.198, generation_tps=99.210, peak_memory=20.176, total_time=2.091\nTrial 3:  prompt_tps=1304.240, generation_tps=98.359, peak_memory=20.177, total_time=1.809\nAverages: prompt_tps=980.316, generation_tps=99.276, peak_memory=20.176",
+      "returncode": 0,
+      "prompt_tokens": 512,
+      "generation_tokens": 128,
+      "trial_count": 3
+    },
+    "qwen3_coder_30b_a3b_mlx4": {
+      "ok": true,
+      "prompt_tokens_per_second": 1331.691,
+      "generation_tokens_per_second": 96.987,
+      "peak_memory_gb": 17.755,
+      "trials": [
+        {
+          "trial": 1,
+          "prompt_tokens_per_second": 1335.653,
+          "generation_tokens_per_second": 97.557,
+          "peak_memory_gb": 17.755,
+          "total_time_seconds": 1.773
+        },
+        {
+          "trial": 2,
+          "prompt_tokens_per_second": 1330.823,
+          "generation_tokens_per_second": 95.024,
+          "peak_memory_gb": 17.755,
+          "total_time_seconds": 1.809
+        },
+        {
+          "trial": 3,
+          "prompt_tokens_per_second": 1328.597,
+          "generation_tokens_per_second": 98.38,
+          "peak_memory_gb": 17.755,
+          "total_time_seconds": 1.765
+        }
+      ],
+      "raw_output": "Running warmup..\nTiming with prompt_tokens=512, generation_tokens=128, batch_size=1.\nTrial 1:  prompt_tps=1335.653, generation_tps=97.557, peak_memory=17.755, total_time=1.773\nTrial 2:  prompt_tps=1330.823, generation_tps=95.024, peak_memory=17.755, total_time=1.809\nTrial 3:  prompt_tps=1328.597, generation_tps=98.380, peak_memory=17.755, total_time=1.765\nAverages: prompt_tps=1331.691, generation_tps=96.987, peak_memory=17.755",
+      "returncode": 0,
+      "prompt_tokens": 512,
+      "generation_tokens": 128,
+      "trial_count": 3
+    }
+  },
+  "runtime_status": {
+    "qwen38_27b_mlx4": {
+      "status": "passed",
+      "startup_ms": 7310.8,
+      "snapshot_path": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/3e6447f082e89cc7f0bc6e5441afd38dfce760ff",
+      "log_path": "output/benchmarks/logs/20260823T202232Z-qwen38_27b_mlx4.log"
+    },
+    "qwen36_35b_a3b_mlx4": {
+      "status": "passed",
+      "startup_ms": 6574.3,
+      "snapshot_path": "/Users/rajeev/.cache/huggingface/hub/models--mlx-community--Qwen3.6-35B-A3B-4bit/snapshots/38740b847e4cb78f352aba30aa41c76e08e6eb46",
+      "log_path": "output/benchmarks/logs/20260823T202232Z-qwen36_35b_a3b_mlx4.log"
+    },
+    "qwen3_coder_30b_a3b_mlx4": {
+      "status": "passed",
+      "startup_ms": 4049.5,
+      "snapshot_path": "/Users/rajeev/.cache/huggingface/hub/models--lmstudio-community--Qwen3-Coder-30B-A3B-Instruct-MLX-4bit/snapshots/bbecedefd826819d2c6b6465e88ca7b9b8ad3407",
+      "log_path": "output/benchmarks/logs/20260823T202232Z-qwen3_coder_30b_a3b_mlx4.log"
+    }
+  },
+  "json_path": "/Users/rajeev/Code/tools/local-llm-lab/output/benchmarks/capability-benchmark-20260823T202232Z.json"
+}
