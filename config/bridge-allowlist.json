@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "operations": {
+    "local.models": {"kind": "api", "description": "List models exposed by the local Ollama API"},
+    "local.complete": {"kind": "api", "description": "Complete against an installed Ollama model"},
+    "cloud.models": {"kind": "api", "description": "List OpenRouter models when a key is supplied"},
+    "cloud.complete": {"kind": "api", "description": "Complete through OpenRouter when a key is supplied"},
+    "runbook.list": {"kind": "runbook", "description": "List the repository's approved operational runbooks"}
+  },
+  "mcp_servers": [
+    {"name": "opencode-fetch", "endpoint": "http://host.docker.internal:15451/mcp", "tools": ["fetch"]},
+    {"name": "opencode-context7", "endpoint": "http://host.docker.internal:15452/mcp", "tools": ["resolve-library-id", "query-docs"]},
+    {"name": "opencode-playwright", "endpoint": "http://host.docker.internal:15453/mcp", "tools": ["snapshot", "click", "fill", "screenshot"]},
+    {"name": "openai-developer-docs", "endpoint": "https://developers.openai.com/mcp", "tools": ["search", "fetch"]},
+    {"name": "draw-io", "endpoint": "https://mcp.draw.io/mcp", "tools": ["diagram"]}
+  ],
+  "runbooks": [
+    "docs/openwebui-secure-setup.md",
+    "docs/openwebui-rollback.md"
+  ]
+}

@@ -15,24 +15,7 @@ fi
 PORT="$(preferred_openwebui_port)"
 URL="http://localhost:${PORT}"
 
-if docker_container_exists "${OPENWEBUI_CONTAINER_NAME}"; then
-    if docker_container_running "${OPENWEBUI_CONTAINER_NAME}"; then
-        echo "✓ Open WebUI is already running"
-    else
-        docker start "${OPENWEBUI_CONTAINER_NAME}" >/dev/null
-        echo "✓ Open WebUI started"
-    fi
-else
-    echo "Creating Open WebUI container on ${URL}"
-    docker run -d \
-        --name "${OPENWEBUI_CONTAINER_NAME}" \
-        --restart unless-stopped \
-        -p "${PORT}:${OPENWEBUI_INTERNAL_PORT}" \
-        -e OLLAMA_BASE_URL="http://host.docker.internal:11434" \
-        -v "${OPENWEBUI_VOLUME_NAME}:/app/backend/data" \
-        "${OPENWEBUI_IMAGE}" >/dev/null
-    echo "✓ Open WebUI container created"
-fi
+OPENWEBUI_PORT="${PORT}" "${LAB_ROOT}/scripts/setup-openwebui.sh"
 
 save_openwebui_port "${PORT}"
 
