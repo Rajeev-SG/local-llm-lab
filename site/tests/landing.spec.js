@@ -11,7 +11,7 @@ test("the guide presents and filters the current installed model inventory", asy
   await page.goto("/");
 
   await expect(page.locator("main h1")).toContainText(
-    "Every local model on this Mac, in one guide.",
+    "Models from this Mac, in one dated guide.",
   );
   await expect(page.getByText("24", { exact: true }).first()).toBeVisible();
   await expect(page.getByRole("heading", { name: "Qwen3 Coder 30B A3B" }).first()).toBeVisible();
