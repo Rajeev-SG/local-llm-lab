@@ -17,6 +17,96 @@ SITE_FILE = ROOT / "site" / "src" / "current-models.json"
 HF_CACHE = Path.home() / ".cache" / "huggingface" / "hub"
 OLLAMA_MANIFESTS = Path.home() / ".ollama" / "models" / "manifests"
 
+PUBLIC_TOP_LEVEL_FIELDS = {
+    "schema_version",
+    "generated_at",
+    "machine",
+    "summary",
+    "installed_models",
+    "aliases",
+    "previously_tested",
+    "score_definition",
+}
+PUBLIC_MODEL_FIELDS = {
+    "build_id",
+    "label",
+    "runtime",
+    "model_name",
+    "cache_repo",
+    "manifest_path",
+    "size_gb",
+    "parameters",
+    "quantization",
+    "context_tokens",
+    "modalities",
+    "capabilities",
+    "aliases",
+    "best_for",
+    "caution",
+    "source_url",
+    "installed",
+    "benchmark",
+}
+PUBLIC_BENCHMARK_FIELDS = {
+    "rank",
+    "status",
+    "work_fit_score",
+    "quality_score",
+    "generation_tokens_per_second",
+    "generation_speed_basis",
+    "peak_memory_gb",
+    "successful_tasks",
+    "task_count",
+    "artifact",
+}
+
+
+def validate_public_payload(payload: dict[str, Any]) -> list[str]:
+    """Return publication-blocking errors for the safe, dated site schema."""
+
+    errors: list[str] = []
+    unexpected = set(payload) - PUBLIC_TOP_LEVEL_FIELDS
+    if unexpected:
+        errors.append(f"unexpected top-level fields: {sorted(unexpected)}")
+    if payload.get("schema_version") != 2:
+        errors.append("schema_version must be 2")
+
+    generated_at = payload.get("generated_at")
+    try:
+        parsed_date = datetime.fromisoformat(str(generated_at).replace("Z", "+00:00"))
+        if parsed_date.tzinfo is None:
+            errors.append("generated_at must include a timezone")
+        elif parsed_date > datetime.now(timezone.utc):
+            errors.append("generated_at cannot be in the future")
+    except (TypeError, ValueError):
+        errors.append("generated_at must be an ISO-8601 date")
+
+    if not isinstance(payload.get("machine"), str) or not payload["machine"].strip():
+        errors.append("machine must be a non-empty public scope description")
+    if not isinstance(payload.get("installed_models"), list):
+        errors.append("installed_models must be a list")
+    for index, model in enumerate(payload.get("installed_models", [])):
+        if not isinstance(model, dict):
+            errors.append(f"installed_models[{index}] must be an object")
+            continue
+        unexpected_model = set(model) - PUBLIC_MODEL_FIELDS
+        if unexpected_model:
+            errors.append(f"installed_models[{index}] has unexpected fields: {sorted(unexpected_model)}")
+        for required in ("build_id", "label", "runtime", "model_name", "source_url"):
+            if not isinstance(model.get(required), str) or not model[required].strip():
+                errors.append(f"installed_models[{index}].{required} must be non-empty")
+        benchmark = model.get("benchmark")
+        if benchmark is not None:
+            if not isinstance(benchmark, dict):
+                errors.append(f"installed_models[{index}].benchmark must be an object or null")
+            else:
+                unexpected_benchmark = set(benchmark) - PUBLIC_BENCHMARK_FIELDS
+                if unexpected_benchmark:
+                    errors.append(
+                        f"installed_models[{index}].benchmark has unexpected fields: {sorted(unexpected_benchmark)}"
+                    )
+    return errors
+
 
 def is_installed(model: dict[str, Any]) -> bool:
     runtime = model["runtime"]
@@ -118,7 +208,7 @@ def main() -> int:
         model for model in installed if (model.get("benchmark") or {}).get("rank") is not None
     ]
     payload = {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "machine": metadata["machine"],
         "summary": {
@@ -136,6 +226,10 @@ def main() -> int:
         "previously_tested": previously_tested,
         "score_definition": leaderboard["score_definition"],
     }
+
+    validation_errors = validate_public_payload(payload)
+    if validation_errors:
+        raise ValueError("Refusing to write invalid public model guide: " + "; ".join(validation_errors))
 
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
     rendered = json.dumps(payload, indent=2) + "\n"

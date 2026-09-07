@@ -202,7 +202,9 @@ export default function App() {
   const [capability, setCapability] = useState("all");
   const [sort, setSort] = useState("rank");
 
-  const installed = guide.installed_models;
+  const installed = Array.isArray(guide.installed_models) ? guide.installed_models : [];
+  const aliases = Array.isArray(guide.aliases) ? guide.aliases : [];
+  const previouslyTested = Array.isArray(guide.previously_tested) ? guide.previously_tested : [];
   const recommendations = {
     code: installed.find((model) => model.benchmark?.rank === 1),
     broad: installed.find((model) => model.benchmark?.rank === 2),
@@ -252,11 +254,21 @@ export default function App() {
     });
   }, [capability, installed, query, runtime, sort]);
 
-  const generatedDate = new Intl.DateTimeFormat("en-GB", {
+  const generatedDate = guide.generated_at
+    ? new Intl.DateTimeFormat("en-GB", {
     day: "numeric",
     month: "long",
     year: "numeric",
-  }).format(new Date(guide.generated_at));
+      }).format(new Date(guide.generated_at))
+    : "date unavailable";
+  const snapshotAgeDays = guide.generated_at
+    ? Math.max(0, Math.floor((Date.now() - new Date(guide.generated_at).getTime()) / 86_400_000))
+    : null;
+  const snapshotStatus = snapshotAgeDays === null
+    ? "Date unavailable"
+    : snapshotAgeDays > 31
+      ? "Stale snapshot"
+      : "Dated snapshot";
 
   return (
     <div className="page-shell">
@@ -281,11 +293,11 @@ export default function App() {
       <main id="top">
         <section className="hero">
           <div className="hero-copy">
-            <p className="eyebrow">Live local inventory · {generatedDate}</p>
-            <h1>Every local model on this Mac, in one guide.</h1>
+            <p className="eyebrow">{snapshotStatus} · {generatedDate}</p>
+            <h1>Models from this Mac, in one dated guide.</h1>
             <p className="lede">
               Choose a model without reopening benchmark notes or searching model
-              cards. This page joins the current installed inventory with measured
+              cards. This page joins a dated installed-inventory snapshot with measured
               local quality, speed, memory, context length, modalities, capabilities,
               tuned aliases, and exact source builds.
             </p>
@@ -300,7 +312,7 @@ export default function App() {
           </div>
 
           <aside className="inventory-summary" aria-label="Current inventory summary">
-            <p className="summary-kicker">On this machine now</p>
+            <p className="summary-kicker">Snapshot scope</p>
             <dl>
               <div>
                 <dt>Installed builds</dt>
@@ -320,8 +332,9 @@ export default function App() {
               </div>
             </dl>
             <p className="summary-note">
-              MLX uses host unified memory directly. Ollama provides the easiest chat
-              path. Apple’s system model is always on-device but has a 4K context.
+              This is a dated, machine-specific snapshot—not a live inventory feed.
+              MLX uses host unified memory directly, while Ollama provides the easiest
+              chat path. Missing scores mean that exact build was not comparable.
             </p>
           </aside>
         </section>
@@ -330,11 +343,11 @@ export default function App() {
           <div className="section-heading split-heading">
             <div>
               <p className="eyebrow">Start here</p>
-              <h2>Four models cover most local work.</h2>
+              <h2>{installed.length ? "Four models cover most local work." : "No recommendations are available."}</h2>
             </div>
             <p>
-              These are recommendations from this Mac’s local measurements, not
-              vendor benchmark claims.
+              These are recommendations from this Mac’s dated local measurements, not
+              vendor benchmark claims. They do not imply current availability.
             </p>
           </div>
           <div className="recommendation-grid">
@@ -342,25 +355,25 @@ export default function App() {
               <p className="recommendation-role">Coding default</p>
               <h3>{recommendations.code?.label}</h3>
               <p>{recommendations.code?.best_for}</p>
-              <a href="#inventory">Local rank #1 · 98.3 work-fit</a>
+              <a href="#inventory">{recommendations.code ? "Local rank #1 · measured here" : "Unavailable in this snapshot"}</a>
             </article>
             <article>
               <p className="recommendation-role">Broad and visual</p>
               <h3>{recommendations.broad?.label}</h3>
               <p>{recommendations.broad?.best_for}</p>
-              <a href="#inventory">Local rank #2 · image input</a>
+              <a href="#inventory">{recommendations.broad ? "Local rank #2 · measured here" : "Unavailable in this snapshot"}</a>
             </article>
             <article>
               <p className="recommendation-role">Small high-quality helper</p>
               <h3>{recommendations.compact?.label}</h3>
               <p>{recommendations.compact?.best_for}</p>
-              <a href="#inventory">Local rank #3 · 6.9 GB</a>
+              <a href="#inventory">{recommendations.compact ? "Local rank #3 · measured here" : "Unavailable in this snapshot"}</a>
             </article>
             <article>
               <p className="recommendation-role">Speech</p>
               <h3>{recommendations.speech?.label}</h3>
               <p>{recommendations.speech?.best_for}</p>
-              <a href="#inventory">Audio input · 1.6 GB</a>
+              <a href="#inventory">{recommendations.speech ? "Audio input · measured here" : "Unavailable in this snapshot"}</a>
             </article>
           </div>
         </section>
@@ -368,7 +381,7 @@ export default function App() {
         <section className="inventory section" id="inventory">
           <div className="section-heading split-heading">
             <div>
-              <p className="eyebrow">Current installed inventory</p>
+              <p className="eyebrow">Dated installed snapshot</p>
               <h2>Compare every exact build.</h2>
             </div>
             <p>
@@ -441,7 +454,8 @@ export default function App() {
             </ol>
           ) : (
             <div className="empty-state">
-              <h3>No installed model matches those filters.</h3>
+              <h3>{installed.length ? "No installed model matches those filters." : "No model snapshot is available."}</h3>
+              <p>{installed.length ? "Try a broader search or clear the filters." : "The public guide is waiting for a validated dated packet."}</p>
               <button
                 type="button"
                 onClick={() => {
@@ -470,7 +484,7 @@ export default function App() {
               <span role="columnheader">Use this name</span>
               <span role="columnheader">Based on</span>
             </div>
-            {guide.aliases.map((item) => (
+            {aliases.map((item) => (
               <div className="alias-row" role="row" key={item.alias}>
                 <code role="cell">{item.alias}</code>
                 <span role="cell">{item.base_model}</span>
@@ -492,7 +506,7 @@ export default function App() {
             </p>
           </div>
           <div className="historical-table">
-            {guide.previously_tested.map((model) => (
+            {previouslyTested.map((model) => (
               <article key={model.build_id}>
                 <div>
                   <h3>{model.label}</h3>
@@ -608,8 +622,8 @@ apfel --model-info`}</code>
 
       <footer className="footer">
         <p>
-          Generated from the live caches on {generatedDate}. Historical benchmark
-          evidence is preserved when a model is removed.
+          Generated from a dated local evidence snapshot on {generatedDate}. Historical
+          benchmark evidence is preserved when a model is removed; this page is not live.
         </p>
         <a href="#top">Back to top ↑</a>
       </footer>
