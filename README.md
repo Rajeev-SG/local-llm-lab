@@ -25,11 +25,11 @@ Everything needed to choose a local model:
 |---|---|
 | Hardware | Apple M5 Pro, 48 GB unified memory, 15 CPU / 16 GPU cores |
 | Installed builds / tuned aliases | 24 installed, 14 fully comparable, 7 aliases |
-| Model data on disk | 320.8 GB (decimal sizes) |
-| Free disk space | about 187 GiB |
-| Runtimes | Direct MLX, Ollama, MLX audio/vision, Apple Foundation Models (`apfel`) |
+| Model data on disk | 320.8 GB across curated builds (pipeline sum); ~339 GiB total HF + Ollama + Magnitude caches (`du`) |
+| Free disk space | ~25 GiB (measured 9 Sep 2026 — tight; free space before pulling large models) |
+| Runtimes | Direct MLX, Ollama, MLX audio/vision, Apple Foundation Models (`apfel`), Magnitude (llama.cpp service) |
 
-Inventory refreshed 23 Aug 2026 from the Hugging Face cache, Ollama manifests, and `apfel --model-info`.
+Inventory refreshed 9 Sep 2026 from the Hugging Face cache, Ollama manifests, and `apfel --model-info`.
 
 ## Model leaderboard
 
