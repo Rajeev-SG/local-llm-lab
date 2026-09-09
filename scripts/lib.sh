@@ -3,7 +3,7 @@ set -euo pipefail
 
 LAB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OPENWEBUI_CONTAINER_NAME="${OPENWEBUI_CONTAINER_NAME:-open-webui-lab}"
-OPENWEBUI_IMAGE="${OPENWEBUI_IMAGE:-ghcr.io/open-webui/open-webui:main}"
+OPENWEBUI_IMAGE="${OPENWEBUI_IMAGE:-ghcr.io/open-webui/open-webui@sha256:6bb1fbe8ab0a3e0456067f493044ffb66a30a65a34be47f6a5862176a370dd16}"
 OPENWEBUI_VOLUME_NAME="${OPENWEBUI_VOLUME_NAME:-open-webui-data}"
 OPENWEBUI_PORT_FILE="${LAB_ROOT}/.openwebui-port"
 OPENWEBUI_INTERNAL_PORT="${OPENWEBUI_INTERNAL_PORT:-8080}"

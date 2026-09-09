@@ -1,5 +1,9 @@
 .DS_Store
 .openwebui-port
+.env.local
+.ntm/
+output/backups/
+output/acceptance/openwebui-proof/
 .playwright-cli/
 .python-version
 __pycache__/

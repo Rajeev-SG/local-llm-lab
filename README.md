@@ -154,9 +154,32 @@ python3 ./scripts/generate-overall-leaderboard.py
 ```bash
 ./scripts/start-ollama.sh
 ./scripts/start-openwebui.sh
-./scripts/setup-agent-offload-models.sh
+./scripts/setup-openwebui-role-models.sh
 ollama run qwen3.5:9b
 ```
+
+The `setup-openwebui-role-models.sh` script synchronizes the installed Ollama models with Open WebUI, applying clean labels and role presets. Models are displayed as:
+`Local LLM Lab — <Label> · <Param Size> · <Disk Size> GB`
+
+The script automatically detects the Ollama runtime memory (e.g. 15.7 GB when containerized in Docker/OrbStack) and labels models exceeding 70% of that memory as `Needs more RAM`. A default context cap of 8192 is applied to improve stability, unless overridden via `OPENWEBUI_LOCAL_NUM_CTX`. Registry syntax and `:latest` tags are omitted from display names for clarity.
+
+For a reproducible Open WebUI deployment, use the pinned Compose setup. It
+recreates only the named container and preserves `open-webui-data`:
+
+```bash
+cp config/openwebui.env.example .env.local
+./scripts/start-ollama.sh
+./scripts/setup-openwebui.sh
+./scripts/restore-ollama-models.sh
+./scripts/doctor.sh
+```
+
+Set `OPENROUTER_API_KEY` in the invoking environment, or set
+`OPENAI_API_KEYS` in the ignored `.env.local`, to enable the OpenAI-compatible
+OpenRouter connection. Never commit either value. Use
+`./scripts/rollback-openwebui.sh <known-good-version-or-digest>` to change the
+image without deleting the volume. The constrained bridge and isolated browser
+proof flow are documented in [docs/openwebui-secure-setup.md](./docs/openwebui-secure-setup.md).
 
 ### Direct MLX
 
