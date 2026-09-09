@@ -5,6 +5,7 @@ A measured guide to the local AI models available on this Apple Silicon Mac.
 - Live guide: [local-llm-lab.vercel.app](https://local-llm-lab.vercel.app)
 - Full historical results: [overall-leaderboard.md](./overall-leaderboard.md)
 - Raw benchmark data: [output/benchmarks](./output/benchmarks)
+- Magnitude (llama.cpp) frontier and memory audit, 2026-09-09: [magnitude-llamacpp-evaluation-2026-09-09.md](./magnitude-llamacpp-evaluation-2026-09-09.md)
 
 ![The current installed-model guide](./output/playwright/model-guide-20260730/hero-desktop.png)
 
