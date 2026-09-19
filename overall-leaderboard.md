@@ -1,6 +1,6 @@
 # Overall Local Model Leaderboard
 
-- Generated: `2026-09-19T19:41:44+00:00`
+- Generated: `2026-09-19T20:51:20+00:00`
 - Machine: `Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores`
 - Exact model builds recorded: `28`
 - Fully capability-benchmarked builds: `19`

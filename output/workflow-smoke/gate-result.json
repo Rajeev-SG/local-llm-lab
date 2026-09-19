@@ -1,23 +1,30 @@
 {
-  "captured_at": "2026-09-19T19:37:17+00:00",
-  "subject": "Ternary Bonsai 2 27B (PQ2_0 GGUF, PrismML llama.cpp)",
-  "workflow_tests_run": 5,
-  "workflow_tests_passed": 5,
+  "pass_threshold": 0.8,
+  "tests_run": 5,
+  "tests_full_passes": 4,
+  "partial_tests": [
+    "5_long_context_diagnosis"
+  ],
+  "failed_tests": [],
   "human_rescues": 0,
-  "tool_loop_failures_total": 0,
-  "median_wall_clock_ms": {
-    "bonsai": 1818.9,
-    "qwen3.8-27B_mlx4": 3500.3,
-    "qwen3_coder_30b_a3b_mlx4": 834.3
-  },
-  "wall_clock_ratio_vs_qwen3.8-27B": 0.52,
-  "wall_clock_ratio_vs_coding_leader": 2.18,
+  "tool_failures_total": 0,
   "limbs": {
     "passes_ge_4_of_5": true,
     "rescue_le_1": true,
-    "within_1.5x_of_dense_compression_source": true,
-    "within_1.5x_of_coding_leader": false
+    "within_1.5x_same_task_comparator": false
   },
-  "verdict": "WORKFLOW_CANDIDATE",
-  "verdict_basis": "Comparators are the 8-task capability suite (identical tasks + evaluators). Bonsai is a ternary compression of Qwen3.8-27B, so that is the primary latency control; the MLX coding leader is reported as the speed ceiling."
+  "wall_clock_ratio": 2.39,
+  "verdict": "BACKGROUND_HELPER_ONLY",
+  "latency_basis": "shared 8-task capability suite (same tasks + evaluators)",
+  "subject_capability_median_ms": 1801.5,
+  "comparator_capability_median_ms": 752.25,
+  "comparator_label": "Qwen3 Coder 30B A3B (MLX 4-bit)",
+  "relevant_comparator": "Qwen3 Coder 30B A3B (MLX 4-bit) \u2014 the current local coding leader, i.e. what a user would actually replace",
+  "secondary_comparator": {
+    "label": "Qwen3.8-27B (MLX 4-bit)",
+    "wall_clock_ratio": 0.55,
+    "median_ms": 3279.3500000000004,
+    "note": "Qwen3.8-27B is the model Bonsai compresses; Bonsai is 0.55x its latency. Against the coding leader it is 2.39x slower."
+  },
+  "verdict_basis": "Same-task latency basis: the shared 8-task capability suite, which the Qwen comparators ran. The five workflow fixtures are new in this PR, so they contribute pass/fail and rescues only. Against the relevant comparator (the coding leader a user would replace) Bonsai is 2.39x slower, so it lands in the middle tier rather than the top tier."
 }

@@ -55,7 +55,7 @@ text runs, not vision or Ollama runs; context and modality are unknown for remov
 | 12 | phi4 | ollama | 16,384 | 9.1 | Text | Completion | 86.2 | 90.8 | 11309.7 | — | 10.3 | — | 8/8 | benchmarked |  |
 | 13 | GLM-4.7-Flash (MLX 4-bit) | mlx | — | 16.9 | — | — | 86 | 84 | 1297.8 | 1148.2 | 69.7 | 17.5 | 8/8 | passed | removed |
 | 14 | mistral-small:22b | ollama | 131,072 | 12.6 | Text | Tools, Long context | 82.6 | 90 | 25128 | — | 5.8 | — | 8/8 | benchmarked |  |
-| 15 | Ternary Bonsai 2 27B (PQ2_0 GGUF, llama.cpp) | llamacpp | 262,144 | 7.2 | Text,Image | Vision, Code, Tools, Thinking, Long context | 79.8 | 76.8 | 1801.5 | 288.4 | 23.1 | 7.5 | 8/8 | passed |  |
+| 15 | Ternary Bonsai 2 27B (PQ2_0 GGUF, llama.cpp) | llamacpp | 32,768 | 7.2 | Text | Code, Tools | 79.8 | 76.8 | 1801.5 | 288.4 | 23.1 | 7.5 | 8/8 | passed | tested at 32k; vision not exercised |
 | 16 | Qwen3.5 9B (MLX 4-bit) | mlx | — | 6 | — | — | 78.6 | 74.8 | 1298.4 | 1044.9 | 53.4 | 5.9 | 8/8 | passed | removed |
 | 17 | gpt-oss-20b (MLX MXFP4/Q4) | mlx | — | 11.2 | — | — | 70.6 | 65.8 | 2425.1 | 1804.7 | 98.4 | 11.7 | 8/8 | passed | removed |
 | 18 | apfel | apfel | 4,096 | — | Text | System on-device | 63.7 | 55.8 | 961.4 | — | — | — | 8/8 | benchmarked |  |

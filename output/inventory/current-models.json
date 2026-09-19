@@ -507,20 +507,16 @@
       "size_gb": 7.21,
       "parameters": "27B dense (ternary 2-bit)",
       "quantization": "PQ2_0 GGUF (2.13 bpw)",
-      "context_tokens": 262144,
+      "context_tokens": 32768,
       "modalities": [
-        "Text",
-        "Image"
+        "Text"
       ],
       "capabilities": [
-        "Vision",
         "Code",
-        "Tools",
-        "Thinking",
-        "Long context"
+        "Tools"
       ],
-      "best_for": "Small fixes, review, triage, browser/tool driving and long-context analysis when disk or memory is the binding constraint",
-      "caution": "Requires the PrismML llama.cpp fork (stock llama.cpp cannot read these weights). Decodes ~3x slower than the MLX coding leader.",
+      "best_for": "Small fixes, review, triage and long-context analysis when disk or memory is the binding constraint",
+      "caution": "Requires the PrismML llama.cpp fork (stock llama.cpp cannot read these weights). Tested at 32k context; vision and 262k context were not exercised. ~2.4x slower than the MLX coding leader.",
       "source_url": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf",
       "installed": true,
       "benchmark": {
