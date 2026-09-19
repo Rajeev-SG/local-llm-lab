@@ -68,24 +68,31 @@ comparable (same tasks, same evaluators, same machine). No new model was downloa
 
 - ≥4/5 tasks pass — **yes (4 full passes + 1 partial at 0.75)**
 - ≤1 human rescue — **yes (0)**
-- median wall-clock ≤1.5x the relevant comparator — **depends on the comparator**
+- median wall-clock ≤1.5x the relevant comparator — **NOT EVALUATED**
 
-Latency is measured on the shared 8-task capability suite, because the five
-workflow fixtures are new in this PR and no comparator has run them (so they
-contribute pass/fail and rescues only, never the latency ratio):
+The latency leg cannot be evaluated with same-task evidence: the five workflow
+fixtures are new in this PR and no comparator build has run them. (Re-running the
+comparators would require re-downloading the Qwen builds and was explicitly out of
+scope for this task.) The capability-suite numbers below are recorded as a
+**proxy only** and are not used to classify the tier.
 
-| Comparator | Median latency | Ratio | Within 1.5x? |
-|---|---:|---:|---|
-| Qwen3.8-27B (MLX 4-bit) — the model Bonsai compresses | 3,279 ms | **0.55x** | yes |
-| Qwen3 Coder 30B A3B (MLX 4-bit) — the coding default it would replace | 752 ms | **2.39x** | no |
+| Proxy basis (8-task capability suite — NOT the workflow tasks) | Median latency |
+|---|---:|
+| Ternary Bonsai 2 27B | 6,022 ms (this run; 1,802 ms on a quieter run) |
+| Qwen3.8-27B (MLX 4-bit) — the model Bonsai compresses | 3,279 ms |
+| Qwen3 Coder 30B A3B (MLX 4-bit) — the coding default it would replace | 752 ms |
+
+Bonsai's capability-suite median varied from 1.8 s to 6.3 s across runs with the
+machine's background load (Chrome, OrbStack, other agents), so even the proxy is
+noisy. On decode throughput it is 23.2 t/s vs the coding leader's 97 t/s.
 
 **Verdict: BACKGROUND/HELPER ONLY.**
 
-Bonsai is reliable (4 full passes, 1 partial, 0 rescues, 0 tool failures) but
-materially slower than the coding leader. Per the issue's gate, "materially slower,
-but reliable enough for review/triage/summarisation/cheap background loops" is the
-middle tier. It is not a drop-in replacement for the interactive coding default, but
-it is genuinely capable and half the speed of its own dense parent.
+The reliable half of the gate is unambiguous: 4 full passes, 1 partial, 0 rescues,
+0 tool-loop failures across coding, comprehension, browser tool-driving and
+long-context diagnosis. The latency leg is unproven on the tasks that matter, so
+the top tier cannot be claimed. Per the issue's middle tier — "reliable enough for
+review/triage/summarisation/cheap background loops" — Bonsai fits there.
 
 ## Measured characteristics
 
@@ -127,7 +134,7 @@ it is genuinely capable and half the speed of its own dense parent.
 ## Result
 
 **BACKGROUND/HELPER ONLY** — integrated into the leaderboard as a measured build
-(rank 15 of 19) with its true tier recorded, not promoted as a default.
+(rank 16 of 19) with its true tier recorded, not promoted as a default.
 
 ## Corrections applied after review
 

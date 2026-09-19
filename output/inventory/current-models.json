@@ -516,13 +516,13 @@
         "Tools"
       ],
       "best_for": "Small fixes, review, triage and long-context analysis when disk or memory is the binding constraint",
-      "caution": "Requires the PrismML llama.cpp fork (stock llama.cpp cannot read these weights). Tested at 32k context; vision and 262k context were not exercised. ~2.4x slower than the MLX coding leader.",
+      "caution": "Requires the PrismML llama.cpp fork (stock llama.cpp cannot read these weights). Tested at 32k context; vision and 262k context were not exercised. Capability-suite latency varies 1.8-6.3 s with machine load.",
       "source_url": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf",
       "installed": true,
       "benchmark": {
-        "rank": 15,
+        "rank": 16,
         "status": "passed",
-        "work_fit_score": 79.8,
+        "work_fit_score": 77.1,
         "quality_score": 76.8,
         "generation_tokens_per_second": 23.15,
         "generation_speed_basis": "isolated llama.cpp bench",

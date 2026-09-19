@@ -97,7 +97,13 @@ def evaluate(subject: dict, comparator: dict | None) -> dict:
 
 
 def capability_median_ms(artifact: Path, slug: str) -> float | None:
-    """Median latency of the shared 8-task capability suite for one build."""
+    """Median latency of the shared 8-task capability suite for one build.
+
+    NOTE: this is a PROXY, not the workflow tasks. The five workflow fixtures are
+    new in this PR and no comparator has run them, so the issue #18 latency leg
+    ("median wall-clock <=1.5x the relevant comparator") cannot be evaluated with
+    same-task evidence. Providing this number is descriptive only and MUST NOT be
+    used to classify into the top tier."""
     data = load(artifact)
     results = (data.get("results") or {}).get(slug) or {}
     latencies = sorted(
@@ -137,17 +143,22 @@ def main() -> int:
         result["comparator_capability_median_ms"] = c_med
         result["comparator_label"] = args.comparator_label
         result["wall_clock_ratio"] = ratio
-        within = ratio is not None and ratio <= 1.5
-        result["limbs"]["within_1.5x_same_task_comparator"] = within
-        if result["tests_full_passes"] >= 4 and result["human_rescues"] <= 1 and within:
-            result["verdict"] = "WORKFLOW_CANDIDATE"
-        elif result["tests_full_passes"] >= 3:
+        # The latency leg cannot be satisfied with same-task evidence: no
+        # comparator has run the workflow fixtures. Record the proxy ratio for
+        # context but never use it to reach the top tier.
+        result["limbs"]["within_1.5x_same_task_comparator"] = "not_evaluated_no_same_task_comparator"
+        result["latency_proxy_note"] = (
+            "Proxy only: capability-suite median latency, not the workflow tasks. "
+            "The issue's <=1.5x leg is unevaluated because no comparator has run "
+            "these fixtures. Top tier cannot be claimed without same-task evidence."
+        )
+        if result["tests_full_passes"] >= 3:
             result["verdict"] = "BACKGROUND_HELPER_ONLY"
         else:
             result["verdict"] = "DO_NOT_INTEGRATE"
     else:
         result["latency_basis"] = "workflow fixtures only (no same-task comparator; latency leg omitted)"
-        result["limbs"]["within_1.5x_same_task_comparator"] = None
+        result["limbs"]["within_1.5x_same_task_comparator"] = "not_evaluated_no_same_task_comparator"
 
     print(json.dumps(result, indent=2))
     return 0

@@ -1,6 +1,6 @@
 # Overall Local Model Leaderboard
 
-- Generated: `2026-09-19T20:51:20+00:00`
+- Generated: `2026-09-19T21:22:19+00:00`
 - Machine: `Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores`
 - Exact model builds recorded: `28`
 - Fully capability-benchmarked builds: `19`
@@ -25,8 +25,8 @@ The work-fit score puts most weight on structured coding-adjacent tasks, then re
 | 12 | phi4 | ollama | 86.2 | 90.8 | 11.31 s | 10.3 tok/s | n/a |
 | 13 | GLM-4.7-Flash (MLX 4-bit) | mlx | 86.0 | 84.0 | 1.30 s | 69.7 tok/s | 17.5 GB |
 | 14 | mistral-small:22b | ollama | 82.6 | 90.0 | 25.13 s | 5.8 tok/s | n/a |
-| 15 | Ternary Bonsai 2 27B (PQ2_0 GGUF, llama.cpp) | llamacpp | 79.8 | 76.8 | 1.80 s | 23.1 tok/s | 7.5 GB |
-| 16 | Qwen3.5 9B (MLX 4-bit) | mlx | 78.6 | 74.8 | 1.30 s | 53.4 tok/s | 5.9 GB |
+| 15 | Qwen3.5 9B (MLX 4-bit) | mlx | 78.6 | 74.8 | 1.30 s | 53.4 tok/s | 5.9 GB |
+| 16 | Ternary Bonsai 2 27B (PQ2_0 GGUF, llama.cpp) | llamacpp | 77.1 | 76.8 | 6.02 s | 23.1 tok/s | 7.5 GB |
 | 17 | gpt-oss-20b (MLX MXFP4/Q4) | mlx | 70.6 | 65.8 | 2.43 s | 98.4 tok/s | 11.7 GB |
 | 18 | apfel | apfel | 63.7 | 55.8 | 0.96 s | n/a | n/a |
 | 19 | LFM2 24B A2B (MLX 4-bit) | mlx | 63.3 | 54.8 | 0.53 s | 139.2 tok/s | 13.8 GB |
