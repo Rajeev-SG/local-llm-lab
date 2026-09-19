@@ -1,0 +1,18 @@
+{
+  "captured_at": "2026-09-19T19:29:49+00:00",
+  "model": "Ternary Bonsai 2 27B PQ2_0",
+  "context_tokens": 32768,
+  "server_process": {
+    "pid": 15671,
+    "rss_mb": 10017.9
+  },
+  "vm_stat_mb": {
+    "Pages free": 10025.0,
+    "Pages active": 8877.0,
+    "Pages inactive": 8741.0,
+    "Pages wired down": 15433.0,
+    "Pages occupied by compressor": 5004.0
+  },
+  "swap": "total = 17408.00M  used = 15883.00M  free = 1525.00M  (encrypted)",
+  "note": "Measured while the server held a 32k context and the Mac had heavy background load (Chrome, OrbStack, other agents). The model itself is 10.0 GB RSS; the machine was already swapping before load."
+}

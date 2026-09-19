@@ -115,6 +115,14 @@ def is_installed(model: dict[str, Any]) -> bool:
         return (HF_CACHE / f"models--{repo}").exists()
     if runtime == "ollama":
         return (OLLAMA_MANIFESTS / model["manifest_path"]).exists()
+    if runtime == "llamacpp":
+        # llama.cpp builds are installed outside the HF/Ollama caches; treat a
+        # build as installed when its weights are present on disk.
+        weight = model.get("model_name")
+        if not weight:
+            return False
+        candidates = [Path.home() / "models" / "bonsai2" / weight]
+        return any(path.exists() for path in candidates)
     if runtime == "apfel":
         executable = shutil.which("apfel")
         if not executable:

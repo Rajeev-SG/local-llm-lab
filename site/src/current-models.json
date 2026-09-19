@@ -3,17 +3,18 @@
   "generated_at": "2026-09-09T14:12:52+00:00",
   "machine": "Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores",
   "summary": {
-    "installed_builds": 24,
-    "ranked_installed_builds": 14,
+    "installed_builds": 25,
+    "ranked_installed_builds": 15,
     "aliases": 7,
     "runtimes": [
       "apfel",
+      "llamacpp",
       "mlx",
       "mlx_audio",
       "mlx_vlm",
       "ollama"
     ],
-    "installed_storage_gb": 320.8,
+    "installed_storage_gb": 328.0,
     "top_model": "Qwen3 Coder 30B A3B"
   },
   "installed_models": [
@@ -494,6 +495,41 @@
         "successful_tasks": 8,
         "task_count": 8,
         "artifact": "output/benchmarks/capability-benchmark-20260409T173011Z.json"
+      }
+    },
+    {
+      "build_id": "llamacpp:Ternary-Bonsai-2-27B-PQ2_0.gguf",
+      "label": "Ternary Bonsai 2 27B",
+      "runtime": "llamacpp",
+      "model_name": "Ternary-Bonsai-2-27B-PQ2_0.gguf",
+      "cache_repo": "prism-ml/Ternary-Bonsai-2-27B-gguf",
+      "manifest_path": null,
+      "size_gb": 7.21,
+      "parameters": "27B dense (ternary 2-bit)",
+      "quantization": "PQ2_0 GGUF (2.13 bpw)",
+      "context_tokens": 32768,
+      "modalities": [
+        "Text"
+      ],
+      "capabilities": [
+        "Code",
+        "Tools"
+      ],
+      "best_for": "Small fixes, review, triage and long-context analysis when disk or memory is the binding constraint",
+      "caution": "Requires the PrismML llama.cpp fork (stock llama.cpp cannot read these weights). Tested at 32k context; vision and 262k context were not exercised. Capability-suite latency varies 1.8-6.3 s with machine load.",
+      "source_url": "https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf",
+      "installed": true,
+      "benchmark": {
+        "rank": 16,
+        "status": "passed",
+        "work_fit_score": 77.1,
+        "quality_score": 76.8,
+        "generation_tokens_per_second": 23.15,
+        "generation_speed_basis": "isolated llama.cpp bench",
+        "peak_memory_gb": 7.5,
+        "successful_tasks": 8,
+        "task_count": 8,
+        "artifact": "output/benchmarks/capability-benchmark-bonsai-bonsai2_27b_llamacpp.json"
       }
     },
     {

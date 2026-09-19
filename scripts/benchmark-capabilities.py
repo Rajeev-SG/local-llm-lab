@@ -478,14 +478,26 @@ def evaluate_shell(response: str) -> dict[str, Any]:
     actual = normalize_shell_output(proc.stdout)
     matches = sum(1 for expected, got in zip(SHELL_EXPECTED, actual) if expected == got)
     score = matches / 3
+    # The task prompt requires the exact "<count> <ip>" column order. Detect a
+    # right-data/wrong-order answer so the evidence distinguishes a format miss
+    # from a wrong computation (the pairs are identical, only reversed).
+    reversed_order = actual == [" ".join(reversed(line.split())) for line in SHELL_EXPECTED]
     if actual == SHELL_EXPECTED:
         summary = "Exact match on top-3 IP count pipeline"
+    elif reversed_order:
+        summary = "Correct counts and IPs, wrong column order (prompt asks for '<count> <ip>')"
     else:
         summary = f"Matched {matches}/3 expected lines"
     return {
         "score": round(score, 3),
         "summary": summary,
-        "details": {"command": command, "actual": actual, "expected": SHELL_EXPECTED, "stderr": proc.stderr.strip()},
+        "details": {
+            "command": command,
+            "actual": actual,
+            "expected": SHELL_EXPECTED,
+            "reversed_column_order": reversed_order,
+            "stderr": proc.stderr.strip(),
+        },
     }
 
 

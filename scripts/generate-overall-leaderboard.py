@@ -92,7 +92,9 @@ def score_candidate(
     generation_tps = performance.get("generation_tokens_per_second")
     prompt_tps = performance.get("prompt_tokens_per_second")
     peak_memory_gb = performance.get("peak_memory_gb")
-    generation_speed_basis = "isolated MLX trial" if generation_tps is not None else None
+    generation_speed_basis = None
+    if generation_tps is not None:
+        generation_speed_basis = "isolated MLX trial" if model.get("kind") == "mlx" else "isolated llama.cpp bench"
     if generation_tps is None and model.get("kind") == "ollama":
         generation_tps = derive_ollama_generation_tps(model_results)
         generation_speed_basis = "median Ollama generation counter"

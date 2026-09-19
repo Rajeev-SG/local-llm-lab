@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "workflow": "bonsai-smoke-v1",
+  "model": "bonsai2_27b_llamacpp",
+  "runtime": "llama.cpp (PrismML fork)",
+  "revision": "6ed5e12bf84b7a63069882c91dd9e9218647d17b",
+  "base_url": "http://127.0.0.1:8091",
+  "generated_at": "2026-09-19T19:10:03+00:00",
+  "tests": {
+    "1_small_coding_fix": {
+      "success": true,
+      "check_command": "python3 test_orders.py",
+      "check_returncode": 0,
+      "check_output": "PASS check_line_total_multiplies_quantity\nPASS check_order_subtotal_sums_lines\nPASS check_apply_discount_is_a_percentage\nall 3 checks passed\n",
+      "turns": 5,
+      "tool_failures": 0,
+      "wall_seconds": 37.8,
+      "transcript": [
+        {
+          "role": "assistant",
+          "content": "",
+          "tool": "read_file",
+          "args": {
+            "path": "orders.py"
+          }
+        },
+        {
+          "role": "tool",
+          "name": "read_file",
+          "result": "\"\"\"Tiny order-total module used as a coding-fix fixture.\"\"\"\nfrom dataclasses import dataclass\n\n\n@dataclass\nclass LineItem:\n    name: str\n    price: float\n    quantity: int\n\n\ndef line_total(item: LineItem) -> float:\n    return item.price\n\n\ndef order_subtotal(items):\n    total = 0.0\n    for item in items:\n        total += line_total(item)\n    return total\n\n\ndef apply_discount(subtotal: float, percent: float) -> float:\n    return subtotal - percent\n"
+        },
+        {
+          "role": "assistant",
+          "content": "",
+          "tool": "read_file",
+          "args": {
+            "path": "test_orders.py"
+          }
+        },
+        {
+          "role": "tool",
+          "name": "read_file",
+          "result": "\"\"\"Acceptance checks for the coding-fix fixture.\n\nRunnable with plain python3 (no pytest needed):\n    python3 test_orders.py\nExits non-zero on the first failing check.\n\"\"\"\nimport sys\nfrom orders import LineItem, line_total, order_subtotal, apply_discount\n\n\ndef check_line_total_multiplies_quantity():\n    assert line_total(LineItem(\"widget\", 2.50, 4)) == 10.0\n\n\ndef check_order_subtotal_sums_lines():\n    items = [LineItem(\"a\", 2.50, 4), LineItem(\"b\", 1.00, 3)]\n    assert order_subtotal(items) == 13.0\n\n\ndef check_apply_discount_is_a_percentage():\n    # 10% off 200.00 is 180.00 (not 190.00, which is subtracting a flat amount)\n    assert apply_discount(200.0, 10.0) == 180.0\n\n\nCHECKS = [\n    check_line_total_multiplies_quantity,\n    check_order_subtotal_sums_lines,\n    check_apply_discount_is_a_percentage,\n]\n\n\ndef main():\n    failures = []\n    for check in CHECKS:\n        try:\n            check()\n            print(f\"PASS {check.__name__}\")\n        except AssertionError as exc:\n            failures.append(check.__name__)\n            print(f\"FAIL {check.__name__}: {exc!r}\")\n    if failures:\n        print(f\"{len(failures)}/{len(CHECKS)} checks failed\")\n        return 1\n    print(f\"all {len(CHECKS)} checks passed\")\n    return 0\n\n\nif __name__ == \"__main__\":\n    sys.exit(main())\n"
+        },
+        {
+          "role": "assistant",
+          "content": "",
+          "tool": "write_file",
+          "args": {
+            "path": "orders.py",
+            "content": "\"\"\"Tiny order-total module used as a coding-fix fixture.\"\"\"\nfrom dataclasses import dataclass\n\n\n@dataclass\nclass LineItem:\n    name: str\n    price: float\n    quantity: int\n\n\ndef line_total(item: LineItem) -> float:\n    return item.price * item.quantity\n\n\ndef order_subtotal(items):\n    total = 0.0\n    for item in items:\n        total += line_total(item)\n    return total\n\n\ndef apply_discount(subtotal: float, percent: float) -> float:\n    return subtotal - subtotal * percent / 100\n\n"
+          }
+        },
+        {
+          "role": "tool",
+          "name": "write_file",
+          "result": "wrote orders.py (484 bytes)"
+        },
+        {
+          "role": "assistant",
+          "content": "",
+          "tool": "run_command",
+          "args": {
+            "command": "python3 test_orders.py"
+          }
+        },
+        {
+          "role": "tool",
+          "name": "run_command",
+          "result": "PASS check_line_total_multiplies_quantity\nPASS check_order_subtotal_sums_lines\nPASS check_apply_discount_is_a_percentage\nall 3 checks passed\n"
+        },
+        {
+          "role": "assistant",
+          "content": "",
+          "tool": "finish",
+          "args": {
+            "summary": "Fixed three bugs in orders.py: line_total now multiplies price by quantity, order_subtotal correctly sums line totals (now works via the fixed line_total), and apply_discount now subtracts a percentage (subtotal * percent / 100) instead of a flat amount. All 3 checks in test_orders.py pass."
+          }
+        }
+      ]
+    },
+    "2_repo_comprehension": {
+      "ok": true,
+      "content": "FILE: scripts/generate-overall-leaderboard.py\nFUNCTION: load_benchmark_rows\nWHY: The guide script only renders rows already selected by the leaderboard generator, and the benchmark script only produces raw results without deciding what gets published.",
+      "elapsed_seconds": 22.2,
+      "completion_tokens": 473,
+      "tokens_per_second": 21.31,
+      "evaluation": {
+        "score": 1.0,
+        "checks": {
+          "file": true,
+          "function": true,
+          "why": true
+        }
+      }
+    },
+    "3_agentic_coding_loop": {
+      "success": true,
+      "check_command": "python3 run_checks.py",
+      "check_returncode": 0,
+      "check_output": "PASS check_remove_sku_returns_quantity\nPASS check_total_value_unchanged_after_remove\nPASS check_average_unit_cost_weighted\nPASS check_average_missing_sku_is_zero\nall 4 checks passed\n",
+      "turns": 7,
+      "tool_failures": 0,
+      "wall_seconds": 73.9,
+      "transcript": [
+        {
+          "role": "assistant",
+          "content": "",
+          "tool": "read_file",
+          "args": {
+            "path": "inventory_spec.md"
+          }
+        },
+        {
+          "role": "tool",
+          "name": "read_file",
+          "result": "# Task spec: Warehouse inventory\n\n`inventory.py` defines `Batch`, `Warehouse`, and several methods. Two methods are\nstubs that return wrong placeholder values:\n\n- `Warehouse.remove_sku(sku)` must remove every batch with that SKU and return the\n  total quantity removed. Currently it removes nothing and returns 0.\n- `Warehouse.average_unit_cost(sku)` must return the quantity-weighted average unit\n  cost for that SKU, or `0.0` when the SKU is absent. Currently it always returns 0.0.\n\nMake `run_checks.py` pass. Run it with `python3 run_checks.py`.\n"
+        },
+        {
+          "role": "assistant",
+          "content": "",
+          "tool": "read_file",
+          "args": {
+            "path": "inventory.py"
+          }
+        },
+        {
+          "role": "tool",
+          "name": "read_file",
+          "result": "\"\"\"Warehouse inventory fixture (medium agentic task).\n\nKnown-good target behaviour is encoded in run_checks.py.\n\"\"\"\nfrom dataclasses import dataclass, field\n\n\n@dataclass\nclass Batch:\n    sku: str\n    qty: int\n    unit_cost: float\n\n\n@dataclass\nclass Warehouse:\n    batches: list = field(default_factory=list)\n\n    def add(self, batch: Batch):\n        self.batches.append(batch)\n\n    def quantity_of(self, sku: str) -> int:\n        return sum(b.qty for b in self.batches if b.sku == sku)\n\n    def total_value(self) -> float:\n        return sum(b.qty * b.unit_cost for b in self.batches)\n\n    def remove_sku(self, sku: str) -> int:\n        \"\"\"Remove all batches for sku; return removed quantity.\"\"\"\n        return 0\n\n    def average_unit_cost(self, sku: str) -> float:\n        \"\"\"Quantity-weighted average unit cost for sku; 0.0 if absent.\"\"\"\n        return 0.0\n"
+        },
+        {
+          "role": "assistant",
+          "content": "",
+          "tool": "read_file",
+          "args": {
+            "path": "run_checks.py"
+          }
+        },
+        {
+          "role": "tool",
+          "name": "read_file",
+          "result": "\"\"\"Acceptance checks for the medium agentic coding fixture.\n\npython3 run_checks.py  -> exit 0 only when the task is fully complete.\n\"\"\"\nimport sys\nfrom inventory import Batch, Warehouse\n\n\ndef new_warehouse():\n    w = Warehouse()\n    w.add(Batch(\"A1\", 10, 2.0))\n    w.add(Batch(\"A1\", 5, 4.0))\n    w.add(Batch(\"B2\", 7, 1.0))\n    return w\n\n\ndef check_remove_sku_returns_quantity():\n    w = new_warehouse()\n    removed = w.remove_sku(\"A1\")\n    assert removed == 15, f\"expected 15 removed, got {removed}\"\n    assert w.quantity_of(\"A1\") == 0\n    assert w.quantity_of(\"B2\") == 7\n\n\ndef check_total_value_unchanged_after_remove():\n    w = new_warehouse()\n    w.remove_sku(\"A1\")\n    assert w.total_value() == 7.0\n\n\ndef check_average_unit_cost_weighted():\n    w = new_warehouse()\n    # (10*2 + 5*4)/15 = 40/15 = 2.666...\n    got = w.average_unit_cost(\"A1\")\n    assert abs(got - (40.0 / 15.0)) < 1e-9, f\"got {got}\"\n\n\ndef check_average_missing_sku_is_zero():\n    w = new_warehouse()\n    assert w.average_unit_cost(\"ZZ\") == 0.0\n\n\nCHECKS = [\n    check_remove_sku_returns_quantity,\n    check_total_value_unchanged_after_remove,\n    check_average_unit_cost_weighted,\n    check_average_missing_sku_is_zero,\n]\n\n\ndef main():\n    failures = []\n    for c in CHECKS:\n        try:\n            c()\n            print(f\"PASS {c.__name__}\")\n        except AssertionError as exc:\n            failures.append(c.__name__)\n            print(f\"FAIL {c.__name__}: {exc}\")\n    if failures:\n        print(f\"{len(failures)}/{len(CHECKS)} checks failed\")\n        return 1\n    print(f\"all {len(CHECKS)} checks passed\")\n    return 0\n\n\nif __name__ == \"__main__\":\n    sys.exit(main())\n"
+        },
+        {
+          "role": "assistant",
+          "content": "",
+          "tool": "write_file",
+          "args": {
+            "path": "inventory.py",
+            "content": "\"\"\"Warehouse inventory fixture (medium agentic task).\n\nKnown-good target behaviour is encoded in run_checks.py.\n\"\"\"\nfrom dataclasses import dataclass, field\n\n\n@dataclass\nclass Batch:\n    sku: str\n    qty: int\n    unit_cost: float\n\n\n@dataclass\nclass Warehouse:\n    batches: list = field(default_factory=list)\n\n    def add(self, batch: Batch):\n        self.batches.append(batch)\n\n    def quantity_of(self, sku: str) -> int:\n        return sum(b.qty for b in self.batches if b.sku == sku)\n\n    def total_value(self) -> float:\n        return sum(b.qty * b.unit_cost for b in self.batches)\n\n    def remove_sku(self, sku: str) -> int:\n        \"\"\"Remove all batches for sku; return removed quantity.\"\"\"\n        removed = 0\n        self.batches = [b for b in self.batches if b.sku != sku]\n        for b in self.batches:\n            pass\n        # Recompute removed quantity from the original batches\n        return sum(b.qty for b in self.batches if b.sku == sku)\n\n    def average_unit_cost(self, sku: str) -> float:\n        \"\"\"Quantity-weighted average unit cost for sku; 0.0 if absent.\"\"\"\n        return 0.0\n"
+          }
+        },
+        {
+          "role": "tool",
+          "name": "write_file",
+          "result": "wrote inventory.py (1102 bytes)"
+        },
+        {
+          "role": "assistant",
+          "content": "I made an error in that edit. Let me rewrite it correctly.\n\n",
+          "tool": "write_file",
+          "args": {
+            "content": "\"\"\"Warehouse inventory fixture (medium agentic task).\n\nKnown-good target behaviour is encoded in run_checks.py.\n\"\"\"\nfrom dataclasses import dataclass, field\n\n\n@dataclass\nclass Batch:\n    sku: str\n    qty: int\n    unit_cost: float\n\n\n@dataclass\nclass Warehouse:\n    batches: list = field(default_factory=list)\n\n    def add(self, batch: Batch):\n        self.batches.append(batch)\n\n    def quantity_of(self, sku: str) -> int:\n        return sum(b.qty for b in self.batches if b.sku == sku)\n\n    def total_value(self) -> float:\n        return sum(b.qty * b.unit_cost for b in self.batches)\n\n    def remove_sku(self, sku: str) -> int:\n        \"\"\"Remove all batches for sku; return removed quantity.\"\"\"\n        removed = sum(b.qty for b in self.batches if b.sku == sku)\n        self.batches = [b for b in self.batches if b.sku != sku]\n        return removed\n\n    def average_unit_cost(self, sku: str) -> float:\n        \"\"\"Quantity-weighted average unit cost for sku; 0.0 if absent.\"\"\"\n        matching = [b for b in self.batches if b.sku == sku]\n        total_qty = sum(b.qty for b in matching)\n        if total_qty == 0:\n            return 0.0\n        return sum(b.qty * b.unit_cost for b in matching) / total_qty\n",
+            "path": "inventory.py"
+          }
+        },
+        {
+          "role": "tool",
+          "name": "write_file",
+          "result": "wrote inventory.py (1208 bytes)"
+        },
+        {
+          "role": "assistant",
+          "content": "",
+          "tool": "run_command",
+          "args": {
+            "command": "python3 run_checks.py"
+          }
+        },
+        {
+          "role": "tool",
+          "name": "run_command",
+          "result": "PASS check_remove_sku_returns_quantity\nPASS check_total_value_unchanged_after_remove\nPASS check_average_unit_cost_weighted\nPASS check_average_missing_sku_is_zero\nall 4 checks passed\n"
+        },
+        {
+          "role": "assistant",
+          "content": "All 4 checks pass.\n\n",
+          "tool": "finish",
+          "args": {
+            "summary": "Implemented remove_sku and average_unit_cost in inventory.py. remove_sku sums the qty of all batches matching the SKU, filters them out of self.batches, and returns the removed quantity. average_unit_cost computes the quantity-weighted average unit cost (sum(qty*unit_cost)/sum(qty)) for matching batches, returning 0.0 when the SKU is absent or total quantity is zero. All 4 checks in run_checks.py pass."
+          }
+        }
+      ]
+    },
+    "4_browser_tool_task": {
+      "success": true,
+      "expected": {
+        "count": "3",
+        "items": [
+          "alpha",
+          "beta",
+          "gamma"
+        ]
+      },
+      "observed": {
+        "count": "3",
+        "items": [
+          "alpha",
+          "beta",
+          "gamma"
+        ]
+      },
+      "turns": 9,
+      "tool_failures": 0,
+      "wall_seconds": 35.1,
+      "transcript": [
+        {
+          "role": "assistant",
+          "tool": "browser_goto",
+          "args": {
+            "url": "http://127.0.0.1:8123"
+          },
+          "content": ""
+        },
+        {
+          "role": "assistant",
+          "tool": "browser_fill",
+          "args": {
+            "selector": "#new-todo",
+            "text": "alpha"
+          },
+          "content": ""
+        },
+        {
+          "role": "assistant",
+          "tool": "browser_click",
+          "args": {
+            "selector": "#add"
+          },
+          "content": ""
+        },
+        {
+          "role": "assistant",
+          "tool": "browser_fill",
+          "args": {
+            "selector": "#new-todo",
+            "text": "beta"
+          },
+          "content": ""
+        },
+        {
+          "role": "assistant",
+          "tool": "browser_click",
+          "args": {
+            "selector": "#add"
+          },
+          "content": ""
+        },
+        {
+          "role": "assistant",
+          "tool": "browser_fill",
+          "args": {
+            "selector": "#new-todo",
+            "text": "gamma"
+          },
+          "content": ""
+        },
+        {
+          "role": "assistant",
+          "tool": "browser_click",
+          "args": {
+            "selector": "#add"
+          },
+          "content": ""
+        },
+        {
+          "role": "assistant",
+          "tool": "browser_read_text",
+          "args": {
+            "selector": "#count"
+          },
+          "content": ""
+        },
+        {
+          "role": "assistant",
+          "tool": "finish",
+          "args": {
+            "summary": "Opened http://127.0.0.1:8123 and added three todos ('alpha', 'beta', 'gamma') using browser_fill on #new-todo and browser_click on #add for each. #count now shows 3, confirming success."
+          },
+          "content": ""
+        }
+      ]
+    },
+    "5_long_context_diagnosis": {
+      "ok": true,
+      "content": "ROOT CAUSE:\nThe OpenRouter Broadcast \u2192 self-hosted Langfuse OTLP pipeline is not delivering traces: the public Tailscale Funnel endpoint accepts direct POSTs (HTTP 200), but OpenRouter's actual broadcast push to `https://rajeevs-macbook-pro-2.tail33d641.ts.net/api/public/otel/v1/traces` times out at the Langfuse worker, so no generations from the proxy land in Langfuse.\n\nEVIDENCE:\n1. **Proxy call succeeded but Langfuse shows zero traces** \u2014 row 1310 confirms the proxy returned `{\"status\":200,\"model\":\"z-ai/glm-5.3-flash\",\"id\":\"gen-1787881844-jyowFyGD1DJ7ifxmpI30\"}` at 01:50:45, yet rows 1308 and 1314 show `/api/public/traces?limit=10` and `/api/public/observations?limit=10` both returning `0 items` even after a 45-second wait (row 1312).\n2. **Langfuse ingestion queue is stuck with socket-timeout errors** \u2014 row 1322 shows `otel-ingestion-queue` at `active: 1, completed: 0` (a job is hung, nothing finished), and the `secondary-otel-ingestion-queue` logs repeated `Error: Socket timeout. Expecting data, but didn't receive any in 30000ms` entries, indicating the worker cannot complete the OTLP ingestion handshake.\n\nFIX:\nRestart the Langfuse worker container (`docker restart langfuse-local-langfuse-worker-1`) to clear the hung `otel-ingestion-queue` job, then re-fire a proxy call and confirm the generation appears in Langfuse; if timeouts persist, check that the Tailscale Funnel proxy is not dropping the long-lived OTLP response (the 405 on `/api/public/otel` and 404 on `/api/public/otel/v1/traces` in row 1275 suggest the funnel path mapping may still be misaligned for OpenRouter's actual request shape, so verify the funnel target is `http://127.0.0.1:3002/api/public/otel` and that OpenRouter's Broadcast payload reaches the correct sub-path).",
+      "elapsed_seconds": 137.0,
+      "completion_tokens": 2022,
+      "tokens_per_second": 14.76,
+      "evaluation": {
+        "score": 0.75,
+        "checks": {
+          "root_cause": true,
+          "stuck_job": true,
+          "redis_timeout": false,
+          "fix": true
+        }
+      }
+    }
+  },
+  "summary": {
+    "tests_run": 5,
+    "tests_passed": 5,
+    "human_rescues": 0,
+    "runtime": "llama.cpp (PrismML fork)"
+  }
+}

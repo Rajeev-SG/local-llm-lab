@@ -6,6 +6,7 @@ A measured guide to the local AI models available on this Apple Silicon Mac.
 - Full historical results: [overall-leaderboard.md](./overall-leaderboard.md)
 - Raw benchmark data: [output/benchmarks](./output/benchmarks)
 - Magnitude (llama.cpp) frontier and memory audit, 2026-09-09: [magnitude-llamacpp-evaluation-2026-09-09.md](./magnitude-llamacpp-evaluation-2026-09-09.md)
+- Ternary Bonsai 2 27B workflow smoke test, 2026-09-19: [output/acceptance/bonsai2-27b-smoke-20260919.md](./output/acceptance/bonsai2-27b-smoke-20260919.md)
 
 ![The current installed-model guide](./output/playwright/model-guide-20260730/hero-desktop.png)
 
@@ -24,8 +25,8 @@ Everything needed to choose a local model:
 | Item | Value |
 |---|---|
 | Hardware | Apple M5 Pro, 48 GB unified memory, 15 CPU / 16 GPU cores |
-| Installed builds / tuned aliases | 24 installed, 14 fully comparable, 7 aliases |
-| Model data on disk | 320.8 GB across curated builds (pipeline sum); ~339 GiB total HF + Ollama + Magnitude caches (`du`) |
+| Installed builds / tuned aliases | 25 installed, 15 fully comparable, 7 aliases |
+| Model data on disk | 328.0 GB across curated builds (pipeline sum); ~339 GiB total HF + Ollama + Magnitude caches (`du`) |
 | Free disk space | ~25 GiB (measured 9 Sep 2026 — tight; free space before pulling large models) |
 | Runtimes | Direct MLX, Ollama, MLX audio/vision, Apple Foundation Models (`apfel`), Magnitude (llama.cpp service) |
 
@@ -33,7 +34,7 @@ Inventory refreshed 9 Sep 2026 from the Hugging Face cache, Ollama manifests, an
 
 ## Model leaderboard
 
-All 18 ranked builds from [overall-leaderboard.json](./output/leaderboard/overall-leaderboard.json),
+All 19 ranked builds from [overall-leaderboard.json](./output/leaderboard/overall-leaderboard.json),
 joined with [inventory](./output/inventory/current-models.json) for context, modality, and size. An em dash
 means the metric is not available for that build (prompt speed and peak memory are only recorded for MLX
 text runs, not vision or Ollama runs; context and modality are unknown for removed files).
@@ -55,9 +56,10 @@ text runs, not vision or Ollama runs; context and modality are unknown for remov
 | 13 | GLM-4.7-Flash (MLX 4-bit) | mlx | — | 16.9 | — | — | 86 | 84 | 1297.8 | 1148.2 | 69.7 | 17.5 | 8/8 | passed | removed |
 | 14 | mistral-small:22b | ollama | 131,072 | 12.6 | Text | Tools, Long context | 82.6 | 90 | 25128 | — | 5.8 | — | 8/8 | benchmarked |  |
 | 15 | Qwen3.5 9B (MLX 4-bit) | mlx | — | 6 | — | — | 78.6 | 74.8 | 1298.4 | 1044.9 | 53.4 | 5.9 | 8/8 | passed | removed |
-| 16 | gpt-oss-20b (MLX MXFP4/Q4) | mlx | — | 11.2 | — | — | 70.6 | 65.8 | 2425.1 | 1804.7 | 98.4 | 11.7 | 8/8 | passed | removed |
-| 17 | apfel | apfel | 4,096 | — | Text | System on-device | 63.7 | 55.8 | 961.4 | — | — | — | 8/8 | benchmarked |  |
-| 18 | LFM2 24B A2B (MLX 4-bit) | mlx | — | 13.4 | — | — | 63.3 | 54.8 | 532.9 | 1879.1 | 139.2 | 13.8 | 8/8 | passed | removed |
+| 16 | Ternary Bonsai 2 27B (PQ2_0 GGUF, llama.cpp) | llamacpp | 32,768 | 7.2 | Text | Code, Tools | 77.1 | 76.8 | 6022.0 | 288.4 | 23.1 | 7.5 | 8/8 | passed | median latency varies with machine load |
+| 17 | gpt-oss-20b (MLX MXFP4/Q4) | mlx | — | 11.2 | — | — | 70.6 | 65.8 | 2425.1 | 1804.7 | 98.4 | 11.7 | 8/8 | passed | removed |
+| 18 | apfel | apfel | 4,096 | — | Text | System on-device | 63.7 | 55.8 | 961.4 | — | — | — | 8/8 | benchmarked |  |
+| 19 | LFM2 24B A2B (MLX 4-bit) | mlx | — | 13.4 | — | — | 63.3 | 54.8 | 532.9 | 1879.1 | 139.2 | 13.8 | 8/8 | passed | removed |
 
 **Notes**
 

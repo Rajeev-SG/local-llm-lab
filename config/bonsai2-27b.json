@@ -1,0 +1,20 @@
+{
+  "label": "Ternary Bonsai 2 27B (PQ2_0 GGUF, llama.cpp)",
+  "base_model": "Qwen/Qwen3.8-27B",
+  "repo": "prism-ml/Ternary-Bonsai-2-27B-gguf",
+  "revision": "6ed5e12bf84b7a63069882c91dd9e9218647d17b",
+  "file": "Ternary-Bonsai-2-27B-PQ2_0.gguf",
+  "mmproj_file": "Ternary-Bonsai-2-27B-mmproj-Q8_0.gguf",
+  "runtime": "llama.cpp (PrismML fork)",
+  "runtime_repo": "PrismML-Eng/llama.cpp",
+  "runtime_release": "prism-b10709-9a9394a",
+  "runtime_asset": "llama-prism-b10709-9a9394a-bin-macos-arm64.tar.gz",
+  "runtime_build": "10709 (commit 9a9394a89)",
+  "binary_dir": "/Users/rajeev/models/bonsai2/bin",
+  "model_path": "/Users/rajeev/models/bonsai2/Ternary-Bonsai-2-27B-PQ2_0.gguf",
+  "mmproj_path": "/Users/rajeev/models/bonsai2/Ternary-Bonsai-2-27B-mmproj-Q8_0.gguf",
+  "download_size_gb": 7.21,
+  "mmproj_size_gb": 0.63,
+  "bpw": 2.13,
+  "notes": "Ternary 2-bit, requires the PrismML llama.cpp fork (stock llama.cpp rejects these files)."
+}

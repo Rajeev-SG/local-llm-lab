@@ -1,0 +1,34 @@
+{
+  "pass_threshold": 0.8,
+  "tests_run": 5,
+  "tests_full_passes": 4,
+  "partial_tests": [
+    "5_long_context_diagnosis"
+  ],
+  "failed_tests": [],
+  "human_rescues": 0,
+  "tool_failures_total": 0,
+  "limbs": {
+    "passes_ge_4_of_5": true,
+    "rescue_le_1": true,
+    "within_1.5x_same_task_comparator": "not_evaluated_no_same_task_comparator"
+  },
+  "wall_clock_ratio": null,
+  "verdict": "BACKGROUND_HELPER_ONLY",
+  "captured_at": "2026-09-19T21:14:05+00:00",
+  "subject": "Ternary Bonsai 2 27B (PQ2_0 GGUF, PrismML llama.cpp)",
+  "workflow_tests": {
+    "1_small_coding_fix": "pass",
+    "2_repo_comprehension": "pass",
+    "3_agentic_coding_loop": "pass",
+    "4_browser_tool_task": "pass",
+    "5_long_context_diagnosis": "partial (0.75)"
+  },
+  "latency_proxy_capability_suite_ms": {
+    "Ternary Bonsai 2 27B": 1801.5,
+    "Qwen3.8-27B (MLX 4-bit)": 3279.3500000000004,
+    "Qwen3 Coder 30B A3B (MLX 4-bit)": 752.25
+  },
+  "latency_basis": "PROXY ONLY \u2014 shared 8-task capability suite; not the workflow tasks",
+  "verdict_basis": "4 full passes + 1 partial, 0 rescues, 0 tool-loop failures. The issue's latency leg (median wall-clock <=1.5x the relevant comparator) is NOT evaluated: the five workflow fixtures are new in this PR and no comparator has run them, so no same-task evidence exists. Top-tier WORKFLOW_CANDIDATE therefore cannot be claimed; the reliable-but-unproven-latency tier applies."
+}

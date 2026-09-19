@@ -6,6 +6,7 @@ const runtimeLabels = {
   mlx_vlm: "MLX · vision",
   mlx_audio: "MLX · audio",
   ollama: "Ollama",
+  llamacpp: "llama.cpp",
   apfel: "Apple system",
 };
 
@@ -29,6 +30,7 @@ const runtimeFilters = [
   { value: "all", label: "All runtimes" },
   { value: "mlx", label: "MLX" },
   { value: "ollama", label: "Ollama" },
+  { value: "llamacpp", label: "llama.cpp" },
   { value: "apfel", label: "Apple system" },
 ];
 
