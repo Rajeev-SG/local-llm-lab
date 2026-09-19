@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T20:56:17+00:00",
+  "generated_at": "2026-09-19T19:41:44+00:00",
   "machine": "Apple M5 Pro, 48 GB unified memory, 15 CPU cores, 16 GPU cores",
   "score_definition": {
     "task_weights": {
@@ -16,8 +16,8 @@
     "work_fit": "80% task quality + 15% median response-time utility + 5% invocation reliability"
   },
   "summary": {
-    "total_builds": 27,
-    "ranked_builds": 18,
+    "total_builds": 28,
+    "ranked_builds": 19,
     "unranked_builds": 9,
     "best_model": "Qwen3 Coder 30B A3B (MLX 4-bit)"
   },
@@ -527,6 +527,42 @@
       "rank": 14
     },
     {
+      "build_id": "llamacpp:Ternary-Bonsai-2-27B-PQ2_0.gguf",
+      "label": "Ternary Bonsai 2 27B (PQ2_0 GGUF, llama.cpp)",
+      "runtime": "llamacpp",
+      "model_name": "Ternary-Bonsai-2-27B-PQ2_0.gguf",
+      "base_model": "Qwen/Qwen3.8-27B",
+      "revision": "6ed5e12bf84b7a63069882c91dd9e9218647d17b",
+      "download_size_gb": 7.21,
+      "status": "passed",
+      "test_level": "capability",
+      "generated_at": "2026-09-19T19:21:15+00:00",
+      "artifact": "output/benchmarks/capability-benchmark-bonsai-bonsai2_27b_llamacpp.json",
+      "successful_tasks": 8,
+      "successful_claimed_tasks": 6,
+      "task_count": 8,
+      "quality_score": 76.8,
+      "work_fit_score": 79.8,
+      "median_latency_ms": 1801.5,
+      "generation_tokens_per_second": 23.15,
+      "generation_speed_basis": "isolated llama.cpp bench",
+      "prompt_tokens_per_second": 288.39,
+      "peak_memory_gb": 7.5,
+      "recommended_use": "Ternary 2-bit compression of Qwen3.8-27B; needs the PrismML llama.cpp fork",
+      "runtime_error": null,
+      "task_scores": {
+        "shell_scripting": 0.0,
+        "json_restructuring": 1.0,
+        "classification": 1.0,
+        "short_summary": 1.0,
+        "text_transformation": 1.0,
+        "translation": 0.8,
+        "unknown_refusal": 1.0,
+        "harmless_exactness": 1.0
+      },
+      "rank": 15
+    },
+    {
       "build_id": "mlx:mlx-community/Qwen3.5-9B-4bit",
       "label": "Qwen3.5 9B (MLX 4-bit)",
       "runtime": "mlx",
@@ -560,7 +596,7 @@
         "unknown_refusal": 1.0,
         "harmless_exactness": 1.0
       },
-      "rank": 15
+      "rank": 16
     },
     {
       "build_id": "mlx:mlx-community/gpt-oss-20b-MXFP4-Q4",
@@ -596,7 +632,7 @@
         "unknown_refusal": 0.0,
         "harmless_exactness": 1.0
       },
-      "rank": 16
+      "rank": 17
     },
     {
       "build_id": "apfel:apple-foundationmodel",
@@ -632,7 +668,7 @@
         "unknown_refusal": 1.0,
         "harmless_exactness": 0.0
       },
-      "rank": 17
+      "rank": 18
     },
     {
       "build_id": "mlx:lmstudio-community/LFM2-24B-A2B-MLX-4bit",
@@ -668,7 +704,7 @@
         "unknown_refusal": 0.0,
         "harmless_exactness": 1.0
       },
-      "rank": 18
+      "rank": 19
     }
   ],
   "unranked": [
@@ -906,6 +942,7 @@
     "output/benchmarks/capability-benchmark-20260719T215317Z.json",
     "output/benchmarks/capability-benchmark-20260719T215650Z.json",
     "output/benchmarks/capability-benchmark-20260719T222207Z.json",
-    "output/benchmarks/capability-benchmark-20260823T202232Z.json"
+    "output/benchmarks/capability-benchmark-20260823T202232Z.json",
+    "output/benchmarks/capability-benchmark-bonsai-bonsai2_27b_llamacpp.json"
   ]
 }
